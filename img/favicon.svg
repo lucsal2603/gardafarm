@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="224" height="224" viewBox="-112 -112 224 224" aria-hidden="true" focusable="false">
+  <defs><clipPath id="mc1"><circle r="100"/></clipPath></defs>
+  <g clip-path="url(#mc1)">
+    <rect class="marchio__prato" x="-112" y="-112" width="224" height="224" fill="#6FA74E"/>
+    <g class="marchio__lago">
+      <path d="M-130,-2 C-92,-13 -56,-16 -22,-8 C8,-1 38,6 68,4 C94,2 114,-2 130,-4 L130,130 L-130,130 Z" fill="#0A4A6C"/>
+      </g>
+    <g class="marchio__sole">
+      <path d="M3,2 C30,-16 72,-17 102,0 C74,12 30,14 3,2 Z" fill="#F2C72E"/>
+      <path d="M10,2.4 C40,3.6 70,2 95,0.6" fill="none" stroke="#0F2A4F" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+  </g>
+  <circle class="marchio__anello" r="104" fill="none" stroke="#EACF53" stroke-width="5"/>
+</svg>
