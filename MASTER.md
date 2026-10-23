@@ -9,7 +9,7 @@ Il logo diventa il mondo del sito: i suoi tre piani (prato, lago, sole) più l'i
 Tre strati sempre accesi, sempre in pausa fuori vista:
 
 - **Ambiente**: loop lenti in sine.inOut, da 2 a 90 s. Onde, sole, nuvole, api, animali che respirano, foto che respirano, etichette come erba al vento.
-- **Scroll**: scrub da 0.6 a 0.9, pin per le scene grandi. Dezoom del paesaggio nel marchio, manifesto a parole, galleria orizzontale, sfilata, volo della mappa, albero che cresce, scritta del piede.
+- **Scroll**: scrub da 0.6 a 0.9, pin per le scene grandi. Dezoom della foto della home nella lente del marchio, manifesto a parole, galleria orizzontale, sfilata, volo della mappa, albero che cresce, scritta del piede.
 - **Interazione**: pulsanti elastici (asse wdth di Archivo + overshoot), link "lago che sale", frutti che fanno la capriola, lente che segue il puntatore, ape compagna del cursore.
 
 Vietati: riga sotto i link in hover, pallini luminosi, numerazioni ordinali, emoji, coordinate, barra di avanzamento, cursore punto+anello.

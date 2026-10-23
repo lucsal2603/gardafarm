@@ -5,7 +5,7 @@ Bozza della home preparata il 23/10/2026 partendo solo dal sito attuale (gardafa
 ## Le tre cose più delicate
 
 1. **Il logo è ridisegnato a mano in vettoriale** partendo dall'unico file disponibile (300×300 px). Colori campionati dal JPG. Serve il file originale (AI, PDF o SVG) per confermare forme e colori.
-2. **Le illustrazioni degli edifici sono interpretazioni.** La fattoria arancione con le vetrate di Villafranca viene dalle foto; il casale di Verona (muri chiari, coppi, pannelli solari, terrazza) è inventato: del fotovoltaico da 28 kW e della terrazza parla il sito, ma non ho foto dell'edificio.
+2. **La foto della home** (serra in vetro, casa bianca coi pannelli solari, sole) l'ho attribuita alla sede di Verona per i pannelli solari, ma il sito non lo dice: confermare la sede. È la foto più definita che hanno (2048 px); per il sito vero serve uno scatto orizzontale di almeno 3000 px, possibilmente senza il riflesso del sole.
 3. **"19 km di strada" fra le due sedi** è calcolato con OpenStreetMap (OSRM). Il segnaposto di Villafranca è a metà di via Paroline, non al civico 7: va spostato sul punto esatto.
 
 ## Contenuti

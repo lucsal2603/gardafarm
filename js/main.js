@@ -44,7 +44,6 @@ function disegna() {
     'scritta-piede': () => D.scritta({ colore: '#E8F2EF', spessore: 7 }),
     enjoy: () => D.enjoy(),
     ape: () => D.ape(),
-    paesaggio: () => D.paesaggio(),
     asinello: () => D.asinello(),
     capretta: () => D.capretta(),
     gallina: () => D.gallina(),
@@ -172,11 +171,16 @@ function velo(poi) {
   setTimeout(() => { if (document.body.contains(v)) tl.progress(1); }, 9000);
 }
 
-/* ================= hero: paesaggio che diventa il marchio ================= */
+/* ================= hero: la foto che diventa il marchio ================= */
+
+/* la foto della home (2048 x 1334): il fuoco sta fra la casa, la serra e il sole;
+   nel cerchio finale entrano circa 1300 px della foto */
+const FOTO = { w: 2048, h: 1334, fuoco: { x: 1010, y: 680 }, campo: 1300 };
 
 function geometriaHero() {
   const vw = innerWidth, vh = innerHeight;
-  const Wt = Math.max(vw, 1.6 * vh), Ht = Wt / 1.6, k = Wt / 1600;
+  const rapporto = FOTO.w / FOTO.h;
+  const Wt = Math.max(vw, rapporto * vh), Ht = Wt / rapporto, k = Wt / FOTO.w;
   const left = (vw - Wt) / 2, top = vh - Ht;
   let r, cx, cy;
   if (MOBILE()) {
@@ -189,9 +193,8 @@ function geometriaHero() {
     cx = vw - margine - r - Math.min(40, vw * 0.02);
     cy = vh * 0.53;
   }
-  const F = { x: 800, y: 640 }, span = 1250;
-  const s = (2 * r) / (span * k);
-  return { vw, vh, Wt, k, left, top, r, cx, cy, s, tx: cx - left - s * F.x * k, ty: cy - top - s * F.y * k };
+  const s = (2 * r) / (FOTO.campo * k);
+  return { vw, vh, Wt, k, left, top, r, cx, cy, s, tx: cx - left - s * FOTO.fuoco.x * k, ty: cy - top - s * FOTO.fuoco.y * k };
 }
 
 function hero() {
@@ -199,7 +202,8 @@ function hero() {
   const palco = $('.hero__palco');
   const scena = $('.hero__scena');
   const tela = $('.hero__tela');
-  const svg = $('.paesaggio', tela);
+  const kb = $('.hero__kb');
+  const ombra = $('.hero__ombra');
   const anello = $('.hero__anello');
   const giro = $('.hero__giro');
   const titolo = $('.hero__titolo');
@@ -212,23 +216,23 @@ function hero() {
   const introSplit = SplitText.create($('.titolo-2', intro), { type: 'lines', mask: 'lines', linesClass: 'riga-maschera' });
   const introAltri = [$('p', intro), ...$$('.bottone', intro)];
 
-  /* panoramica lenta: su schermi stretti il paesaggio è più largo e scorre */
-  const pan = { a: 1 };
-  const panEl = svg;
-  gsap.ticker.add((t) => {
-    const A = Math.max(0, (Math.max(innerWidth, 1.6 * innerHeight) - innerWidth) / 2) * 0.82 + 18;
-    gsap.set(panEl, { x: Math.sin(t * 0.22) * A * pan.a });
-  });
-
-  /* ambiente: api, animali, sole */
-  ambienteHero(svg, sez);
-
-  const strati = $$('.pz', svg).map((g) => ({ g, p: parseFloat(g.dataset.prof) || 0 }));
-
   if (RIDOTTO) {
     gsap.set([intro], { autoAlpha: 1 });
     return;
   }
+
+  /* la foto non sta mai ferma: respira piano (zoom lentissimo) e, sugli schermi
+     stretti dove è più larga dello schermo, scorre di lato fra la casa e la serra */
+  const pan = { a: 1 };
+  const stato = { attivo: true };
+  inAmbiente(sez, { pause: () => { stato.attivo = false; }, resume: () => { stato.attivo = true; } });
+  gsap.ticker.add((t) => {
+    if (!stato.attivo) return;
+    const Wt = Math.max(innerWidth, (FOTO.w / FOTO.h) * innerHeight);
+    const A = Math.max(0, (Wt - innerWidth) / 2) * 0.82;
+    const respiro = 1.04 + Math.sin(t * 0.2) * 0.03 * (0.35 + 0.65 * pan.a);
+    gsap.set(kb, { x: Math.sin(t * 0.16) * A * pan.a, scale: respiro });
+  });
 
   const posiziona = () => {
     const g = geometriaHero();
@@ -261,18 +265,17 @@ function hero() {
   tl.to(pan, { a: 0, duration: 0.25 }, 0)
     .to(scorri, { autoAlpha: 0, y: 20, duration: 0.08 }, 0)
     .to(titoloRighe, { yPercent: -60, autoAlpha: 0, stagger: 0.04, duration: 0.18, ease: 'power2.in' }, 0.02)
-    .to(sotto, { autoAlpha: 0, y: -20, duration: 0.14 }, 0.06);
-  strati.forEach(({ g, p }) => {
-    tl.to(g, { y: () => p * innerHeight * 0.08, duration: 0.3 }, 0);
-  });
-  tl.to($('.pz--sole', svg), { y: () => -innerHeight * 0.18, duration: 0.5, ease: 'power1.out' }, 0);
+    .to(sotto, { autoAlpha: 0, y: -20, duration: 0.14 }, 0.06)
+    /* prima del dezoom la foto sale appena, come una camera che si alza */
+    .to(kb, { yPercent: -3, duration: 0.2 }, 0)
+    .to(kb, { yPercent: 0, duration: 0.3, ease: 'power2.inOut' }, 0.3)
+    .to(ombra, { autoAlpha: 0, duration: 0.3 }, 0.15);
 
   tl.fromTo(scena,
     { clipPath: () => `circle(${Math.hypot(innerWidth, innerHeight)}px at ${geometriaHero().cx}px ${geometriaHero().cy}px)` },
     { clipPath: () => { const g = geometriaHero(); return `circle(${g.r}px at ${g.cx}px ${g.cy}px)`; }, duration: 0.5, ease: 'power2.inOut', immediateRender: false }, 0.18);
   tl.fromTo(tela, { x: 0, y: 0, scale: 1 },
     { x: () => geometriaHero().tx, y: () => geometriaHero().ty, scale: () => geometriaHero().s, duration: 0.5, ease: 'power2.inOut', immediateRender: false }, 0.18);
-  strati.forEach(({ g }) => { tl.to(g, { y: 0, duration: 0.3, ease: 'power2.inOut' }, 0.38); });
 
   tl.to($('circle', anello), { drawSVG: '100%', duration: 0.22, ease: 'power2.inOut' }, 0.6)
     .fromTo(anello, { visibility: 'visible', rotation: -90 }, { rotation: 0, duration: 0.22 }, 0.6)
@@ -280,37 +283,6 @@ function hero() {
     .to(introSplit.lines, { yPercent: 0, stagger: 0.04, duration: 0.2, ease: 'power3.out' }, 0.7)
     .to(introAltri, { autoAlpha: 1, y: 0, stagger: 0.03, duration: 0.16, ease: 'power3.out' }, 0.78)
     .to({}, { duration: 0.12 });
-}
-
-function ambienteHero(svg, sez) {
-  /* api che volano a otto sulle arnie e sulla lavanda */
-  const api = $$('.pz-ape', svg);
-  const percorsi = [
-    'M330,900 C380,840 470,850 470,900 C470,950 380,960 330,900 C280,840 190,850 190,900 C190,950 280,960 330,900 Z',
-    'M1180,860 C1250,820 1330,840 1320,890 C1310,940 1220,930 1180,880 C1140,830 1060,840 1070,880 C1080,920 1150,900 1180,860 Z'
-  ];
-  api.forEach((a, i) => {
-    gsap.set(a, { scale: 0.42, transformOrigin: '50% 50%' });
-    inAmbiente(sez, gsap.to(a, {
-      motionPath: { path: percorsi[i], autoRotate: false },
-      duration: 9 + i * 3, repeat: -1, ease: 'none'
-    }));
-  });
-
-  /* animali del paesaggio: vita propria */
-  const asino = $('.pz-asino .animale', svg);
-  const capra = $('.pz-capra .animale', svg);
-  const gallina = $('.pz-gallina .animale', svg);
-  const coniglio = $('.pz-coniglio .animale', svg);
-  [asino, capra, gallina, coniglio].forEach((a) => { if (a) inAmbiente(sez, ...vitaAnimale(a)); });
-  if (asino) {
-    inAmbiente(sez, gsap.to($('.testa', asino), { rotation: 34, svgOrigin: '146 62', duration: 1.6, ease: 'sine.inOut', repeat: -1, yoyo: true, repeatDelay: 2.2 }));
-  }
-  if (coniglio) {
-    inAmbiente(sez, gsap.timeline({ repeat: -1, repeatDelay: 2.6 })
-      .to($('.animale__corpo', coniglio), { y: -26, rotation: -8, svgOrigin: '60 110', duration: 0.28, ease: 'power2.out' })
-      .to($('.animale__corpo', coniglio), { y: 0, rotation: 0, duration: 0.3, ease: 'bounce.out' }));
-  }
 }
 
 /* ================= animali: rig ================= */
@@ -1024,7 +996,7 @@ function avvia() {
       gsap.from(titoloHero, { yPercent: 70, autoAlpha: 0, rotation: 3, duration: 1.4, stagger: 0.12, ease: 'expo.out' });
       gsap.from(sotto, { autoAlpha: 0, y: 24, duration: 1.2, delay: 0.3, ease: 'expo.out' });
       gsap.from('.testata', { yPercent: -120, duration: 1.2, delay: 0.2, ease: 'expo.out' });
-      gsap.from('.hero__scorri', { autoAlpha: 0, y: 20, duration: 1, delay: 0.6, ease: 'expo.out' });
+      gsap.from('.hero__scorri', { autoAlpha: 0, y: 20, duration: 1, delay: 1.3, ease: 'expo.out' });
     });
 
     ScrollTrigger.refresh();

@@ -17,7 +17,7 @@ python3 -m http.server 8112 --directory /Users/lucas/gardafarm
 
 - `index.html`: tutti i contenuti.
 - `css/style.css`: token e stili.
-- `js/disegni.js`: tutte le illustrazioni SVG (marchio, scritta, paesaggio, animali, frutti, albero, onde).
+- `js/disegni.js`: tutte le illustrazioni SVG (marchio, scritta, animali, frutti, albero, onde).
 - `js/main.js`: la regia (GSAP 3.15 + ScrollTrigger, SplitText, DrawSVG, MotionPath; Lenis).
 - `js/mappa.js`: mappa MapLibre + OpenFreeMap ridipinta nei colori del marchio, caricata solo vicino alla sezione.
 - `js/percorso.js`: la strada fra le due sedi (OSRM), calcolata una volta.
