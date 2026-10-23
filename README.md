@@ -26,3 +26,5 @@ python3 -m http.server 8112 --directory /Users/lucas/gardafarm
 ## Pubblicazione
 
 GitHub Pages dal ramo `main`: push = deploy. A ogni modifica di CSS o JS aggiornare `?v=` nei due link di `index.html` (Pages tiene CSS e JS in cache 10 minuti).
+
+Demo pubblicata: https://lucsal2603.github.io/gardafarm/ (noindex).
