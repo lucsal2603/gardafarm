@@ -336,7 +336,7 @@
   const espandi = () => {
     $$('.espandi').forEach((sez) => {
       const img = $('.espandi__img', sez), foto = $('img', img), titolo = $('.espandi__titolo', sez);
-      if (ridotto) return;
+      if (ridotto || innerWidth < 760) return;
       const g = () => parseFloat(getComputedStyle(html).getPropertyValue('--gutter')) || 24;
       const r = () => parseFloat(getComputedStyle(img).borderRadius) || 24;
       const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top top', end: 'bottom bottom', scrub: 0.8, invalidateOnRefresh: true } });

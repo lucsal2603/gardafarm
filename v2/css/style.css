@@ -637,8 +637,53 @@ html:not(.js) .espandi__img { clip-path: none; }
   .loader__perc { right: 50%; transform: translate(50%, 0); top: auto; bottom: 14vh; font-size: 22vw; }
 }
 @media (max-width: 480px) {
-  .sale, .quattro { grid-template-columns: 1fr; }
-  .sala { aspect-ratio: 4 / 3; }
+  .quattro { grid-template-columns: 1fr; }
+}
+
+/* ---------- smartphone: rifinitura ---------- */
+@media (max-width: 760px) {
+  .t-mega { font-size: 12.4vw; }
+  .t-xl { font-size: 12vw; }
+  .t-l { font-size: clamp(36px, 10.5vw, 56px); }
+  .display { letter-spacing: -.015em; }
+  .titolo-pagina { padding-top: calc(var(--header-h) + 2vh); }
+
+  /* immagine in cima alle pagine interne: ferma, col titolo sopra */
+  .espandi { height: auto; padding: clamp(18px, 5vw, 28px) 0 0; }
+  .espandi__palco { position: relative; height: 72svh; min-height: 420px; overflow: visible; }
+  .espandi__img { clip-path: inset(0 var(--gutter) round var(--raggio)) !important; --velo: 1 !important; }
+  .espandi__img img { transform: none !important; }
+  .espandi__titolo { font-size: clamp(32px, 9.5vw, 46px); }
+
+  .pila-intro { top: 0 !important; }
+  .sede__piede { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .sede__piede br { display: none; }
+  .sede__nome { font-size: clamp(40px, 11vw, 56px); }
+
+  .sale { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sala { aspect-ratio: 4 / 5; padding: 14px; }
+  .sala__nome { font-size: 24px; }
+  .sala__mq { font-size: 18px; }
+
+  .quattro__voce { display: grid; grid-template-columns: 56px 1fr; column-gap: 16px; row-gap: 6px; align-items: start; padding: 18px; }
+  .quattro__voce .forma-frutto { width: 56px; grid-row: span 2; }
+  .quattro__voce h3 { margin-top: 0; font-size: 24px; }
+
+  .frutti { min-height: 78vh; padding-block: 14vh; }
+  .frutti .forma-frutto { width: clamp(70px, 22vw, 110px); }
+
+  .bustina { width: 58vw; margin-left: -29vw; margin-top: calc(58vw * -.66); }
+
+  .numero__v { font-size: clamp(44px, 13vw, 60px); }
+  .dintorni__col h3 { font-size: 26px; }
+  .parola-cielo .display { font-size: 21vw; }
+
+  .footer__grande { text-align: left; padding-right: 0; }
+  .footer__grande .display { font-size: 13.2vw; }
+  .footer__grande .italic { font-size: 11vw; padding-right: 0; text-align: right; }
+  .footer__griglia { gap: 28px; }
+  .footer__fondo { flex-direction: column; }
+  .cta .pill { flex: 0 0 auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
