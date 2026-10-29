@@ -412,27 +412,41 @@
     });
   };
 
-  /* ================= la vita a Gardafarm: le foto escono dal titolo ================= */
+  /* ================= la vita a Gardafarm: le foto entrano nel logo, poi lo schermo entra nel logo ================= */
   const vita = () => {
     const sez = $('.vita');
     if (!sez || ridotto) return;
-    const palco = $('.vita__palco', sez), foto = $$('.vita__foto', sez), testo = $('.vita__testo', sez);
-    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top top', end: 'bottom bottom', scrub: 0.9, invalidateOnRefresh: true } });
-    foto.forEach((f, i) => {
-      const verso = () => {
-        const p = palco.getBoundingClientRect();
-        return { x: p.width / 2 - (f.offsetLeft + f.offsetWidth / 2), y: p.height / 2 - (f.offsetTop + f.offsetHeight / 2) };
-      };
-      const v = parseFloat(f.dataset.vel) || 1;
-      tl.fromTo(f,
-        { x: () => verso().x * 0.92, y: () => verso().y * 0.92, scale: 0.15, autoAlpha: 0 },
-        { x: 0, y: 0, scale: 1, autoAlpha: 1, ease: 'power3.out', duration: 1 }, i * 0.06)
-        .to(f, { y: () => -innerHeight * 0.12 * v, ease: 'none', duration: 0.9 }, 1.1);
+    const palco = $('.vita__palco', sez), foto = $$('.vita__foto', sez);
+    const logo = $('.vita__logo', sez), png = $('.vita__logo-png', sez), marchio = $('.vita__logo-marchio', sez);
+    const velo = document.createElement('div');
+    velo.className = 'vita__velo';
+    palco.appendChild(velo);
+    const verso = (f) => ({
+      x: palco.clientWidth / 2 - (f.offsetLeft + f.offsetWidth / 2),
+      y: palco.clientHeight / 2 - (f.offsetTop + f.offsetHeight / 2)
     });
-    tl.fromTo(testo, { scale: 0.86 }, { scale: 1, ease: 'power2.out', duration: 1 }, 0)
-      .to(testo, { yPercent: -10, ease: 'none', duration: 0.9 }, 1.1);
-    const split = SplitText.create($('.display', testo), { type: 'lines', mask: 'lines', linesClass: 'split-line' });
-    gsap.from(split.lines, { yPercent: 115, stagger: 0.1, duration: 1.3, scrollTrigger: { trigger: sez, start: 'top 70%', once: true } });
+    gsap.set(logo, { scale: 0.2, autoAlpha: 0 });
+    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top top', end: 'bottom bottom', scrub: 0.7, invalidateOnRefresh: true } });
+    /* 1. le foto galleggiano piano */
+    foto.forEach((f) => {
+      const v = parseFloat(f.dataset.vel) || 1;
+      tl.to(f, { y: () => -innerHeight * 0.04 * v, ease: 'none', duration: 0.5 }, 0);
+    });
+    /* 2. volano al centro e spariscono dentro il logo */
+    foto.forEach((f, i) => {
+      tl.to(f, {
+        x: () => verso(f).x, y: () => verso(f).y, scale: 0.08, rotate: () => (i % 2 ? 140 : -140),
+        autoAlpha: 0, ease: 'power3.in', duration: 0.9
+      }, 0.5 + i * 0.07);
+    });
+    /* 3. il logo nasce mentre arrivano */
+    tl.to(logo, { scale: 1, autoAlpha: 1, ease: 'back.out(1.8)', duration: 0.7 }, 1.15)
+      .to(logo, { scale: 1.04, ease: 'none', duration: 0.5 }, 1.85)
+    /* 4. lo schermo entra nel logo: il marchio vettoriale si allarga fino a riempire tutto */
+      .set(marchio, { opacity: 1 }, 2.35)
+      .to(png, { opacity: 0, duration: 0.15, ease: 'none' }, 2.35)
+      .to(marchio, { scale: 46, transformOrigin: '50% 24%', ease: 'power3.in', duration: 0.75 }, 2.35)
+      .to(velo, { opacity: 1, ease: 'none', duration: 0.25 }, 3.0);
   };
 
   /* ================= ventaglio: le foto laterali escono da dietro quella centrale ================= */

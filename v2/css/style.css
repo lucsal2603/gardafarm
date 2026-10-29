@@ -417,7 +417,7 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 .indice { margin-top: clamp(48px, 6vw, 96px); border-top: 1px solid rgba(8, 54, 80, .25); }
 .indice__riga {
   position: relative; isolation: isolate;
-  display: grid; grid-template-columns: 48px minmax(0, 1.9fr) minmax(0, 1fr) 190px 40px; align-items: center; gap: 20px;
+  display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr) 190px 40px; align-items: center; gap: 20px;
   padding: clamp(18px, 2vw, 30px) clamp(8px, 1vw, 16px);
   border-bottom: 1px solid rgba(8, 54, 80, .25);
   color: var(--lago-notte);
@@ -431,7 +431,6 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 }
 .indice__riga:hover, .indice__riga:focus-visible { color: var(--crema); }
 .indice__riga:hover::before, .indice__riga:focus-visible::before { transform: scaleY(1); border-radius: 14px; }
-.indice__n { font-family: var(--serif); font-size: 15px; }
 .indice__nome {
   font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144;
   font-size: clamp(28px, 3.3vw, 56px); line-height: 1; text-transform: uppercase;
@@ -451,7 +450,6 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 @media (hover: none), (max-width: 760px) {
   .indice__anteprime { display: none; }
   .indice__riga { grid-template-columns: 64px 1fr 36px; grid-template-areas: 'mini nome freccia' 'mini desc freccia' 'mini dove freccia'; row-gap: 6px; }
-  .indice__n { display: none; }
   .indice__mini { display: block; grid-area: mini; width: 64px; height: 64px; border-radius: 50%; overflow: hidden; border: 3px solid var(--carta); }
   .indice__mini img { width: 100%; height: 100%; object-fit: cover; }
   .indice__nome { grid-area: nome; font-size: 26px; }
@@ -461,10 +459,17 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 }
 
 /* ---------- la vita a Gardafarm: foto che si sparpagliano ---------- */
-.vita { position: relative; height: 280vh; }
+.vita { position: relative; height: 420vh; }
 .vita__palco { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
-.vita__testo { position: relative; z-index: 5; text-align: center; padding: 0 var(--gutter); }
-.vita__testo .display { margin-top: 18px; }
+.vita__logo {
+  --lw: clamp(210px, 25vw, 360px);
+  position: absolute; left: 50%; top: 50%; z-index: 5;
+  width: var(--lw); aspect-ratio: 380 / 420;
+  margin-left: calc(var(--lw) / -2); margin-top: calc(var(--lw) * 420 / 380 / -2);
+}
+.vita__logo-png { width: 100%; height: auto; }
+.vita__logo-marchio { position: absolute; left: 12.5%; top: -.6%; width: 75.8%; height: auto; opacity: 0; }
+.vita__velo { position: absolute; inset: 0; background: var(--crema); z-index: 9; opacity: 0; pointer-events: none; }
 .vita__foto {
   position: absolute; left: var(--x); top: var(--y); width: var(--w); aspect-ratio: 224 / 264;
   rotate: var(--r); z-index: 2; will-change: transform;
@@ -472,7 +477,7 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 .vita__foto svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 22px 26px rgba(8, 54, 80, .26)); }
 .vita__foto > img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 @media (max-width: 760px) {
-  .vita { height: 240vh; }
+  .vita { height: 360vh; }
   .vita__foto { width: calc(var(--w) * 2.1); left: var(--xm, var(--x)); top: var(--ym, var(--y)); }
   .vita__foto--desktop { display: none; }
 }
