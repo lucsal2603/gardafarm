@@ -390,14 +390,50 @@
   const fioreEsperienze = () => {
     const sez = $('.fiore-sez');
     if (!sez) return;
-    const giro = $('.fiore__giro', sez), petali = $$('.petalo', sez), infos = $$('.fiore__info', sez), ape = $('.fiore__ape', sez);
+    const giro = $('.fiore__giro', sez), petali = $$('.petalo', sez), ape = $('.fiore__ape', sez);
+    const lati = $$('.fiore__lato', sez), voci = $$('.arco__voce', sez), nomeSr = $('#fiore-nome-sr');
     const N = petali.length, passo = 360 / N;
+    /* archi concentrici al fiore, ricalcolati sullo schermo reale */
+    const arco = $('.fiore__arco', sez), grande = $('#arco-grande'), piccolo = $('#arco-piccolo');
+    const disegnaArchi = () => {
+      const W = sez.clientWidth, H = sez.clientHeight, fi = $('.fiore', sez);
+      const F = fi.offsetWidth, cx = W / 2, cy = fi.offsetTop + F / 2;
+      const giu = W < 900;
+      const fsN = Math.min(giu ? W * 0.085 : W * 0.052, giu ? 40 : 84), fsS = Math.max(16, fsN * 0.36);
+      const Rg = F * 0.53 + F * 0.13 + fsN * 0.2, Rp = Rg - fsN * 0.95;
+      const ap = giu ? 64 : 70;
+      const d = (R) => { const a = ap * Math.PI / 180; return `M${cx - Math.sin(a) * R} ${cy - Math.cos(a) * R} A${R} ${R} 0 0 1 ${cx + Math.sin(a) * R} ${cy - Math.cos(a) * R}`; };
+      arco.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      grande.setAttribute('d', d(Rg)); piccolo.setAttribute('d', d(Rp));
+      /* ogni nome si adatta alla lunghezza dell'arco */
+      const lungo = (R) => R * 2 * ap * Math.PI / 180 * 0.94;
+      const adatta = (sel, fs, R) => $$(sel, arco).forEach((t) => {
+        t.setAttribute('font-size', fs.toFixed(1));
+        const l = t.getComputedTextLength();
+        if (l > lungo(R)) t.setAttribute('font-size', (fs * lungo(R) / l).toFixed(1));
+      });
+      adatta('.arco__nome', fsN, Rg);
+      adatta('.arco__sotto', fsS, Rp);
+      arco.style.setProperty('--ox', cx + 'px'); arco.style.setProperty('--oy', cy + 'px');
+    };
+    disegnaArchi();
+    addEventListener('resize', disegnaArchi);
+    document.fonts?.ready.then(disegnaArchi);
     let attivo = -1;
     const accendi = (k) => {
       if (k === attivo) return;
+      const prima = attivo;
       attivo = k;
       petali.forEach((p, i) => p.classList.toggle('is-on', i === k));
-      infos.forEach((el, i) => el.classList.toggle('is-on', i === k));
+      lati.forEach((el, i) => el.classList.toggle('is-on', i === k));
+      if (nomeSr) nomeSr.textContent = $('textPath', voci[k]).textContent;
+      voci.forEach((v, i) => v.classList.toggle('is-on', i === k));
+      if (!ridotto && prima >= 0) {
+        const dir = k > prima ? 1 : -1;
+        const ox = arco.style.getPropertyValue('--ox'), oy = arco.style.getPropertyValue('--oy');
+        gsap.fromTo(voci[k], { rotation: 14 * dir, opacity: 0, svgOrigin: `${parseFloat(ox)} ${parseFloat(oy)}` }, { rotation: 0, opacity: 1, duration: 0.8, ease: 'power3.out', overwrite: true });
+        gsap.fromTo(voci[prima], { rotation: 0, opacity: 1, svgOrigin: `${parseFloat(ox)} ${parseFloat(oy)}` }, { rotation: -14 * dir, opacity: 0, duration: 0.5, ease: 'power2.in', overwrite: true });
+      }
     };
     /* l'ape vola da una punta all'altra: si alza dal petalo che se ne va e si posa su quello che arriva in alto */
     const fiore = $('.fiore', sez);
@@ -444,8 +480,10 @@
     if (arrivo) {
       const U = 1 / 0.6;
       tl.addLabel('uscita')
-        .fromTo(arrivo, { x: 0, xPercent: 100 }, { x: 0, xPercent: 0, ease: 'power2.out', duration: U }, 'uscita')
-        .to(['.fiore', '.fiore-sez__testi'].map((q) => $(q, sez)), { scale: 0.92, autoAlpha: 0.4, ease: 'none', duration: U }, 'uscita')
+        .set(arrivo, { autoAlpha: 1 }, 'uscita')
+        .fromTo($$('.telo', sez), { x: 0, xPercent: 110, '--curva': '46vh' }, { x: 0, xPercent: 0, '--curva': '0vh', ease: 'power3.inOut', duration: U * 0.55, stagger: U * 0.12 }, 'uscita')
+        .fromTo(arrivo, { x: 0, xPercent: 110, '--curva': '46vh' }, { x: 0, xPercent: 0, '--curva': '0vh', ease: 'power3.inOut', duration: U * 0.55 }, `uscita+=${U * 0.42}`)
+        .to(['.fiore', '.fiore__arco', '.fiore__lati', '.fiore__tutte', '.fiore__etichetta'].map((q) => $(q, sez)), { scale: 0.92, autoAlpha: 0.4, ease: 'none', duration: U }, 'uscita')
         .to(sez, { autoAlpha: 0, duration: 0.02, ease: 'none' });
     }
     ScrollTrigger.sort();

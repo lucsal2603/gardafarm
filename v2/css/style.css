@@ -484,26 +484,9 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
   .indice__freccia { grid-area: freccia; width: 34px; height: 34px; }
 }
 
-/* ---------- esperienze: il fiore che ruota ---------- */
-.fiore-sez {
-  position: relative; height: 100vh; height: 100svh; overflow: hidden;
-  display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 3vw;
-  padding: calc(var(--header-h) + 1vh) var(--gutter) 3vh;
-}
-.fiore-sez__testi { position: relative; z-index: 3; max-width: 520px; padding-left: 2vw; }
-.fiore__infos { position: relative; height: clamp(300px, 38vh, 380px); margin: 22px 0 26px; }
-.fiore__info { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 10px; opacity: 0; transform: translateY(30px); pointer-events: none; transition: opacity .5s var(--dolce), transform .7s var(--dolce); }
-.fiore__info.is-on { opacity: 1; transform: none; pointer-events: auto; transition-delay: .12s; }
-.fiore__dove { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; font-family: var(--serif); font-size: 16px; color: var(--lago); }
-.fiore__dove svg { flex: none; }
-.fiore__nome { font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144; text-transform: uppercase; font-size: clamp(38px, 4.6vw, 76px); line-height: .95; color: var(--lago); }
-.fiore__sotto { font-family: var(--serif); font-style: italic; font-size: clamp(18px, 1.5vw, 23px); color: var(--bosco); margin: 0; }
-.fiore__testo { margin: 0; max-width: 42ch; color: var(--lago-notte); }
-.fiore__link { margin-top: auto; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lago); }
-.fiore__link svg { transition: translate .4s var(--rimbalzo); }
-.fiore__link:hover svg { translate: 8px 0; }
-
-.fiore { --F: min(76vh, 46vw); position: relative; width: var(--F); height: var(--F); justify-self: center; margin-top: 6vh; }
+/* ---------- esperienze: il fiore in basso, il nome ad arco sopra ---------- */
+.fiore-sez { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
+.fiore { --F: min(92vh, 84vw); position: absolute; left: 50%; top: var(--cy, 94%); width: var(--F); height: var(--F); margin: calc(var(--F) / -2) 0 0 calc(var(--F) / -2); }
 .fiore__giro { position: absolute; inset: 0; will-change: transform; }
 .petalo {
   --L: calc(var(--F) * .43); --P: calc(var(--L) / 1.6);
@@ -512,36 +495,58 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 }
 .petalo svg { width: 100%; height: 100%; overflow: visible; transform-origin: 50% 100%; transition: transform .7s var(--rimbalzo), filter .6s; filter: saturate(.75) drop-shadow(0 18px 22px rgba(8, 54, 80, .25)); }
 .petalo__bordo { fill: #E3D2AE; stroke: #E3D2AE; stroke-width: 22; stroke-linejoin: round; }
-.petalo.is-on svg { transform: scale(1.14); filter: saturate(1.05) drop-shadow(0 26px 30px rgba(8, 54, 80, .35)); }
+.petalo.is-on svg { transform: scale(1.12); filter: saturate(1.05) drop-shadow(0 26px 30px rgba(8, 54, 80, .35)); }
 .fiore__cuore {
   position: absolute; left: 50%; top: 50%; z-index: 2; width: calc(var(--F) * .3); aspect-ratio: 1; border-radius: 50%;
   transform: translate(-50%, -50%); display: grid; place-items: center; text-align: center;
   background: var(--lago); color: var(--sole); box-shadow: 0 0 0 calc(var(--F) * .012) var(--sole), 0 0 0 calc(var(--F) * .02) var(--lago), 0 20px 40px -14px rgba(8, 54, 80, .5);
 }
-.fiore__cuore h2 { font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144; text-transform: uppercase; font-size: calc(var(--F) * .036); line-height: 1.05; }
+.fiore__cuore h2 { font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144; text-transform: uppercase; font-size: calc(var(--F) * .036); line-height: 1.05; margin-top: calc(var(--F) * -.05); }
 .fiore__cuore em { text-transform: none; font-size: 1.15em; }
-.fiore__ape { --aw: calc(var(--F) * .14); position: absolute; left: 50%; top: 50%; z-index: 4; width: var(--aw); aspect-ratio: 120 / 90; margin: calc(var(--aw) * -.375) 0 0 calc(var(--aw) * -.5); pointer-events: none; will-change: transform; filter: drop-shadow(0 8px 10px rgba(8, 54, 80, .25)); }
+.fiore__ape { --aw: calc(var(--F) * .13); position: absolute; left: 50%; top: 50%; z-index: 4; width: var(--aw); aspect-ratio: 120 / 90; margin: calc(var(--aw) * -.375) 0 0 calc(var(--aw) * -.5); pointer-events: none; will-change: transform; filter: drop-shadow(0 8px 10px rgba(8, 54, 80, .25)); }
 .fiore__ape svg { width: 100%; height: 100%; overflow: visible; animation: ape-volo 1.1s ease-in-out infinite; }
-.ridotto .fiore__giro { transform: none !important; }
+
+.fiore__etichetta { position: absolute; left: 0; right: 0; top: calc(var(--header-h) + 1vh); text-align: center; color: var(--lago); z-index: 3; }
+.fiore__arco { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; overflow: visible; }
+.arco__nome { font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144; text-transform: uppercase; fill: var(--lago); letter-spacing: .01em; text-anchor: middle; }
+.arco__sotto { font-family: var(--serif); font-style: italic; fill: var(--bosco); text-anchor: middle; }
+.arco__voce { opacity: 0; }
+.arco__voce.is-on { opacity: 1; }
+
+.fiore__lati { position: absolute; left: var(--gutter); bottom: 6vh; z-index: 3; width: min(330px, 25vw); }
+.fiore__lato { position: absolute; left: 0; bottom: 0; width: 100%; opacity: 0; transform: translateY(20px); transition: opacity .5s var(--dolce), transform .7s var(--dolce); pointer-events: none; }
+.fiore__lato.is-on { opacity: 1; transform: none; pointer-events: auto; transition-delay: .1s; }
+.fiore__testo { margin: 0 0 16px; font-size: 16px; color: var(--lago-notte); }
+.fiore__piede { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 14px; border-top: 1px solid rgba(8, 54, 80, .25); }
+.fiore__dove { display: inline-flex; align-items: center; gap: 8px; font-family: var(--serif); font-size: 16px; color: var(--lago); }
+.fiore__link { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lago); }
+.fiore__link svg { transition: translate .4s var(--rimbalzo); }
+.fiore__link:hover svg { translate: 8px 0; }
+.fiore__tutte { position: absolute; right: var(--gutter); bottom: 6vh; z-index: 3; }
 
 @media (max-width: 900px) {
-  .fiore-sez { grid-template-columns: 1fr; align-content: start; gap: 0; padding-top: calc(var(--header-h) + 2vh); }
-  .fiore { --F: min(84vw, 46svh); grid-row: 1; margin-top: 3vh; }
-  .fiore-sez__testi { padding-left: 0; }
-  .fiore-sez__testi > .etichetta, .fiore-sez__testi > .pill { display: none; }
-  .fiore__infos { height: 30svh; margin: 4svh 0 0; }
-  .fiore__nome { font-size: clamp(28px, 8vw, 40px); }
-  .fiore__testo { font-size: 14.5px; }
+  .fiore { --F: min(100vw, 60svh); --cy: 80%; }
+  .fiore__lati { left: var(--gutter); right: var(--gutter); width: auto; bottom: auto; top: calc(var(--header-h) + 5svh); }
+  .fiore__lato { position: absolute; top: 0; bottom: auto; }
+  .fiore__testo { display: none; }
+  .fiore__piede { border-top: 0; padding-top: 0; justify-content: center; gap: 24px; }
+  .fiore__etichetta, .fiore__tutte { display: none; }
 }
 
 /* ---------- la vita a Gardafarm: viaggio orizzontale tra le stagioni ---------- */
 .stagioni { position: relative; overflow: clip; }
 /* le stagioni salgono sopra il fiore, che resta fermo dietro */
 .js:not(.ridotto) .stagioni-entra { position: relative; z-index: 0; margin-top: -100vh; margin-top: -100svh; }
-.fiore__arrivo { position: absolute; inset: 0; z-index: 10; transform: translateX(100%); box-shadow: -30px 0 60px -20px rgba(8, 54, 80, .3); }
-.fiore__arrivo .display { margin-top: 18px; color: var(--prato); }
-.fiore__arrivo .etichetta { color: var(--prato); }
-.ridotto .fiore__arrivo, html:not(.js) .fiore__arrivo { display: none; }
+.fiore__arrivo { position: absolute; inset: 0; z-index: 10; transform: translateX(100%); visibility: hidden; box-shadow: -30px 0 60px -20px rgba(8, 54, 80, .3); }
+.fiore-sez .fiore__arrivo .display { margin-top: 18px; color: var(--prato); }
+.fiore-sez .fiore__arrivo .etichetta { color: var(--prato); }
+.fiore-sez .fiore__arrivo .stagioni__vai { color: var(--lago); }
+.ridotto .fiore__arrivo, html:not(.js) .fiore__arrivo, .ridotto .fiore__teli { display: none; }
+/* tre teli che arrivano da destra prima del pannello delle stagioni */
+.fiore__teli { position: absolute; inset: 0; z-index: 9; pointer-events: none; overflow: hidden; }
+.telo, .fiore__arrivo { --curva: 38vh; }
+.telo { position: absolute; top: 0; bottom: 0; left: calc(var(--curva) * -1); width: calc(100% + var(--curva)); background: var(--c); transform: translateX(110%); border-radius: var(--curva) 0 0 var(--curva) / 50% 0 0 50%; box-shadow: -18px 0 40px -20px rgba(8, 54, 80, .35); }
+.fiore__arrivo { border-radius: var(--curva) 0 0 var(--curva) / 50% 0 0 50%; }
 .stagioni__palco { height: 100vh; height: 100svh; overflow: hidden; }
 .stagioni__binario { display: flex; height: 100%; width: max-content; }
 .stagione { position: relative; flex: 0 0 100vw; height: 100%; background: var(--bg, var(--crema)); overflow: hidden; }
