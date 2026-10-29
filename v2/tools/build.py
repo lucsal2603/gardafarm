@@ -13,7 +13,7 @@ from pathlib import Path
 
 QUI = Path(__file__).resolve().parent
 RADICE = QUI.parent
-VERSIONE = '2026102940'
+VERSIONE = '2026102943'
 
 VOCI = [
     ('home', 'index.html', 'Home', 'giardino-verde'),
@@ -34,7 +34,7 @@ TESTA = '''<!doctype html>
 <meta name="theme-color" content="#FBF5EA">
 <meta property="og:title" content="{titolo}">
 <meta property="og:description" content="{descrizione}">
-<meta property="og:image" content="img/giardino-verde.webp">
+<meta property="og:image" content="img/m/giardino-verde.webp">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,7 +105,7 @@ def menu_img():
     for i, (_, _, _, img) in enumerate(VOCI):
         on = ' class="is-on"' if i == 0 else ''
         out.append(f'    <img{on} src="img/{img}.webp" alt="" loading="lazy">')
-    out.append('    <img src="img/squadra-asinello.webp" alt="" loading="lazy">')
+    out.append('    <img src="img/m/squadra-asinello.webp" alt="" loading="lazy">')
     return '\n'.join(out)
 
 PIEDE = '''<footer class="footer" id="contatti">

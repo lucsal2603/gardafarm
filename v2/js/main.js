@@ -142,17 +142,50 @@
     faccette: 'M100 8 L150 16 L186 52 L196 108 L190 168 L160 214 L110 236 L56 228 L18 192 L4 136 L10 80 L42 30 Z',
     fiore: fiore()
   };
+  /* ombre morbide disegnate una volta sola su canvas: stesso aspetto del drop-shadow CSS, ma senza ricalcolarlo a ogni fotogramma */
+  const ombre = new Map();
+  const ombra = (d, vb, strati, unita = 1.3) => {
+    const chiave = d + vb.join(',') + JSON.stringify(strati);
+    if (ombre.has(chiave)) return ombre.get(chiave);
+    const P = 70, k = 2, W = (vb[2] + 2 * P) * k, H = (vb[3] + 2 * P) * k, LONTANO = 4000;
+    const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    const ctx = cv.getContext('2d'), forma = new Path2D(d);
+    strati.forEach(([y, blur, a]) => {
+      ctx.save();
+      ctx.setTransform(k, 0, 0, k, (P - vb[0] - LONTANO) * k, (P - vb[1]) * k);
+      ctx.shadowColor = `rgba(8, 54, 80, ${a})`;
+      ctx.shadowBlur = blur / unita * k;
+      ctx.shadowOffsetX = LONTANO * k;
+      ctx.shadowOffsetY = y / unita * k;
+      ctx.fill(forma);
+      ctx.restore();
+    });
+    const out = { url: cv.toDataURL('image/png'), x: vb[0] - P, y: vb[1] - P, w: vb[2] + 2 * P, h: vb[3] + 2 * P };
+    ombre.set(chiave, out);
+    return out;
+  };
+  const imgOmbra = (o) => `<image href="${o.url}" x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" aria-hidden="true"/>`;
+
   $$('[data-sagoma]').forEach((b, i) => {
     const foto = $('.bustina__foto', b) || b, img = $('img', foto);
     const d = SAGOME[b.dataset.sagoma];
     if (!img || !d) return;
     const id = `sagoma-${i}`;
+    const forte = b.classList.contains('bustina');
+    const o = ombra(d, [-12, -12, 224, 264], forte ? [[26, 30, 0.28], [4, 8, 0.12]] : [[22, 26, 0.28]]);
     foto.innerHTML = `<svg viewBox="-12 -12 224 264" role="img" aria-label="${img.alt.replace(/"/g, '&quot;')}">
       <defs><clipPath id="${id}"><path d="${d}"/></clipPath></defs>
+      ${imgOmbra(o)}
       <path d="${d}" fill="var(--c)" stroke="var(--c)" stroke-width="18" stroke-linejoin="round"/>
       <path d="${d}" fill="var(--crema)" stroke="var(--crema)" stroke-width="6" stroke-linejoin="round"/>
       <g clip-path="url(#${id})"><image href="${img.getAttribute('src')}" x="-10" y="-10" width="220" height="260" preserveAspectRatio="xMidYMid slice"/></g>
     </svg>`;
+  });
+
+  $$('.petalo svg').forEach((sv) => {
+    const d = $('.petalo__bordo', sv)?.getAttribute('d');
+    if (!d) return;
+    sv.insertAdjacentHTML('afterbegin', imgOmbra(ombra(d, [-14, -14, 228, 348], [[22, 26, 0.42]], 1.1)));
   });
 
   /* senza GSAP (CDN irraggiungibile) la pagina resta leggibile */
@@ -180,6 +213,12 @@
     const id = a.getAttribute('href');
     if (id.length > 1 && $(id)) { e.preventDefault(); chiudiMenu(); vaiA(id); }
   }));
+
+  /* ================= animazioni in loop ferme quando sono fuori dallo schermo ================= */
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((voci) => voci.forEach((v) => v.target.classList.toggle('fuori-vista', !v.isIntersecting)), { rootMargin: '100px' });
+    $$('.manifesto, .fiore-sez, .hero').forEach((el) => io.observe(el));
+  }
 
   /* ================= header ================= */
   const header = $('.header');
@@ -233,6 +272,7 @@
     let mx = -200, my = -200, cx = -200, cy = -200;
     addEventListener('pointermove', (e) => { mx = e.clientX + 14; my = e.clientY + 14; }, { passive: true });
     gsap.ticker.add(() => {
+      if (!cursore.classList.contains('is-on') && Math.abs(mx - cx) + Math.abs(my - cy) < 0.5) return;
       cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2;
       cursore.style.transform = `translate3d(${cx.toFixed(1)}px, ${cy.toFixed(1)}px, 0)`;
     });
@@ -304,7 +344,14 @@
     if (!ridotto) {
       ScrollTrigger.create({ trigger: hero, start: 'top top', end: 'bottom bottom', onUpdate: (s) => { scrollP = s.progress; } });
     }
+    /* la giostra lavora solo quando l'hero è visibile; scrive nel DOM solo i valori cambiati */
+    let heroVisto = true;
+    ScrollTrigger.create({ trigger: hero, start: 'top bottom', end: 'bottom top', onToggle: (st) => { heroVisto = st.isActive; ultimoT = performance.now(); } });
+    const cache = bustine.map(() => ({}));
+    const scrivi = (el, c, k, v, fn) => { if (c[k] !== v) { c[k] = v; fn(v); } };
+    let giroPrima = '', formaPrima = '';
     const disponi = () => {
+      if (!heroVisto) return;
       const now = performance.now(), dt = Math.min(0.05, (now - ultimoT) / 1000); ultimoT = now;
       if (!ridotto) auto += dt * 0.06;
       const obiettivo = auto + scrollP * N * 0.85;
@@ -322,14 +369,19 @@
         const s = 1 - Math.min(at, 3) * 0.1;
         const blur = Math.min(7, Math.max(0, at - 0.6) * 3.2);
         const op = at > N / 2 - 0.8 ? Math.max(0, (N / 2 - at) / 0.8) : 1;
-        b.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg) scale(${s.toFixed(3)})`;
-        b.style.filter = blur > 0.15 ? `blur(${blur.toFixed(1)}px)` : 'none';
-        b.style.zIndex = String(100 - Math.round(at * 10));
-        b.style.opacity = op.toFixed(2);
-        b.tabIndex = at < 0.5 ? 0 : -1;
+        const c = cache[i];
+        scrivi(b, c, 't', `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg) scale(${s.toFixed(3)})`, (v) => { b.style.transform = v; });
+        /* sfocatura a scatti di mezzo pixel: a occhio identica, ma ridisegna molto meno spesso */
+        const bq = Math.round(blur * 2) / 2;
+        scrivi(b, c, 'f', bq > 0.15 ? `blur(${bq}px)` : 'none', (v) => { b.style.filter = v; });
+        scrivi(b, c, 'z', String(100 - Math.round(at * 10)), (v) => { b.style.zIndex = v; });
+        scrivi(b, c, 'o', op.toFixed(2), (v) => { b.style.opacity = v; });
+        scrivi(b, c, 'i', at < 0.5 ? 0 : -1, (v) => { b.tabIndex = v; });
       });
-      giro?.setAttribute('transform', `rotate(${(-corrente * 14).toFixed(2)} 500 640)`);
-      if (forma) forma.parentNode.style.transform = `rotate(${(Math.sin(corrente * 0.6) * 2.2).toFixed(2)}deg)`;
+      const g = `rotate(${(-corrente * 14).toFixed(1)} 500 640)`;
+      if (giro && g !== giroPrima) { giroPrima = g; giro.setAttribute('transform', g); }
+      const fr = `rotate(${(Math.sin(corrente * 0.6) * 2.2).toFixed(2)}deg)`;
+      if (forma && fr !== formaPrima) { formaPrima = fr; forma.parentNode.style.transform = fr; }
     };
     disponi();
     gsap.ticker.add(disponi);
