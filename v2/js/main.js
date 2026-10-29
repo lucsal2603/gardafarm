@@ -426,7 +426,7 @@
     const stato = { r: 0 };
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: sez, start: 'top top', end: () => '+=' + innerHeight * 0.6 * (N - 1 + SOSTA), pin: true, scrub: 0.6,
+        trigger: sez, start: 'top top', end: () => '+=' + innerHeight * (0.6 * (N - 1 + SOSTA) + 1), pin: true, scrub: 0.6,
         refreshPriority: 1, invalidateOnRefresh: true
       }
     });
@@ -438,6 +438,8 @@
         accendi(((Math.round(-stato.r / passo) % N) + N) % N);
       } });
     }
+    /* uscita: le stagioni salgono sopra, il fiore resta fermo e si allontana */
+    tl.to(sez, { scale: 0.9, autoAlpha: 0.35, ease: 'none', duration: 1 / 0.6 });
     ScrollTrigger.sort();
   };
 

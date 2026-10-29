@@ -534,6 +534,8 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 
 /* ---------- la vita a Gardafarm: viaggio orizzontale tra le stagioni ---------- */
 .stagioni { position: relative; overflow: clip; }
+/* le stagioni salgono sopra il fiore, che resta fermo dietro */
+.js:not(.ridotto) .stagioni-entra { position: relative; z-index: 3; margin-top: -100vh; margin-top: -100svh; box-shadow: 0 -30px 60px -20px rgba(8, 54, 80, .25); }
 .stagioni__palco { height: 100vh; height: 100svh; overflow: hidden; }
 .stagioni__binario { display: flex; height: 100%; width: max-content; }
 .stagione { position: relative; flex: 0 0 100vw; height: 100%; background: var(--bg, var(--crema)); overflow: hidden; }
