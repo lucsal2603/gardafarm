@@ -154,6 +154,8 @@ html:not(.js) .loader, .loader.is-done { display: none; }
 .header > * { pointer-events: auto; }
 .header.is-hidden { transform: translateY(-110%); }
 .header__logo { grid-column: 2; display: block; width: clamp(78px, 8vw, 124px); transition: width .5s var(--dolce); }
+.header__logo img { border-radius: 18px; transition: background .4s, padding .4s; }
+.header.is-small .header__logo img { background: color-mix(in srgb, var(--crema) 88%, transparent); padding: 6px 8px; backdrop-filter: blur(6px); }
 .header.is-small .header__logo { width: clamp(62px, 5.4vw, 84px); }
 .header__sx { display: flex; gap: 6px; }
 .header__dx { justify-self: end; display: flex; align-items: center; }
@@ -484,7 +486,7 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 
 /* ---------- esperienze: il fiore che ruota ---------- */
 .fiore-sez {
-  position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden;
+  position: relative; height: 100vh; height: 100svh; overflow: hidden;
   display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 3vw;
   padding: calc(var(--header-h) + 1vh) var(--gutter) 3vh;
 }
@@ -535,7 +537,11 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 /* ---------- la vita a Gardafarm: viaggio orizzontale tra le stagioni ---------- */
 .stagioni { position: relative; overflow: clip; }
 /* le stagioni salgono sopra il fiore, che resta fermo dietro */
-.js:not(.ridotto) .stagioni-entra { position: relative; z-index: 3; margin-top: -100vh; margin-top: -100svh; box-shadow: 0 -30px 60px -20px rgba(8, 54, 80, .25); }
+.js:not(.ridotto) .stagioni-entra { position: relative; z-index: 0; margin-top: -100vh; margin-top: -100svh; }
+.fiore__arrivo { position: absolute; inset: 0; z-index: 10; transform: translateX(100%); box-shadow: -30px 0 60px -20px rgba(8, 54, 80, .3); }
+.fiore__arrivo .display { margin-top: 18px; color: var(--prato); }
+.fiore__arrivo .etichetta { color: var(--prato); }
+.ridotto .fiore__arrivo, html:not(.js) .fiore__arrivo { display: none; }
 .stagioni__palco { height: 100vh; height: 100svh; overflow: hidden; }
 .stagioni__binario { display: flex; height: 100%; width: max-content; }
 .stagione { position: relative; flex: 0 0 100vw; height: 100%; background: var(--bg, var(--crema)); overflow: hidden; }
@@ -713,6 +719,13 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 .footer__social { display: flex; gap: 8px; margin-top: 8px; }
 .footer__social .pill { color: var(--crema); background: transparent; height: 36px; font-size: 11px; }
 .footer__social .pill:hover { background: var(--sole); color: var(--lago-notte); border-color: var(--sole); }
+.footer__mappe { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); margin-top: clamp(40px, 5vw, 70px); }
+.mappa { margin: 0; }
+.mappa iframe { display: block; width: 100%; aspect-ratio: 16 / 8; border: 0; border-radius: var(--raggio); background: var(--lago-notte); filter: saturate(.8) contrast(1.02); }
+.mappa figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; font-size: 13px; color: rgba(251, 245, 234, .85); }
+.mappa figcaption b { font-family: var(--serif); font-weight: 400; font-size: 17px; color: var(--sole); }
+.mappa figcaption a { text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+@media (max-width: 760px) { .footer__mappe { grid-template-columns: 1fr; } .mappa iframe { aspect-ratio: 4 / 3; } }
 .footer__fondo { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; margin-top: clamp(40px, 5vw, 70px); padding-top: 18px; border-top: 1px solid rgba(251, 245, 234, .2); font-size: 12px; color: rgba(251, 245, 234, .75); }
 .footer__fondo a { text-decoration: underline; text-underline-offset: 3px; }
 

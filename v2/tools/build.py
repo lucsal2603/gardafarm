@@ -13,7 +13,7 @@ from pathlib import Path
 
 QUI = Path(__file__).resolve().parent
 RADICE = QUI.parent
-VERSIONE = '2026102923'
+VERSIONE = '2026102926'
 
 VOCI = [
     ('home', 'index.html', 'Home', 'giardino-verde'),
@@ -145,6 +145,16 @@ PIEDE = '''<footer class="footer" id="contatti">
         <a class="pill" href="https://www.facebook.com/gardafarmverona/" target="_blank" rel="noopener">Facebook</a>
       </div>
     </div>
+  </div>
+  <div class="footer__mappe">
+    <figure class="mappa">
+      <iframe src="https://www.google.com/maps?q=Via+Gardesane+91b,+37139+Verona+VR&amp;z=14&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mappa: Gardafarm Verona, Via Gardesane 91/B"></iframe>
+      <figcaption><span><b>Verona</b> · Via Gardesane 91/B</span><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Via+Gardesane+91b,+37139+Verona" target="_blank" rel="noopener">Indicazioni ↗</a></figcaption>
+    </figure>
+    <figure class="mappa">
+      <iframe src="https://www.google.com/maps?q=Via+Paroline+7,+37069+Villafranca+di+Verona+VR&amp;z=14&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mappa: Gardafarm Villafranca, Via Paroline 7"></iframe>
+      <figcaption><span><b>Villafranca</b> · Via Paroline 7</span><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Via+Paroline+7,+37069+Villafranca+di+Verona" target="_blank" rel="noopener">Indicazioni ↗</a></figcaption>
+    </figure>
   </div>
   <div class="footer__fondo">
     <span>© 2026 Gardafarm, tutti i diritti riservati</span>

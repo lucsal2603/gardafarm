@@ -438,8 +438,16 @@
         accendi(((Math.round(-stato.r / passo) % N) + N) % N);
       } });
     }
-    /* uscita: le stagioni salgono sopra, il fiore resta fermo e si allontana */
-    tl.to(sez, { scale: 0.9, autoAlpha: 0.35, ease: 'none', duration: 1 / 0.6 });
+    /* uscita: il pannello delle stagioni arriva da destra sopra il fiore fermo;
+       a schermo coperto la sezione vera (identica) è già lì dietro e prende il posto */
+    const arrivo = $('.fiore__arrivo', sez);
+    if (arrivo) {
+      const U = 1 / 0.6;
+      tl.addLabel('uscita')
+        .fromTo(arrivo, { x: 0, xPercent: 100 }, { x: 0, xPercent: 0, ease: 'power2.out', duration: U }, 'uscita')
+        .to(['.fiore', '.fiore-sez__testi'].map((q) => $(q, sez)), { scale: 0.92, autoAlpha: 0.4, ease: 'none', duration: U }, 'uscita')
+        .to(sez, { autoAlpha: 0, duration: 0.02, ease: 'none' });
+    }
     ScrollTrigger.sort();
   };
 
