@@ -766,7 +766,8 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
   .elenco__d { grid-column: 2; text-align: left; }
   .titolo-pagina__lati { font-size: 15px; }
   .hero h1, .hero__piccolo { display: none; }
-  .hero__forma { width: 160vw; bottom: -6vh; }
+  .hero__forma { width: 150vw; left: 50%; right: auto; margin: 0 0 0 -75vw; bottom: -4vh; }
+  .hero .bustina { top: 40%; }
   .hero__forma text { font-size: 96px; }
   .pill { height: 38px; padding: 0 14px; font-size: 12px; }
   .pill--tondo { width: 38px; padding: 0; }
