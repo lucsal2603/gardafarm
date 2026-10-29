@@ -394,6 +394,25 @@ html:not(.js) .ventaglio__palco, .ridotto .ventaglio__palco { position: relative
 .frutti .forma-frutto { position: absolute; width: clamp(110px, 17vw, 300px); z-index: 1; }
 .forma-frutto svg { width: 100%; height: auto; display: block; overflow: visible; }
 
+/* ---------- manifesto: frase grande che si accende parola per parola ---------- */
+.manifesto { position: relative; height: 300vh; }
+.manifesto__palco { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-items: center; padding: 0 var(--gutter); }
+.manifesto__testo {
+  max-width: 1280px; margin: 0; text-align: center;
+  font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144;
+  font-size: clamp(34px, 5.8vw, 100px); line-height: 1.14; letter-spacing: -.01em;
+  text-transform: uppercase; color: var(--prato);
+}
+.manifesto__icona { display: inline-block; width: 1.3em; height: 1.3em; vertical-align: -.3em; margin: 0 .22em; }
+.manifesto__icona svg { width: 100%; height: 100%; }
+.manifesto .parola { display: inline-block; }
+html:not(.js) .manifesto, .ridotto .manifesto { height: auto; }
+html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative; height: auto; padding-block: 20vh; }
+@media (max-width: 760px) {
+  .manifesto { height: 240vh; }
+  .manifesto__testo { font-size: clamp(28px, 8.4vw, 40px); }
+}
+
 /* ---------- indice delle esperienze (home) ---------- */
 .indice { margin-top: clamp(48px, 6vw, 96px); border-top: 1px solid rgba(8, 54, 80, .25); }
 .indice__riga {

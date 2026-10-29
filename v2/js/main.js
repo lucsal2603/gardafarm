@@ -453,6 +453,27 @@
       .to(centro, { yPercent: -2, ease: 'none', duration: 0.6 }, 1.4);
   };
 
+  /* ================= manifesto: parole e simboli compaiono con lo scroll ================= */
+  const manifesto = () => {
+    const sez = $('.manifesto');
+    if (!sez || ridotto) return;
+    const pezzi = [];
+    [...$('.manifesto__testo', sez).children].forEach((el) => {
+      if (el.classList.contains('manifesto__parte')) {
+        SplitText.create(el, { type: 'words', wordsClass: 'parola' }).words.forEach((w) => pezzi.push(w));
+      } else pezzi.push(el);
+    });
+    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top top', end: 'bottom bottom', scrub: 0.8 } });
+    pezzi.forEach((el, i) => {
+      const icona = el.classList.contains('manifesto__icona');
+      tl.fromTo(el,
+        icona ? { scale: 0, rotate: -40, autoAlpha: 0 } : { autoAlpha: 0.12, yPercent: 35, filter: 'blur(6px)' },
+        icona ? { scale: 1, rotate: 0, autoAlpha: 1, ease: 'back.out(2.2)', duration: 1.2 } : { autoAlpha: 1, yPercent: 0, filter: 'blur(0px)', ease: 'power2.out', duration: 1 },
+        i * 0.55);
+    });
+    tl.to({}, { duration: 1.5 });
+  };
+
   /* ================= pila di carte ================= */
   const pila = () => {
     if (ridotto || innerWidth < 760) return;
@@ -518,6 +539,7 @@
     indice();
     vita();
     ventaglio();
+    manifesto();
     pila();
     contatori();
     scorrevoli();
