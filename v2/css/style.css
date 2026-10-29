@@ -375,27 +375,73 @@ html:not(.js) .espandi__img { clip-path: none; }
 .frutti .forma-frutto { position: absolute; width: clamp(110px, 17vw, 300px); z-index: 1; }
 .forma-frutto svg { width: 100%; height: auto; display: block; overflow: visible; }
 
-/* ---------- carte esperienze (riga orizzontale) ---------- */
-.riga-carte { margin-top: clamp(40px, 5vw, 80px); overflow: hidden; }
-.riga-carte__binario { display: flex; gap: 14px; padding-inline: var(--gutter); width: max-content; }
-.carta-esp {
-  position: relative; flex: 0 0 auto; width: clamp(260px, 23vw, 380px);
-  aspect-ratio: 3 / 4; border-radius: var(--raggio); overflow: hidden;
-  background: var(--bg, var(--crema-2));
-  display: flex; flex-direction: column; justify-content: space-between;
-  padding: 16px;
-  transition: transform .7s var(--dolce);
+/* ---------- indice delle esperienze (home) ---------- */
+.indice { margin-top: clamp(48px, 6vw, 96px); border-top: 1px solid rgba(8, 54, 80, .25); }
+.indice__riga {
+  position: relative; isolation: isolate;
+  display: grid; grid-template-columns: 48px minmax(0, 1.9fr) minmax(0, 1fr) 190px 40px; align-items: center; gap: 20px;
+  padding: clamp(18px, 2vw, 30px) clamp(8px, 1vw, 16px);
+  border-bottom: 1px solid rgba(8, 54, 80, .25);
+  color: var(--lago-notte);
+  transition: color .45s var(--dolce);
 }
-.carta-esp:hover { transform: rotate(-2deg) translateY(-6px); }
-.carta-esp:nth-child(even):hover { transform: rotate(2deg) translateY(-6px); }
-.carta-esp__foto { position: absolute; inset: 0; z-index: 0; }
-.carta-esp__foto img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); transition: transform 1.2s var(--dolce); }
-.carta-esp:hover .carta-esp__foto img { transform: scale(1.1); }
-.carta-esp__foto::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,54,80,0) 40%, rgba(8,54,80,.75)); }
-.carta-esp > *:not(.carta-esp__foto) { position: relative; z-index: 1; }
-.carta-esp__dove { align-self: flex-start; padding: 5px 11px; border-radius: 999px; background: var(--carta); color: var(--lago); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-.carta-esp__nome { color: var(--crema); font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144; font-size: clamp(28px, 2.4vw, 40px); line-height: 1; }
-.carta-esp__nome em { display: block; font-size: .5em; letter-spacing: .02em; margin-top: 8px; font-family: var(--sans); font-style: normal; font-weight: 500; opacity: .9; }
+.indice__riga::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: var(--lago); border-radius: 0;
+  transform: scaleY(0); transform-origin: 50% 100%;
+  transition: transform .55s var(--dolce), border-radius .55s var(--dolce);
+}
+.indice__riga:hover, .indice__riga:focus-visible { color: var(--crema); }
+.indice__riga:hover::before, .indice__riga:focus-visible::before { transform: scaleY(1); border-radius: 14px; }
+.indice__n { font-family: var(--serif); font-size: 15px; }
+.indice__nome {
+  font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144;
+  font-size: clamp(28px, 3.3vw, 56px); line-height: 1; text-transform: uppercase;
+  transition: translate .55s var(--dolce), color .45s;
+}
+.indice__riga:hover .indice__nome { translate: 14px 0; font-style: italic; color: var(--sole); }
+.indice__desc { font-family: var(--serif); font-style: italic; font-size: clamp(16px, 1.3vw, 20px); }
+.indice__dove { justify-self: start; white-space: nowrap; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; }
+.indice__freccia { justify-self: end; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid currentColor; transition: background .4s, color .4s, rotate .5s var(--rimbalzo); }
+.indice__riga:hover .indice__freccia { background: var(--sole); color: var(--lago-notte); border-color: var(--sole); rotate: -45deg; }
+.indice__mini { display: none; }
+.indice__anteprime { position: fixed; left: 0; top: 0; z-index: 60; pointer-events: none; width: clamp(220px, 20vw, 320px); aspect-ratio: 224 / 264; }
+.indice__img { position: absolute; inset: 0; opacity: 0; transform: scale(.6) rotate(-12deg); transition: opacity .35s, transform .6s var(--rimbalzo); }
+.indice__img.is-on { opacity: 1; transform: none; }
+.indice__img svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 26px 30px rgba(8, 54, 80, .35)); }
+.indice__img > img { display: none; }
+@media (hover: none), (max-width: 760px) {
+  .indice__anteprime { display: none; }
+  .indice__riga { grid-template-columns: 64px 1fr 36px; grid-template-areas: 'mini nome freccia' 'mini desc freccia' 'mini dove freccia'; row-gap: 6px; }
+  .indice__n { display: none; }
+  .indice__mini { display: block; grid-area: mini; width: 64px; height: 64px; border-radius: 50%; overflow: hidden; border: 3px solid var(--carta); }
+  .indice__mini img { width: 100%; height: 100%; object-fit: cover; }
+  .indice__nome { grid-area: nome; font-size: 26px; }
+  .indice__desc { grid-area: desc; font-size: 15px; }
+  .indice__dove { grid-area: dove; font-size: 10px; padding: 4px 9px; }
+  .indice__freccia { grid-area: freccia; width: 34px; height: 34px; }
+}
+
+/* ---------- la vita a Gardafarm: foto che si sparpagliano ---------- */
+.vita { position: relative; height: 280vh; }
+.vita__palco { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
+.vita__testo { position: relative; z-index: 5; text-align: center; padding: 0 var(--gutter); }
+.vita__testo .display { margin-top: 18px; }
+.vita__foto {
+  position: absolute; left: var(--x); top: var(--y); width: var(--w); aspect-ratio: 224 / 264;
+  rotate: var(--r); z-index: 2; will-change: transform;
+}
+.vita__foto svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 22px 26px rgba(8, 54, 80, .26)); }
+.vita__foto > img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+@media (max-width: 760px) {
+  .vita { height: 240vh; }
+  .vita__foto { width: calc(var(--w) * 2.1); left: var(--xm, var(--x)); top: var(--ym, var(--y)); }
+  .vita__foto--desktop { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vita { height: auto; }
+  .vita__palco { position: relative; min-height: 100vh; }
+}
 
 /* ---------- galleria a nastro ---------- */
 .nastro { overflow: hidden; padding-block: 4px; }

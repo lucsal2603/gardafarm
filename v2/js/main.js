@@ -131,8 +131,8 @@
     faccette: 'M100 8 L150 16 L186 52 L196 108 L190 168 L160 214 L110 236 L56 228 L18 192 L4 136 L10 80 L42 30 Z',
     fiore: fiore()
   };
-  $$('.bustina[data-sagoma]').forEach((b, i) => {
-    const foto = $('.bustina__foto', b), img = $('img', foto);
+  $$('[data-sagoma]').forEach((b, i) => {
+    const foto = $('.bustina__foto', b) || b, img = $('img', foto);
     const d = SAGOME[b.dataset.sagoma];
     if (!img || !d) return;
     const id = `sagoma-${i}`;
@@ -388,6 +388,53 @@
     });
   };
 
+  /* ================= indice esperienze: foto che segue il mouse ================= */
+  const indice = () => {
+    const box = $('.indice__anteprime');
+    if (!box || touch) return;
+    const imgs = $$('.indice__img', box);
+    let mx = 0, my = 0, x = 0, y = 0, vx = 0, attivo = false;
+    addEventListener('pointermove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
+    gsap.ticker.add(() => {
+      if (!attivo && !imgs.some((im) => im.classList.contains('is-on'))) return;
+      const nx = x + (mx - x) * 0.14, ny = y + (my - y) * 0.14;
+      vx = nx - x; x = nx; y = ny;
+      const w = box.offsetWidth, h = box.offsetHeight;
+      box.style.transform = `translate3d(${(x - w / 2).toFixed(1)}px, ${(y - h * 0.62).toFixed(1)}px, 0) rotate(${Math.max(-14, Math.min(14, vx * 0.6)).toFixed(2)}deg)`;
+    });
+    $$('.indice__riga').forEach((r) => {
+      r.addEventListener('pointerenter', () => {
+        if (!attivo) { x = mx; y = my; }
+        attivo = true;
+        imgs.forEach((im, k) => im.classList.toggle('is-on', k === +r.dataset.indice));
+      });
+      r.addEventListener('pointerleave', () => { attivo = false; imgs.forEach((im) => im.classList.remove('is-on')); });
+    });
+  };
+
+  /* ================= la vita a Gardafarm: le foto escono dal titolo ================= */
+  const vita = () => {
+    const sez = $('.vita');
+    if (!sez || ridotto) return;
+    const palco = $('.vita__palco', sez), foto = $$('.vita__foto', sez), testo = $('.vita__testo', sez);
+    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top top', end: 'bottom bottom', scrub: 0.9, invalidateOnRefresh: true } });
+    foto.forEach((f, i) => {
+      const verso = () => {
+        const p = palco.getBoundingClientRect();
+        return { x: p.width / 2 - (f.offsetLeft + f.offsetWidth / 2), y: p.height / 2 - (f.offsetTop + f.offsetHeight / 2) };
+      };
+      const v = parseFloat(f.dataset.vel) || 1;
+      tl.fromTo(f,
+        { x: () => verso().x * 0.92, y: () => verso().y * 0.92, scale: 0.15, autoAlpha: 0 },
+        { x: 0, y: 0, scale: 1, autoAlpha: 1, ease: 'power3.out', duration: 1 }, i * 0.06)
+        .to(f, { y: () => -innerHeight * 0.12 * v, ease: 'none', duration: 0.9 }, 1.1);
+    });
+    tl.fromTo(testo, { scale: 0.86 }, { scale: 1, ease: 'power2.out', duration: 1 }, 0)
+      .to(testo, { yPercent: -10, ease: 'none', duration: 0.9 }, 1.1);
+    const split = SplitText.create($('.display', testo), { type: 'lines', mask: 'lines', linesClass: 'split-line' });
+    gsap.from(split.lines, { yPercent: 115, stagger: 0.1, duration: 1.3, scrollTrigger: { trigger: sez, start: 'top 70%', once: true } });
+  };
+
   /* ================= pila di carte ================= */
   const pila = () => {
     if (ridotto || innerWidth < 760) return;
@@ -450,6 +497,8 @@
     espandi();
     parallasse();
     righe();
+    indice();
+    vita();
     pila();
     contatori();
     scorrevoli();
