@@ -13,7 +13,7 @@ from pathlib import Path
 
 QUI = Path(__file__).resolve().parent
 RADICE = QUI.parent
-VERSIONE = '2026102932'
+VERSIONE = '2026102933'
 
 VOCI = [
     ('home', 'index.html', 'Home', 'giardino-verde'),
@@ -159,6 +159,7 @@ PIEDE = '''<footer class="footer" id="contatti">
   <div class="footer__fondo">
     <span>© 2026 Gardafarm, tutti i diritti riservati</span>
     <span><a href="https://www.gardafarmverona.com/general-4" target="_blank" rel="noopener">Privacy Policy</a> · <a href="https://www.gardafarmverona.com/copia-di-privacy-policy" target="_blank" rel="noopener">Dichiarazione cookie</a></span>
+    <a class="firma" href="https://lucsal.it" target="_blank" rel="noopener">Sito realizzato da <b>lucsal.it</b></a>
   </div>
 </footer>
 '''

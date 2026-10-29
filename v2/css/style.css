@@ -863,3 +863,9 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
   .pagina-esperienze .fiore__testo { display: block; font-size: 14px; margin-bottom: 10px; text-align: center; }
   .pagina-esperienze .fiore { --cy: 84%; --F: min(96vw, 54svh); }
 }
+
+.footer__fondo { align-items: center; }
+.firma { margin-left: auto; text-decoration: none !important; color: rgba(251, 245, 234, .75); transition: color .3s; }
+.firma b { font-family: var(--serif); font-weight: 400; font-size: 15px; color: var(--sole); letter-spacing: .02em; }
+.firma:hover { color: var(--crema); }
+@media (max-width: 760px) { .firma { margin-left: 0; } }
