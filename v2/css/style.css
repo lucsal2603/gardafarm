@@ -482,35 +482,54 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
   .indice__freccia { grid-area: freccia; width: 34px; height: 34px; }
 }
 
-/* ---------- esperienze: mazzo di carte ---------- */
-.mazzo {
-  position: relative; min-height: 100vh; min-height: 100svh;
-  display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4vw;
-  padding: calc(var(--header-h) + 2vh) var(--gutter) 6vh;
+/* ---------- esperienze: il fiore che ruota ---------- */
+.fiore-sez {
+  position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden;
+  display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 3vw;
+  padding: calc(var(--header-h) + 1vh) var(--gutter) 3vh;
 }
-.mazzo__intro { max-width: 560px; }
-.mazzo__intro .display { margin: 18px 0 22px; }
-.mazzo__lead { margin-bottom: 26px; }
-.mazzo__punti { display: flex; gap: 8px; margin-bottom: 28px; }
-.mazzo__punti span { width: 9px; height: 9px; transform: rotate(45deg); background: rgba(8, 54, 80, .22); transition: background .3s, transform .4s var(--rimbalzo); }
-.mazzo__punti span.is-on { background: var(--lago); transform: rotate(45deg) scale(1.35); }
-.mazzo__tavolo { position: relative; justify-self: center; width: clamp(260px, 30vw, 430px); aspect-ratio: 3 / 4.3; }
-.mazzo__carta {
-  position: absolute; inset: 0; display: flex; flex-direction: column;
-  border: clamp(9px, 1.1vw, 16px) solid #E3D2AE; border-radius: var(--raggio);
-  background: #E3D2AE; color: var(--lago-notte);
-  box-shadow: 0 30px 60px -26px rgba(8, 54, 80, .5), 0 6px 14px rgba(8, 54, 80, .12);
-  transform-origin: 50% 90%; will-change: transform;
+.fiore-sez__testi { position: relative; z-index: 3; max-width: 520px; padding-left: 2vw; }
+.fiore__infos { position: relative; height: clamp(300px, 38vh, 380px); margin: 22px 0 26px; }
+.fiore__info { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 10px; opacity: 0; transform: translateY(30px); pointer-events: none; transition: opacity .5s var(--dolce), transform .7s var(--dolce); }
+.fiore__info.is-on { opacity: 1; transform: none; pointer-events: auto; transition-delay: .12s; }
+.fiore__dove { align-self: flex-start; padding: 5px 12px; border: 1px solid var(--lago); border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lago); }
+.fiore__nome { font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144; text-transform: uppercase; font-size: clamp(38px, 4.6vw, 76px); line-height: .95; color: var(--lago); }
+.fiore__sotto { font-family: var(--serif); font-style: italic; font-size: clamp(18px, 1.5vw, 23px); color: var(--bosco); margin: 0; }
+.fiore__testo { margin: 0; max-width: 42ch; color: var(--lago-notte); }
+.fiore__link { margin-top: auto; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lago); }
+.fiore__link svg { transition: translate .4s var(--rimbalzo); }
+.fiore__link:hover svg { translate: 8px 0; }
+
+.fiore { --F: min(76vh, 46vw); position: relative; width: var(--F); height: var(--F); justify-self: center; margin-top: 6vh; }
+.fiore__giro { position: absolute; inset: 0; will-change: transform; }
+.petalo {
+  --L: calc(var(--F) * .43); --P: calc(var(--L) / 1.6);
+  position: absolute; left: 50%; bottom: 50%; width: var(--P); height: var(--L); margin-left: calc(var(--P) / -2);
+  transform-origin: 50% 100%; transform: rotate(calc(var(--i) * 60deg)) translateY(calc(var(--F) * -.06));
 }
-.mazzo__foto { flex: 1.25; border-radius: calc(var(--raggio) * .6); overflow: hidden; }
-.mazzo__foto img { width: 100%; height: 100%; object-fit: cover; }
-.mazzo__corpo { flex: 1; display: flex; flex-direction: column; gap: 6px; padding: 16px 6px 4px; }
-.mazzo__dove { align-self: flex-start; padding: 4px 10px; border: 1px solid currentColor; border-radius: 999px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.mazzo__nome { font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144; text-transform: uppercase; font-size: clamp(24px, 2.3vw, 38px); line-height: 1; margin-top: 6px; }
-.mazzo__sotto { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--bosco); }
-.mazzo__testo { font-size: 13.5px; line-height: 1.45; margin-top: auto; }
-.ridotto .mazzo__tavolo { width: auto; aspect-ratio: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
-.ridotto .mazzo__carta { position: relative; aspect-ratio: 3 / 4.3; }
+.petalo svg { width: 100%; height: 100%; overflow: visible; transform-origin: 50% 100%; transition: transform .7s var(--rimbalzo), filter .6s; filter: saturate(.75) drop-shadow(0 18px 22px rgba(8, 54, 80, .25)); }
+.petalo__bordo { fill: #E3D2AE; stroke: #E3D2AE; stroke-width: 22; stroke-linejoin: round; }
+.petalo.is-on svg { transform: scale(1.14); filter: saturate(1.05) drop-shadow(0 26px 30px rgba(8, 54, 80, .35)); }
+.fiore__cuore {
+  position: absolute; left: 50%; top: 50%; z-index: 2; width: calc(var(--F) * .3); aspect-ratio: 1; border-radius: 50%;
+  transform: translate(-50%, -50%); display: grid; place-items: center; text-align: center;
+  background: var(--lago); color: var(--sole); box-shadow: 0 0 0 calc(var(--F) * .012) var(--sole), 0 0 0 calc(var(--F) * .02) var(--lago), 0 20px 40px -14px rgba(8, 54, 80, .5);
+}
+.fiore__cuore h2 { font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144; text-transform: uppercase; font-size: calc(var(--F) * .036); line-height: 1.05; }
+.fiore__cuore em { text-transform: none; font-size: 1.15em; }
+.fiore__ape { position: absolute; left: 50%; top: 0; z-index: 4; width: calc(var(--F) * .14); aspect-ratio: 120 / 90; margin-left: calc(var(--F) * .03); margin-top: calc(var(--F) * -.04); pointer-events: none; filter: drop-shadow(0 8px 10px rgba(8, 54, 80, .25)); }
+.fiore__ape svg { width: 100%; height: 100%; overflow: visible; animation: ape-volo 1.1s ease-in-out infinite; }
+.ridotto .fiore__giro { transform: none !important; }
+
+@media (max-width: 900px) {
+  .fiore-sez { grid-template-columns: 1fr; align-content: start; gap: 0; padding-top: calc(var(--header-h) + 2vh); }
+  .fiore { --F: min(84vw, 46svh); grid-row: 1; margin-top: 3vh; }
+  .fiore-sez__testi { padding-left: 0; }
+  .fiore-sez__testi > .etichetta, .fiore-sez__testi > .pill { display: none; }
+  .fiore__infos { height: 30svh; margin: 4svh 0 0; }
+  .fiore__nome { font-size: clamp(28px, 8vw, 40px); }
+  .fiore__testo { font-size: 14.5px; }
+}
 
 /* ---------- la vita a Gardafarm: viaggio orizzontale tra le stagioni ---------- */
 .stagioni { position: relative; overflow: clip; }

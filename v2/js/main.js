@@ -386,54 +386,36 @@
     });
   };
 
-  /* ================= indice esperienze: foto che segue il mouse ================= */
-  const indice = () => {
-    const box = $('.indice__anteprime');
-    if (!box || touch) return;
-    const imgs = $$('.indice__img', box);
-    let mx = 0, my = 0, x = 0, y = 0, vx = 0, attivo = false;
-    addEventListener('pointermove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
-    gsap.ticker.add(() => {
-      if (!attivo && !imgs.some((im) => im.classList.contains('is-on'))) return;
-      const nx = x + (mx - x) * 0.14, ny = y + (my - y) * 0.14;
-      vx = nx - x; x = nx; y = ny;
-      const w = box.offsetWidth, h = box.offsetHeight;
-      box.style.transform = `translate3d(${(x - w / 2).toFixed(1)}px, ${(y - h * 0.62).toFixed(1)}px, 0) rotate(${Math.max(-14, Math.min(14, vx * 0.6)).toFixed(2)}deg)`;
-    });
-    $$('.indice__riga').forEach((r) => {
-      r.addEventListener('pointerenter', () => {
-        if (!attivo) { x = mx; y = my; }
-        attivo = true;
-        imgs.forEach((im, k) => im.classList.toggle('is-on', k === +r.dataset.indice));
-      });
-      r.addEventListener('pointerleave', () => { attivo = false; imgs.forEach((im) => im.classList.remove('is-on')); });
-    });
-  };
-
-  /* ================= esperienze: mazzo di carte, a ogni scroll la carta in cima vola via ================= */
-  const mazzo = () => {
-    const sez = $('.mazzo');
-    if (!sez || ridotto) return;
-    const carte = $$('.mazzo__carta', sez), punti = $$('.mazzo__punti span', sez), N = carte.length;
-    const SLOT = [{ rotate: 0, y: 0, scale: 1 }, { rotate: -5, y: 16, scale: 0.95 }, { rotate: 6, y: 30, scale: 0.9 }, { rotate: -8, y: 42, scale: 0.85 }];
-    const slot = (k) => ({ ...SLOT[Math.min(k, 3)], autoAlpha: k > 3 ? 0 : 1 });
-    carte.forEach((c, i) => { c.style.zIndex = String(N - i); gsap.set(c, slot(i)); });
-    const accendi = (k) => punti.forEach((p, i) => p.classList.toggle('is-on', i === k));
+  /* ================= esperienze: il fiore ruota, il petalo in alto racconta l'esperienza ================= */
+  const fioreEsperienze = () => {
+    const sez = $('.fiore-sez');
+    if (!sez) return;
+    const giro = $('.fiore__giro', sez), petali = $$('.petalo', sez), infos = $$('.fiore__info', sez), ape = $('.fiore__ape', sez);
+    const N = petali.length, passo = 360 / N;
+    let attivo = -1;
+    const accendi = (k) => {
+      if (k === attivo) return;
+      attivo = k;
+      petali.forEach((p, i) => p.classList.toggle('is-on', i === k));
+      infos.forEach((el, i) => el.classList.toggle('is-on', i === k));
+      if (ape && !ridotto) gsap.fromTo(ape, { y: -30, rotate: -18 }, { y: 0, rotate: 0, duration: 0.7, ease: 'back.out(3)' });
+    };
     accendi(0);
-    const SOSTA = 0.85; /* mezzo schermo di scroll fermo prima che il mazzo si muova */
+    if (ridotto) return;
+    const SOSTA = 0.85; /* mezzo schermo fermo appena la sezione appare */
+    const stato = { r: 0 };
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sez, start: 'top top', end: () => '+=' + innerHeight * 0.6 * (N - 1 + SOSTA), pin: true, scrub: 0.6,
-        refreshPriority: 1, invalidateOnRefresh: true,
-        onUpdate: (st) => accendi(Math.min(N - 1, Math.max(0, Math.round((st.progress * (N - 1 + SOSTA)) - SOSTA))))
+        refreshPriority: 1, invalidateOnRefresh: true
       }
     });
     tl.to({}, { duration: SOSTA });
-    for (let i = 0; i < N - 1; i++) {
-      const t = SOSTA + i;
-      const verso = i % 2 ? 1 : -1;
-      tl.to(carte[i], { xPercent: verso * 135, yPercent: -18, rotate: verso * 28, autoAlpha: 0, ease: 'power2.in', duration: 0.8 }, t);
-      for (let j = i + 1; j < N; j++) tl.to(carte[j], { ...slot(j - i - 1), ease: 'power2.out', duration: 0.8 }, t + 0.1);
+    for (let i = 1; i < N; i++) {
+      tl.to(stato, { r: -passo * i, ease: 'power2.inOut', duration: 1, onUpdate: () => {
+        gsap.set(giro, { rotate: stato.r });
+        accendi(((Math.round(-stato.r / passo) % N) + N) % N);
+      } });
     }
     ScrollTrigger.sort();
   };
@@ -604,10 +586,9 @@
     espandi();
     parallasse();
     righe();
-    indice();
     ventaglio();
     manifesto();
-    mazzo();
+    fioreEsperienze();
     stagioni();
     pila();
     contatori();
