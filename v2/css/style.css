@@ -335,7 +335,12 @@ html:not(.js) .espandi__img { clip-path: none; }
   box-shadow: 0 30px 60px -24px rgba(8, 54, 80, .45), 0 8px 18px rgba(8, 54, 80, .12);
   transform-origin: 50% 85%; will-change: transform; backface-visibility: hidden;
 }
-.ventaglio__carta img { width: 100%; height: 100%; object-fit: cover; }
+.ventaglio__carta {
+  border: clamp(9px, 1.35vw, 20px) solid var(--carta);
+  background: var(--carta);
+  outline: 1px solid rgba(8, 54, 80, .1); outline-offset: -1px;
+}
+.ventaglio__carta img { width: 100%; height: 100%; object-fit: cover; border-radius: calc(var(--raggio) * .55); }
 .ventaglio__carta--centro { z-index: 3; }
 .ventaglio__carta--sx, .ventaglio__carta--dx { z-index: 1; }
 .ventaglio__frase { text-align: center; color: var(--prato); font-size: clamp(22px, 2.6vw, 42px); padding: 0 var(--gutter); }
