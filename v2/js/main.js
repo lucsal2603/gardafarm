@@ -462,8 +462,11 @@
     const stato = { r: 0 };
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: sez, start: 'top top', end: () => '+=' + innerHeight * (0.6 * (N - 1 + SOSTA) + 1), pin: true, scrub: 0.6,
-        refreshPriority: 1, invalidateOnRefresh: true
+        trigger: sez, start: 'top top', end: () => '+=' + innerHeight * (0.6 * (N - 1 + SOSTA) + 1.35), pin: true, scrub: 0.6,
+        refreshPriority: 1, invalidateOnRefresh: true,
+        /* scambio secco e invisibile: nello stesso istante la sezione vera è ferma esattamente al suo posto */
+        onLeave: () => gsap.set(sez, { visibility: 'hidden' }),
+        onEnterBack: () => gsap.set(sez, { visibility: 'visible' })
       }
     });
     tl.to({}, { duration: SOSTA });
@@ -484,7 +487,7 @@
         .fromTo($$('.telo', sez), { x: 0, xPercent: 110, '--curva': '46vh' }, { x: 0, xPercent: 0, '--curva': '0vh', ease: 'power3.inOut', duration: U * 0.55, stagger: U * 0.12 }, 'uscita')
         .fromTo(arrivo, { x: 0, xPercent: 110, '--curva': '46vh' }, { x: 0, xPercent: 0, '--curva': '0vh', ease: 'power3.inOut', duration: U * 0.55 }, `uscita+=${U * 0.42}`)
         .to(['.fiore', '.fiore__arco', '.fiore__lati', '.fiore__tutte', '.fiore__etichetta'].map((q) => $(q, sez)), { scale: 0.92, autoAlpha: 0.4, ease: 'none', duration: U }, 'uscita')
-        .to(sez, { autoAlpha: 0, duration: 0.02, ease: 'none' });
+        .to({}, { duration: U * 0.35 });
     }
     ScrollTrigger.sort();
   };
