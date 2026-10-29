@@ -113,6 +113,37 @@
 
   disegnaForme();
 
+  /* sagome delle foto nella giostra della home (viewBox 200x240) */
+  const fiore = () => {
+    const n = 10, R = 86, cx = 100, cy = 120;
+    const pt = (k) => [cx + Math.cos(k / n * Math.PI * 2 - Math.PI / 2) * R, cy + Math.sin(k / n * Math.PI * 2 - Math.PI / 2) * R * 1.12];
+    let d = `M${pt(0).map((v) => v.toFixed(1)).join(' ')}`;
+    for (let k = 1; k <= n; k++) d += ` A30 30 0 0 1 ${pt(k).map((v) => v.toFixed(1)).join(' ')}`;
+    return d + ' Z';
+  };
+  const SAGOME = {
+    cerchio: 'M4 120 A96 96 0 1 1 196 120 A96 96 0 1 1 4 120 Z',
+    arco: 'M6 236 L6 98 A94 94 0 0 1 194 98 L194 236 Z',
+    foglia: 'M100 2 C 178 52, 202 142, 100 238 C -2 142, 22 52, 100 2 Z',
+    uovo: 'M100 4 C 162 4, 196 104, 194 158 C 192 210, 150 238, 100 238 C 50 238, 8 210, 6 158 C 4 104, 38 4, 100 4 Z',
+    goccia: 'M100 4 C 128 58, 194 104, 194 156 A94 84 0 0 1 6 156 C 6 104, 72 58, 100 4 Z',
+    ciottolo: 'M40 8 C 120 -4, 196 20, 196 110 C 196 200, 150 238, 92 236 C 30 234, 4 190, 6 120 C 8 50, 10 12, 40 8 Z',
+    faccette: 'M100 8 L150 16 L186 52 L196 108 L190 168 L160 214 L110 236 L56 228 L18 192 L4 136 L10 80 L42 30 Z',
+    fiore: fiore()
+  };
+  $$('.bustina[data-sagoma]').forEach((b, i) => {
+    const foto = $('.bustina__foto', b), img = $('img', foto);
+    const d = SAGOME[b.dataset.sagoma];
+    if (!img || !d) return;
+    const id = `sagoma-${i}`;
+    foto.innerHTML = `<svg viewBox="-12 -12 224 264" role="img" aria-label="${img.alt.replace(/"/g, '&quot;')}">
+      <defs><clipPath id="${id}"><path d="${d}"/></clipPath></defs>
+      <path d="${d}" fill="var(--c)" stroke="var(--c)" stroke-width="18" stroke-linejoin="round"/>
+      <path d="${d}" fill="var(--crema)" stroke="var(--crema)" stroke-width="6" stroke-linejoin="round"/>
+      <g clip-path="url(#${id})"><image href="${img.getAttribute('src')}" x="-10" y="-10" width="220" height="260" preserveAspectRatio="xMidYMid slice"/></g>
+    </svg>`;
+  });
+
   /* senza GSAP (CDN irraggiungibile) la pagina resta leggibile */
   if (!window.gsap) {
     html.classList.add('ridotto');

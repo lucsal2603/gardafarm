@@ -244,30 +244,32 @@ html:not(.js) .loader, .loader.is-done { display: none; }
 }
 .hero__giostra { position: absolute; inset: 0; }
 .bustina {
-  position: absolute; left: 50%; top: 52%;
-  width: clamp(170px, 19vw, 300px);
-  aspect-ratio: 3 / 4.3;
-  margin-left: calc(clamp(170px, 19vw, 300px) / -2);
-  margin-top: calc(clamp(170px, 19vw, 300px) * -.72);
-  border-radius: 14px;
-  background: var(--c, var(--sole));
-  color: var(--ct, var(--lago-notte));
-  padding: 9px 9px 0;
-  display: flex; flex-direction: column;
-  box-shadow: 0 30px 60px -20px rgba(8, 54, 80, .35), 0 6px 16px rgba(8, 54, 80, .12);
+  position: absolute; left: 50%; top: 54%;
+  width: clamp(210px, 23vw, 360px);
+  aspect-ratio: 224 / 264;
+  margin-left: calc(clamp(210px, 23vw, 360px) / -2);
+  margin-top: calc(clamp(210px, 23vw, 360px) * -.66);
+  color: var(--lago);
   will-change: transform, filter;
-  transform-origin: 50% 60%;
+  transform-origin: 50% 55%;
 }
-.bustina__foto { flex: 1; border-radius: 8px; overflow: hidden; position: relative; }
-.bustina__foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.bustina__etichetta { padding: 10px 6px 12px; text-align: center; line-height: 1; }
-.bustina__marca { display: block; font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; opacity: .8; }
-.bustina__nome { display: block; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(22px, 2vw, 32px); margin: 5px 0 4px; }
-.bustina__sub { display: block; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
-.bustina::after {
-  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-  background: linear-gradient(115deg, rgba(255,255,255,.28), transparent 38%, transparent 70%, rgba(0,0,0,.08));
+.bustina__foto { position: absolute; inset: 0; display: block; }
+.bustina__foto svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 26px 30px rgba(8, 54, 80, .28)) drop-shadow(0 4px 8px rgba(8, 54, 80, .12)); }
+.bustina__foto > img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.bustina__foto image { transition: transform 1s var(--dolce); transform-origin: 50% 50%; transform-box: fill-box; }
+.bustina:hover .bustina__foto image { transform: scale(1.08); }
+.bustina__etichetta {
+  position: absolute; left: 50%; bottom: 4%;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 9px 16px 8px; border-radius: 999px;
+  background: var(--carta); color: var(--lago);
+  box-shadow: 0 8px 20px -8px rgba(8, 54, 80, .35);
+  transform: translateX(-50%) rotate(var(--re, -4deg));
+  white-space: nowrap; line-height: 1;
 }
+.bustina:nth-child(even) .bustina__etichetta { --re: 4deg; }
+.bustina__nome { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(19px, 1.6vw, 26px); }
+.bustina__sub { font-size: 9.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--prato); }
 .hero__scorri {
   position: absolute; left: 50%; bottom: 3.2vh; transform: translateX(-50%);
   font-family: var(--serif); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--crema);
@@ -581,7 +583,7 @@ html:not(.js) .espandi__img { clip-path: none; }
   .pill-dot { width: 38px; height: 38px; }
   .header__logo { width: 64px; }
   .header.is-small .header__logo { width: 54px; }
-  .bustina { width: 44vw; margin-left: -22vw; margin-top: calc(44vw * -.72); }
+  .bustina { width: 52vw; margin-left: -26vw; margin-top: calc(52vw * -.66); }
   .parola-cielo { aspect-ratio: 4 / 5; }
   .quattro__voce { min-height: 0; }
   .frutti { min-height: 100vh; }
