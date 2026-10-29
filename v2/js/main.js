@@ -326,7 +326,7 @@
         .from('.hero__forma', { yPercent: 40, rotate: -6, duration: 1.8 }, 0)
         .to(ingresso, { t: 1.6, duration: 2.2, ease: 'none' }, 0.1)
         .from('.header > *', { y: -30, opacity: 0, stagger: 0.08, duration: 1 }, 0.5)
-        .from('.hero__scorri, .hero h1, .hero__piccolo', { opacity: 0, y: 16, duration: 1 }, 0.8);
+        .from('.hero h1, .hero__piccolo', { opacity: 0, y: 16, duration: 1 }, 0.8);
     };
   }
 
