@@ -317,6 +317,21 @@ html:not(.js) .espandi { height: auto; }
 html:not(.js) .espandi__palco { position: relative; height: 80vh; }
 html:not(.js) .espandi__img { clip-path: none; }
 
+/* trittico di foto in parallasse (home) */
+.trittico {
+  display: grid; grid-template-columns: 1fr 1.35fr 1fr; gap: clamp(14px, 2vw, 32px);
+  align-items: start; padding: clamp(20px, 3vw, 50px) var(--gutter) 0;
+}
+.trittico__foto { border-radius: var(--raggio); overflow: hidden; aspect-ratio: 3 / 4; }
+.trittico__foto img { width: 100%; height: 100%; object-fit: cover; }
+.trittico__foto--sx { margin-top: 18vh; transform: rotate(-2deg); }
+.trittico__foto--centro { aspect-ratio: 4 / 5; }
+.trittico__foto--dx { margin-top: 30vh; transform: rotate(2deg); }
+.trittico__frase {
+  grid-column: 1 / -1; text-align: center; color: var(--prato);
+  font-size: clamp(24px, 2.6vw, 42px); margin-top: clamp(40px, 6vw, 90px);
+}
+
 /* testo centrato tra rombi */
 .racconto { padding: clamp(70px, 9vw, 150px) var(--gutter); }
 .racconto .rombo:first-child { margin-bottom: clamp(28px, 3vw, 48px); }
@@ -545,6 +560,10 @@ html:not(.js) .espandi__img { clip-path: none; }
   .sede { min-height: 0; }
   .sede__foto { width: 78%; }
   .sede__testa { flex-direction: column; gap: 6px; }
+  .trittico { grid-template-columns: 1fr 1fr; }
+  .trittico__foto--centro { grid-column: 1 / -1; grid-row: 1; }
+  .trittico__foto--sx, .trittico__foto--dx { margin-top: 0; }
+  .trittico__foto--dx { margin-top: 10vh; }
   .sede__tipo { text-align: left; }
   .pila-intro .forma-frutto { display: none !important; }
   .carta-pila { grid-template-columns: 1fr; position: relative; top: 0; }

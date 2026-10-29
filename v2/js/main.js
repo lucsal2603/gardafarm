@@ -332,6 +332,13 @@
         scrollTrigger: { trigger: el.closest('section') || el, start: 'top bottom', end: 'bottom top', scrub: true }
       });
     });
+    $$('[data-sale]').forEach((el) => gsap.fromTo(el, { yPercent: () => -12 * parseFloat(el.dataset.sale) }, {
+      yPercent: () => 12 * parseFloat(el.dataset.sale), ease: 'none',
+      scrollTrigger: { trigger: el.parentNode, start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true }
+    }));
+    $$('[data-sale] img').forEach((im) => gsap.fromTo(im, { scale: 1.15 }, {
+      scale: 1, ease: 'none', scrollTrigger: { trigger: im.parentNode, start: 'top bottom', end: 'bottom top', scrub: true }
+    }));
     $$('.parola-cielo img, [data-parallasse] img').forEach((im) => gsap.fromTo(im, { yPercent: -8 }, {
       yPercent: 8, ease: 'none', scrollTrigger: { trigger: im.parentNode, start: 'top bottom', end: 'bottom top', scrub: true }
     }));
