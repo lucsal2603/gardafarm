@@ -493,14 +493,14 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 .petalo {
   --L: calc(var(--F) * .43); --P: calc(var(--L) / 1.6);
   position: absolute; left: 50%; bottom: 50%; width: var(--P); height: var(--L); margin-left: calc(var(--P) / -2);
-  transform-origin: 50% 100%; transform: rotate(calc(var(--i) * 60deg)) translateY(calc(var(--F) * -.06));
+  transform-origin: 50% 100%; transform: rotate(calc(var(--i) * 60deg)) translateY(calc(var(--F) * -.06)) scale(var(--sb, 1));
 }
 .petalo svg { width: 100%; height: 100%; overflow: visible; transform-origin: 50% 100%; transition: transform .7s var(--rimbalzo), filter .6s; filter: saturate(.75) drop-shadow(0 18px 22px rgba(8, 54, 80, .25)); }
 .petalo__bordo { fill: #E3D2AE; stroke: #E3D2AE; stroke-width: 22; stroke-linejoin: round; }
 .petalo.is-on svg { transform: scale(1.12); filter: saturate(1.05) drop-shadow(0 26px 30px rgba(8, 54, 80, .35)); }
 .fiore__cuore {
   position: absolute; left: 50%; top: 50%; z-index: 2; width: calc(var(--F) * .3); aspect-ratio: 1; border-radius: 50%;
-  transform: translate(-50%, -50%); display: grid; place-items: center; text-align: center;
+  transform: translate(-50%, -50%) scale(var(--sc, 1)); display: grid; place-items: center; text-align: center;
   background: var(--lago); color: var(--sole); box-shadow: 0 0 0 calc(var(--F) * .012) var(--sole), 0 0 0 calc(var(--F) * .02) var(--lago), 0 20px 40px -14px rgba(8, 54, 80, .5);
 }
 .fiore__cuore h2 { font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144; text-transform: uppercase; font-size: calc(var(--F) * .036); line-height: 1.05; margin-top: calc(var(--F) * -.05); }
@@ -867,3 +867,6 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 .firma b { font-family: var(--serif); font-weight: 400; font-size: 15px; color: var(--sole); letter-spacing: .02em; }
 .firma:hover { color: var(--crema); }
 @media (max-width: 760px) { .firma { margin-left: 0; } }
+
+/* link spenti nella demo */
+a.spento { pointer-events: none; cursor: default; }

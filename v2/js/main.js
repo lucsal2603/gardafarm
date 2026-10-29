@@ -9,6 +9,17 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
+  /* demo: attivi solo menu, chiamate, email e contatti; tutti gli altri link sono spenti */
+  const acceso = (h) => /^(tel:|mailto:|#contatti$)/.test(h || '');
+  $$('a[href]').forEach((a) => {
+    if (acceso(a.getAttribute('href'))) return;
+    a.classList.add('spento');
+    a.setAttribute('aria-disabled', 'true');
+    a.setAttribute('tabindex', '-1');
+    a.removeAttribute('data-cursor');
+  });
+  document.addEventListener('click', (e) => { const a = e.target.closest('a.spento'); if (a) { e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+
   /* ================= forme (frutti e natura a faccette, come carta ritagliata) ================= */
   const COL = {
     prato: '#4F8F35', bosco: '#2F6B2A', lago: '#0B4A6E', sole: '#F2C230', pesca: '#F3A06B',
@@ -464,6 +475,19 @@
     addEventListener('resize', () => muoviApe(-ultimoF * passo));
     accendi(0);
     if (ridotto) return;
+    /* il fiore nasce di colpo da sotto: stelo che spinge su, petali che scattano, cuore che fa pac */
+    const fioreEl = $('.fiore', sez), cuore = $('.fiore__cuore', sez);
+    const scritte = ['.fiore__arco', '.fiore__lati', '.fiore__etichetta', '.fiore__tutte'].map((q) => $(q, sez)).filter(Boolean);
+    const nasce = gsap.timeline({ paused: true })
+      .fromTo(fioreEl, { y: () => innerHeight * 0.55 }, { y: 0, duration: 0.55, ease: 'back.out(1.6)' }, 0)
+      .fromTo(cuore, { '--sc': 0 }, { '--sc': 1, duration: 0.5, ease: 'back.out(3)' }, 0.12)
+      .fromTo(petali, { '--sb': 0 }, { '--sb': 1, duration: 0.6, ease: 'elastic.out(1, 0.55)', stagger: { each: 0.05, from: 'start' } }, 0.2)
+      .fromTo(ape, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 }, 0.55)
+      .fromTo(scritte, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.05 }, 0.45);
+    /* in home il fiore nasce quando il giallo lo ha scoperto; nelle altre pagine quando entra nello schermo */
+    const sottoStriscia = sez.classList.contains('dopo-manifesto');
+    if (sottoStriscia) nasce.progress(1);
+    else if (!ridotto) ScrollTrigger.create({ trigger: sez, start: 'top 55%', onEnter: () => nasce.restart(), onLeaveBack: () => nasce.pause(0) });
     const SOSTA = 0.85; /* mezzo schermo fermo appena la sezione appare */
     const stato = { r: 0 };
     const tl = gsap.timeline({
@@ -472,7 +496,9 @@
         refreshPriority: 1, invalidateOnRefresh: true,
         /* scambio secco e invisibile: nello stesso istante la sezione vera è ferma esattamente al suo posto */
         onLeave: () => { if ($('.fiore__arrivo', sez)) gsap.set(sez, { visibility: 'hidden' }); },
-        onEnterBack: () => gsap.set(sez, { visibility: 'visible' })
+        onEnterBack: () => gsap.set(sez, { visibility: 'visible' }),
+        onEnter: () => { if (sottoStriscia) nasce.restart(); },
+        onLeaveBack: () => { if (sottoStriscia) nasce.pause(0); }
       }
     });
     tl.to({}, { duration: SOSTA });
