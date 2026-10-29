@@ -320,13 +320,13 @@ html:not(.js) .espandi__palco { position: relative; height: 80vh; }
 html:not(.js) .espandi__img { clip-path: none; }
 
 /* ventaglio di tre foto (home): le laterali escono da dietro e ruotano */
-.ventaglio { position: relative; height: 230vh; }
+.ventaglio { position: relative; height: 100vh; height: 100svh; }
 .ventaglio__palco {
   position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(28px, 5vh, 56px);
 }
 .ventaglio__carte {
-  --w: clamp(190px, 25vw, 380px);
+  --w: clamp(220px, 27vw, 410px);
   position: relative; width: var(--w); aspect-ratio: 4 / 5;
   perspective: 1400px;
 }
@@ -336,9 +336,9 @@ html:not(.js) .espandi__img { clip-path: none; }
   transform-origin: 50% 85%; will-change: transform; backface-visibility: hidden;
 }
 .ventaglio__carta {
-  border: clamp(9px, 1.35vw, 20px) solid var(--carta);
-  background: var(--carta);
-  outline: 1px solid rgba(8, 54, 80, .1); outline-offset: -1px;
+  border: clamp(9px, 1.35vw, 20px) solid #E3D2AE;
+  background: #E3D2AE;
+  outline: 1px solid rgba(91, 58, 30, .18); outline-offset: -1px;
 }
 .ventaglio__carta img { width: 100%; height: 100%; object-fit: cover; border-radius: calc(var(--raggio) * .55); }
 .ventaglio__carta--centro { z-index: 3; }
@@ -349,7 +349,7 @@ html:not(.js) .ventaglio__palco, .ridotto .ventaglio__palco { position: relative
 .ridotto .ventaglio__carta--sx { transform: translateX(-62%) rotate(-12deg); }
 .ridotto .ventaglio__carta--dx { transform: translateX(62%) rotate(12deg); }
 @media (max-width: 760px) {
-  .ventaglio { height: 200vh; }
+  .ventaglio { height: 86svh; }
   .ventaglio__carte { --w: 40vw; }
 }
 
@@ -406,9 +406,12 @@ html:not(.js) .ventaglio__palco, .ridotto .ventaglio__palco { position: relative
 .manifesto__icona { display: inline-block; width: 1.3em; height: 1.3em; vertical-align: -.3em; margin: 0 .22em; }
 .manifesto__icona svg { width: 100%; height: 100%; }
 .manifesto .parola { display: inline-block; }
-.manifesto__palco { overflow: hidden; }
+.manifesto__palco { overflow: hidden; background: var(--crema); }
+/* la sezione dopo sta già sotto il palco: quando il giallo copre tutto, il palco sparisce e lei è lì, ferma */
+.js:not(.ridotto) .manifesto { z-index: 2; margin-bottom: -100vh; margin-bottom: -100svh; }
+.js:not(.ridotto) .manifesto + .sezione { z-index: 1; }
 .manifesto__striscia { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; overflow: visible; }
-.manifesto__striscia path { fill: none; stroke: var(--sole); stroke-width: 56; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.manifesto__striscia path { fill: none; stroke: var(--sole); stroke-linecap: round; stroke-linejoin: round; }
 .ridotto .manifesto__striscia { display: none; }
 html:not(.js) .manifesto, .ridotto .manifesto { height: auto; }
 html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative; height: auto; padding-block: 20vh; }

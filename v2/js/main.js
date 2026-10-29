@@ -174,8 +174,6 @@
   const suScroll = (y) => {
     if (!header || html.classList.contains('menu-aperto')) return;
     header.classList.toggle('is-small', y > 60);
-    if (y > 300 && y > ultimo + 3) header.classList.add('is-hidden');
-    else if (y < ultimo - 3 || y <= 300) header.classList.remove('is-hidden');
     ultimo = y;
   };
   if (lenis) lenis.on('scroll', ({ scroll }) => suScroll(scroll));
@@ -456,15 +454,13 @@
     const sx = $('.ventaglio__carta--sx', sez), dx = $('.ventaglio__carta--dx', sez), centro = $('.ventaglio__carta--centro', sez);
     const frase = $('.ventaglio__frase', sez);
     const apri = innerWidth < 760 ? 44 : 68;
-    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top top', end: 'bottom bottom', scrub: 1 } });
-    tl.fromTo(centro, { scale: 0.86, rotate: -2 }, { scale: 1, rotate: 0, ease: 'power2.out', duration: 1 }, 0)
-      .fromTo(sx, { xPercent: 0, rotate: 0, rotationY: 0, scale: 0.9 },
-        { xPercent: -apri, rotate: -14, rotationY: 32, scale: 0.94, ease: 'power3.inOut', duration: 1.2 }, 0.15)
-      .fromTo(dx, { xPercent: 0, rotate: 0, rotationY: 0, scale: 0.9 },
-        { xPercent: apri, rotate: 16, rotationY: -32, scale: 0.94, ease: 'power3.inOut', duration: 1.2 }, 0.15)
-      .fromTo(frase, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, ease: 'power2.out', duration: 0.6 }, 0.9)
-      .to([sx, dx], { yPercent: -4, ease: 'none', duration: 0.6 }, 1.4)
-      .to(centro, { yPercent: -2, ease: 'none', duration: 0.6 }, 1.4);
+    /* nessun cambio di grandezza: appena la sezione entra nello schermo le laterali si aprono */
+    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top 85%', end: 'top 20%', scrub: 0.8 } });
+    tl.fromTo(sx, { xPercent: 0, rotate: 0, rotationY: 0 },
+        { xPercent: -apri, rotate: -14, rotationY: 32, ease: 'power3.out', duration: 1 }, 0)
+      .fromTo(dx, { xPercent: 0, rotate: 0, rotationY: 0 },
+        { xPercent: apri, rotate: 16, rotationY: -32, ease: 'power3.out', duration: 1 }, 0)
+      .fromTo(frase, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, ease: 'power2.out', duration: 0.5 }, 0.5);
   };
 
   /* ================= manifesto: parole e simboli compaiono con lo scroll ================= */
@@ -477,7 +473,7 @@
         SplitText.create(el, { type: 'words', wordsClass: 'parola' }).words.forEach((w) => pezzi.push(w));
       } else pezzi.push(el);
     });
-    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top top', end: 'bottom bottom', scrub: 0.8 } });
+    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top top', end: 'bottom bottom', scrub: 0.8, invalidateOnRefresh: true } });
     pezzi.forEach((el, i) => {
       const icona = el.classList.contains('manifesto__icona');
       tl.fromTo(el,
@@ -486,11 +482,29 @@
         i * 0.55);
     });
     /* striscia gialla: scende col percorso a serpentina, poi si allarga fino a coprire lo schermo */
-    const linea = $('.manifesto__striscia path', sez);
+    const svgL = $('.manifesto__striscia', sez), linea = $('.manifesto__striscia path', sez), palco = $('.manifesto__palco', sez);
     if (linea) {
-      tl.to(linea, { strokeDashoffset: 0, ease: 'none', duration: 4.5 }, '+=0.5')
-        .to(linea, { attr: { 'stroke-width': 2600 }, strokeWidth: 2600, ease: 'power2.in', duration: 2.2 })
-        .to({}, { duration: 0.4 });
+      /* percorso a serpentina su tutta la larghezza, ricalcolato in pixel sullo schermo reale */
+      const PERCORSO = [[0.5, -0.06], [0.95, 0.04, 0.97, 0.19, 0.72, 0.26], [0.45, 0.33, 0.05, 0.28, 0.1, 0.42],
+        [0.14, 0.56, 0.9, 0.5, 0.88, 0.64], [0.86, 0.78, 0.17, 0.7, 0.24, 0.84], [0.29, 0.94, 0.53, 0.95, 0.5, 1.08]];
+      let W = 0, H = 0;
+      const disegna = () => {
+        W = palco.clientWidth; H = palco.clientHeight;
+        svgL.setAttribute('viewBox', `0 0 ${W} ${H}`);
+        const p = (x, y) => `${(x * W).toFixed(1)} ${(y * H).toFixed(1)}`;
+        let d = `M${p(...PERCORSO[0])}`;
+        for (const c of PERCORSO.slice(1)) d += ` C ${p(c[0], c[1])}, ${p(c[2], c[3])}, ${p(c[4], c[5])}`;
+        linea.setAttribute('d', d);
+      };
+      disegna();
+      ScrollTrigger.addEventListener('refreshInit', disegna);
+      const spessore = () => Math.max(28, Math.min(W, H) * 0.07);
+      gsap.set(linea, { attr: { 'stroke-width': spessore() } });
+      tl.fromTo(linea, { attr: { 'stroke-dashoffset': 1 } }, { attr: { 'stroke-dashoffset': 0 }, ease: 'none', duration: 7 }, '+=0.4')
+        .fromTo(linea, { attr: { 'stroke-width': () => spessore() } }, { attr: { 'stroke-width': () => Math.hypot(W, H) * 1.2 }, ease: 'power2.in', duration: 2.4 })
+        .to({}, { duration: 0.5 })
+        /* lo schermo è giallo: il palco sparisce e sotto c'è già la sezione delle esperienze, ferma */
+        .to(palco, { autoAlpha: 0, ease: 'none', duration: 0.15 });
     } else tl.to({}, { duration: 1.5 });
   };
 
