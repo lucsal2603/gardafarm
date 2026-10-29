@@ -410,41 +410,55 @@
     });
   };
 
-  /* ================= la vita a Gardafarm: le foto entrano nel logo, poi lo schermo entra nel logo ================= */
-  const vita = () => {
-    const sez = $('.vita');
+  /* ================= esperienze: mazzo di carte, a ogni scroll la carta in cima vola via ================= */
+  const mazzo = () => {
+    const sez = $('.mazzo');
     if (!sez || ridotto) return;
-    const palco = $('.vita__palco', sez), foto = $$('.vita__foto', sez);
-    const logo = $('.vita__logo', sez), png = $('.vita__logo-png', sez), marchio = $('.vita__logo-marchio', sez);
-    const velo = document.createElement('div');
-    velo.className = 'vita__velo';
-    palco.appendChild(velo);
-    const verso = (f) => ({
-      x: palco.clientWidth / 2 - (f.offsetLeft + f.offsetWidth / 2),
-      y: palco.clientHeight / 2 - (f.offsetTop + f.offsetHeight / 2)
+    const carte = $$('.mazzo__carta', sez), punti = $$('.mazzo__punti span', sez), N = carte.length;
+    const SLOT = [{ rotate: 0, y: 0, scale: 1 }, { rotate: -5, y: 16, scale: 0.95 }, { rotate: 6, y: 30, scale: 0.9 }, { rotate: -8, y: 42, scale: 0.85 }];
+    const slot = (k) => ({ ...SLOT[Math.min(k, 3)], autoAlpha: k > 3 ? 0 : 1 });
+    carte.forEach((c, i) => { c.style.zIndex = String(N - i); gsap.set(c, slot(i)); });
+    const accendi = (k) => punti.forEach((p, i) => p.classList.toggle('is-on', i === k));
+    accendi(0);
+    const SOSTA = 0.85; /* mezzo schermo di scroll fermo prima che il mazzo si muova */
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sez, start: 'top top', end: () => '+=' + innerHeight * 0.6 * (N - 1 + SOSTA), pin: true, scrub: 0.6,
+        refreshPriority: 1, invalidateOnRefresh: true,
+        onUpdate: (st) => accendi(Math.min(N - 1, Math.max(0, Math.round((st.progress * (N - 1 + SOSTA)) - SOSTA))))
+      }
     });
-    gsap.set(logo, { scale: 0.2, autoAlpha: 0 });
-    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top top', end: 'bottom bottom', scrub: 0.7, invalidateOnRefresh: true } });
-    /* 1. le foto galleggiano piano */
-    foto.forEach((f) => {
-      const v = parseFloat(f.dataset.vel) || 1;
-      tl.to(f, { y: () => -innerHeight * 0.04 * v, ease: 'none', duration: 0.5 }, 0);
+    tl.to({}, { duration: SOSTA });
+    for (let i = 0; i < N - 1; i++) {
+      const t = SOSTA + i;
+      const verso = i % 2 ? 1 : -1;
+      tl.to(carte[i], { xPercent: verso * 135, yPercent: -18, rotate: verso * 28, autoAlpha: 0, ease: 'power2.in', duration: 0.8 }, t);
+      for (let j = i + 1; j < N; j++) tl.to(carte[j], { ...slot(j - i - 1), ease: 'power2.out', duration: 0.8 }, t + 0.1);
+    }
+    ScrollTrigger.sort();
+  };
+
+  /* ================= la vita a Gardafarm: viaggio orizzontale tra le stagioni ================= */
+  const stagioni = () => {
+    const sez = $('.stagioni');
+    if (!sez || ridotto) return;
+    const binario = $('.stagioni__binario', sez);
+    const dist = () => binario.scrollWidth - innerWidth;
+    const corsa = gsap.to(binario, {
+      x: () => -dist(), ease: 'none',
+      scrollTrigger: { trigger: sez, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 0.8, invalidateOnRefresh: true }
     });
-    /* 2. volano al centro e spariscono dentro il logo */
-    foto.forEach((f, i) => {
-      tl.to(f, {
-        x: () => verso(f).x, y: () => verso(f).y, scale: 0.08, rotate: () => (i % 2 ? 140 : -140),
-        autoAlpha: 0, ease: 'power3.in', duration: 0.9
-      }, 0.5 + i * 0.07);
+    $$('.stagione', sez).forEach((pan) => {
+      const nome = $('.stagione__nome', pan);
+      if (nome) gsap.fromTo(nome, { xPercent: 18 }, { xPercent: -22, ease: 'none', scrollTrigger: { trigger: pan, containerAnimation: corsa, start: 'left right', end: 'right left', scrub: true } });
+      $$('.stagione__foto', pan).forEach((f) => {
+        const v = parseFloat(f.dataset.v) || 1;
+        gsap.fromTo(f, { x: () => innerWidth * 0.08 * v, y: 40 * v }, { x: () => -innerWidth * 0.08 * v, y: -40 * v, ease: 'none',
+          scrollTrigger: { trigger: pan, containerAnimation: corsa, start: 'left right', end: 'right left', scrub: true, invalidateOnRefresh: true } });
+      });
+      const testo = $('.stagione__testo', pan);
+      if (testo) gsap.from(testo, { autoAlpha: 0, y: 40, ease: 'power2.out', scrollTrigger: { trigger: pan, containerAnimation: corsa, start: 'left 55%', end: 'left 20%', scrub: true } });
     });
-    /* 3. il logo nasce mentre arrivano */
-    tl.to(logo, { scale: 1, autoAlpha: 1, ease: 'back.out(1.8)', duration: 0.7 }, 1.15)
-      .to(logo, { scale: 1.04, ease: 'none', duration: 0.5 }, 1.85)
-    /* 4. lo schermo entra nel logo: il marchio vettoriale si allarga fino a riempire tutto */
-      .set(marchio, { opacity: 1 }, 2.35)
-      .to(png, { opacity: 0, duration: 0.15, ease: 'none' }, 2.35)
-      .to(marchio, { scale: 46, transformOrigin: '50% 24%', ease: 'power3.in', duration: 0.75 }, 2.35)
-      .to(velo, { opacity: 1, ease: 'none', duration: 0.25 }, 3.0);
   };
 
   /* ================= ventaglio: le foto laterali escono da dietro quella centrale ================= */
@@ -500,7 +514,27 @@
       ScrollTrigger.addEventListener('refreshInit', disegna);
       const spessore = () => Math.max(28, Math.min(W, H) * 0.07);
       gsap.set(linea, { attr: { 'stroke-width': spessore() } });
-      tl.fromTo(linea, { attr: { 'stroke-dashoffset': 1 } }, { attr: { 'stroke-dashoffset': 0 }, ease: 'none', duration: 7 }, '+=0.4')
+      /* l'ape sta sulla punta: la striscia è la scia che lascia */
+      const ape = $('.manifesto__ape', sez);
+      const prog = { p: 0 };
+      let angolo = 90;
+      const muovi = () => {
+        linea.setAttribute('stroke-dashoffset', (1 - prog.p).toFixed(5));
+        if (!ape) return;
+        const L = linea.getTotalLength(), l = prog.p * L;
+        const pt = linea.getPointAtLength(l), dietro = linea.getPointAtLength(Math.max(0, l - 6)), avanti = linea.getPointAtLength(Math.min(L, l + 6));
+        const a = Math.atan2(avanti.y - dietro.y, avanti.x - dietro.x) * 180 / Math.PI;
+        let diff = ((a - angolo + 540) % 360) - 180;
+        angolo += diff * 0.35;
+        const sp = ape.offsetWidth * 0.32, rad = angolo * Math.PI / 180;
+        /* se va verso sinistra la specchio, così non vola a pancia in su */
+        const sinistra = Math.cos(rad) < 0;
+        const rot = sinistra ? angolo - 180 : angolo;
+        ape.style.transform = `translate3d(${(pt.x + Math.cos(rad) * sp).toFixed(1)}px, ${(pt.y + Math.sin(rad) * sp).toFixed(1)}px, 0) rotate(${rot.toFixed(1)}deg) scaleX(${sinistra ? -1 : 1})`;
+      };
+      muovi();
+      ScrollTrigger.addEventListener('refresh', muovi);
+      tl.to(prog, { p: 1, ease: 'none', duration: 7, onUpdate: muovi }, '+=0.4')
         .fromTo(linea, { attr: { 'stroke-width': () => spessore() } }, { attr: { 'stroke-width': () => Math.hypot(W, H) * 1.2 }, ease: 'power2.in', duration: 2.4 })
         .to({}, { duration: 0.5 })
         /* lo schermo è giallo: il palco sparisce e sotto c'è già la sezione delle esperienze, ferma */
@@ -571,9 +605,10 @@
     parallasse();
     righe();
     indice();
-    vita();
     ventaglio();
     manifesto();
+    mazzo();
+    stagioni();
     pila();
     contatori();
     scorrevoli();
