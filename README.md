@@ -1,5 +1,7 @@
 # Gardafarm, bozza della home
 
+> **Nuova versione completa (5 pagine) in [`v2/`](v2/README.md)**, ispirata ad Agrumea Farm (Awwwards). Ramo `v2-awwwards`.
+
 Home page dimostrativa per Gardafarm: agriturismo e sale eventi a Verona, fattoria didattica e sociale a Villafranca di Verona.
 
 Le cose da chiedere al cliente sono in [DA-VERIFICARE.md](DA-VERIFICARE.md); il sistema di design in [MASTER.md](MASTER.md).
