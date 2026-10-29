@@ -152,6 +152,8 @@
   }
 
   gsap.registerPlugin(ScrollTrigger, SplitText);
+  /* sul telefono la barra del browser che appare e sparisce non deve ricalcolare tutto */
+  ScrollTrigger.config({ ignoreMobileResize: true });
   gsap.defaults({ ease: 'expo.out', duration: 1.2 });
 
   /* ================= Lenis ================= */
@@ -258,7 +260,7 @@
             rotate: chars ? 6 : 0,
             stagger: chars ? 0.028 : 0.09,
             duration: chars ? 1.3 : 1.2,
-            scrollTrigger: { trigger: el, start: 'top 90%', once: true }
+            scrollTrigger: { trigger: el, start: 'top 80%', once: true }
           });
         }
       });
@@ -266,7 +268,7 @@
     if (!ridotto) {
       $$('[data-reveal]').forEach((el) => gsap.to(el, {
         opacity: 1, y: 0, duration: 1.3, delay: +(el.dataset.reveal || 0),
-        scrollTrigger: { trigger: el, start: 'top 92%', once: true }
+        scrollTrigger: { trigger: el, start: 'top 84%', once: true }
       }));
     }
   };
@@ -404,7 +406,8 @@
       const giu = W < 900;
       const fsN = Math.min(giu ? W * 0.085 : W * 0.052, giu ? 40 : 84), fsS = Math.max(16, fsN * 0.36);
       const Rg = F * 0.53 + F * 0.13 + fsN * 0.2, Rp = Rg - fsN * 0.95;
-      const ap = giu ? 64 : 70;
+      /* l'arco non deve uscire dallo schermo: gli estremi restano dentro i margini */
+      const ap = Math.min(giu ? 64 : 70, Math.asin(Math.min(1, (W / 2 - 18) / Rg)) * 180 / Math.PI);
       const d = (R) => { const a = ap * Math.PI / 180; return `M${cx - Math.sin(a) * R} ${cy - Math.cos(a) * R} A${R} ${R} 0 0 1 ${cx + Math.sin(a) * R} ${cy - Math.cos(a) * R}`; };
       arco.setAttribute('viewBox', `0 0 ${W} ${H}`);
       grande.setAttribute('d', d(Rg)); piccolo.setAttribute('d', d(Rp));
@@ -523,12 +526,12 @@
     const sx = $('.ventaglio__carta--sx', sez), dx = $('.ventaglio__carta--dx', sez), centro = $('.ventaglio__carta--centro', sez);
     const frase = $('.ventaglio__frase', sez);
     const apri = innerWidth < 760 ? 44 : 68;
-    /* nessun cambio di grandezza: appena la sezione entra nello schermo le laterali si aprono */
-    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top 85%', end: 'top 20%', scrub: 0.8 } });
+    /* nessun cambio di grandezza: le laterali si aprono mentre le carte arrivano al centro dello schermo */
+    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top 50%', end: 'top top', scrub: 0.8 } });
     tl.fromTo(sx, { xPercent: 0, rotate: 0, rotationY: 0 },
-        { xPercent: -apri, rotate: -14, rotationY: 32, ease: 'power3.out', duration: 1 }, 0)
+        { xPercent: -apri, rotate: -14, rotationY: 32, ease: 'sine.inOut', duration: 1 }, 0)
       .fromTo(dx, { xPercent: 0, rotate: 0, rotationY: 0 },
-        { xPercent: apri, rotate: 16, rotationY: -32, ease: 'power3.out', duration: 1 }, 0)
+        { xPercent: apri, rotate: 16, rotationY: -32, ease: 'sine.inOut', duration: 1 }, 0)
       .fromTo(frase, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, ease: 'power2.out', duration: 0.5 }, 0.5);
   });
 
@@ -616,7 +619,7 @@
       const fine = parseFloat(el.dataset.conta);
       if (ridotto) { el.textContent = fine; return; }
       const o = { v: 0 };
-      gsap.to(o, { v: fine, duration: 2.2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+      gsap.to(o, { v: fine, duration: 2.2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 80%', once: true },
         onUpdate: () => { el.textContent = el.hasAttribute('data-anno') ? Math.round(o.v) : Math.round(o.v).toLocaleString('it-IT'); } });
     });
   };

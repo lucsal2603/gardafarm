@@ -233,7 +233,7 @@ html:not(.js) .loader, .loader.is-done { display: none; }
 
 /* ---------- hero home ---------- */
 .hero { position: relative; height: 340vh; }
-.hero__palco { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.hero__palco { position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden; }
 .hero__forma {
   position: absolute; left: 0; right: 0; bottom: -20vh; margin-inline: auto;
   width: min(1040px, 78vw); aspect-ratio: 1 / .78;
@@ -305,7 +305,7 @@ html:not(.js) .loader, .loader.is-done { display: none; }
 
 /* immagine che si espande a tutto schermo */
 .espandi { position: relative; height: 220vh; }
-.espandi__palco { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.espandi__palco { position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden; }
 .espandi__img {
   position: absolute; inset: 0;
   clip-path: inset(6vh var(--gutter) 58vh var(--gutter) round var(--raggio));
@@ -322,9 +322,9 @@ html:not(.js) .espandi__palco { position: relative; height: 80vh; }
 html:not(.js) .espandi__img { clip-path: none; }
 
 /* ventaglio di tre foto (home): le laterali escono da dietro e ruotano */
-.ventaglio { position: relative; height: 100vh; height: 100svh; }
+.ventaglio { position: relative; height: 100vh; height: 100lvh; }
 .ventaglio__palco {
-  position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+  position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(28px, 5vh, 56px);
 }
 .ventaglio__carte {
@@ -399,7 +399,7 @@ html:not(.js) .ventaglio__palco, .ridotto .ventaglio__palco { position: relative
 /* ---------- manifesto: frase grande che si accende parola per parola ---------- */
 .manifesto { position: relative; height: 260vh; }
 .manifesto--striscia { height: 560vh; }
-.manifesto__palco { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-items: center; padding: 0 var(--gutter); }
+.manifesto__palco { position: sticky; top: 0; height: 100vh; height: 100lvh; display: grid; place-items: center; padding: 0 var(--gutter); }
 .manifesto__testo {
   max-width: 1280px; margin: 0; text-align: center;
   font-family: var(--serif); font-weight: 300; font-variation-settings: 'opsz' 144;
@@ -411,7 +411,7 @@ html:not(.js) .ventaglio__palco, .ridotto .ventaglio__palco { position: relative
 .manifesto .parola { display: inline-block; }
 .manifesto__palco { overflow: hidden; background: var(--crema); }
 /* la sezione dopo sta già sotto il palco: quando il giallo copre tutto, il palco sparisce e lei è lì, ferma */
-.js:not(.ridotto) .manifesto--striscia { z-index: 2; margin-bottom: -100vh; margin-bottom: -100svh; }
+.js:not(.ridotto) .manifesto--striscia { z-index: 2; margin-bottom: -100vh; margin-bottom: -100lvh; }
 .js:not(.ridotto) .dopo-manifesto { z-index: 1; }
 .manifesto__striscia { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; overflow: visible; }
 .manifesto__striscia path { fill: none; stroke: var(--sole); stroke-linecap: round; stroke-linejoin: round; }
@@ -487,7 +487,7 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 }
 
 /* ---------- esperienze: il fiore in basso, il nome ad arco sopra ---------- */
-.fiore-sez { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
+.fiore-sez { position: relative; height: 100vh; height: 100lvh; overflow: hidden; }
 .fiore { --F: min(92vh, 84vw); position: absolute; left: 50%; top: var(--cy, 94%); width: var(--F); height: var(--F); margin: calc(var(--F) / -2) 0 0 calc(var(--F) / -2); }
 .fiore__giro { position: absolute; inset: 0; will-change: transform; }
 .petalo {
@@ -527,10 +527,10 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 .fiore__tutte { position: absolute; right: var(--gutter); bottom: 6vh; z-index: 3; }
 
 @media (max-width: 900px) {
-  .fiore { --F: min(100vw, 60svh); --cy: 80%; }
-  .fiore__lati { left: var(--gutter); right: var(--gutter); width: auto; bottom: auto; top: calc(var(--header-h) + 5svh); }
-  .fiore__lato { position: absolute; top: 0; bottom: auto; }
-  .fiore__testo { display: none; }
+  .fiore { --F: min(108vw, 58svh); --cy: 84%; }
+  .fiore__lati { left: var(--gutter); right: var(--gutter); width: auto; bottom: auto; top: calc(var(--header-h) + 3svh); }
+  .fiore__lato { position: absolute; top: 0; bottom: auto; text-align: center; }
+  .fiore__testo { display: block; font-size: 14.5px; margin-bottom: 12px; text-align: center; }
   .fiore__piede { border-top: 0; padding-top: 0; justify-content: center; gap: 24px; }
   .fiore__etichetta, .fiore__tutte { display: none; }
 }
@@ -538,7 +538,7 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 /* ---------- la vita a Gardafarm: viaggio orizzontale tra le stagioni ---------- */
 .stagioni { position: relative; overflow: clip; }
 /* le stagioni salgono sopra il fiore, che resta fermo dietro */
-.js:not(.ridotto) .stagioni-entra { position: relative; z-index: 0; margin-top: -100vh; margin-top: -100svh; }
+.js:not(.ridotto) .stagioni-entra { position: relative; z-index: 0; margin-top: -100vh; margin-top: -100lvh; }
 .fiore__arrivo { position: absolute; inset: 0; z-index: 10; transform: translateX(100%); visibility: hidden; box-shadow: -30px 0 60px -20px rgba(8, 54, 80, .3); }
 .fiore-sez .fiore__arrivo .display { margin-top: 18px; color: var(--prato); }
 .fiore-sez .fiore__arrivo .etichetta { color: var(--prato); }
@@ -549,7 +549,7 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 .telo, .fiore__arrivo { --curva: 38vh; }
 .telo { position: absolute; top: 0; bottom: 0; left: calc(var(--curva) * -1); width: calc(100% + var(--curva)); background: var(--c); transform: translateX(110%); border-radius: var(--curva) 0 0 var(--curva) / 50% 0 0 50%; box-shadow: -18px 0 40px -20px rgba(8, 54, 80, .35); }
 .fiore__arrivo { border-radius: var(--curva) 0 0 var(--curva) / 50% 0 0 50%; }
-.stagioni__palco { height: 100vh; height: 100svh; overflow: hidden; }
+.stagioni__palco { height: 100vh; height: 100lvh; overflow: hidden; }
 .stagioni__binario { display: flex; height: 100%; width: max-content; }
 .stagione { position: relative; flex: 0 0 100vw; height: 100%; background: var(--bg, var(--crema)); overflow: hidden; }
 .stagione--intro { flex-basis: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 var(--gutter); background: var(--crema); }
@@ -860,8 +860,6 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
   .sagome { min-height: 110vw; }
 }
 @media (max-width: 900px) {
-  .pagina-esperienze .fiore__testo { display: block; font-size: 14px; margin-bottom: 10px; text-align: center; }
-  .pagina-esperienze .fiore { --cy: 84%; --F: min(96vw, 54svh); }
 }
 
 .footer__fondo { align-items: center; }
