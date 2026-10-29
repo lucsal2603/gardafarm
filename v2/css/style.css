@@ -395,7 +395,7 @@ html:not(.js) .ventaglio__palco, .ridotto .ventaglio__palco { position: relative
 .forma-frutto svg { width: 100%; height: auto; display: block; overflow: visible; }
 
 /* ---------- manifesto: frase grande che si accende parola per parola ---------- */
-.manifesto { position: relative; height: 300vh; }
+.manifesto { position: relative; height: 560vh; }
 .manifesto__palco { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-items: center; padding: 0 var(--gutter); }
 .manifesto__testo {
   max-width: 1280px; margin: 0; text-align: center;
@@ -406,10 +406,14 @@ html:not(.js) .ventaglio__palco, .ridotto .ventaglio__palco { position: relative
 .manifesto__icona { display: inline-block; width: 1.3em; height: 1.3em; vertical-align: -.3em; margin: 0 .22em; }
 .manifesto__icona svg { width: 100%; height: 100%; }
 .manifesto .parola { display: inline-block; }
+.manifesto__palco { overflow: hidden; }
+.manifesto__striscia { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; overflow: visible; }
+.manifesto__striscia path { fill: none; stroke: var(--sole); stroke-width: 56; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.ridotto .manifesto__striscia { display: none; }
 html:not(.js) .manifesto, .ridotto .manifesto { height: auto; }
 html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative; height: auto; padding-block: 20vh; }
 @media (max-width: 760px) {
-  .manifesto { height: 240vh; }
+  .manifesto { height: 460vh; }
   .manifesto__testo { font-size: clamp(28px, 8.4vw, 40px); }
 }
 

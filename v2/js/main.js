@@ -485,7 +485,13 @@
         icona ? { scale: 1, rotate: 0, autoAlpha: 1, ease: 'back.out(2.2)', duration: 1.2 } : { autoAlpha: 1, yPercent: 0, filter: 'blur(0px)', ease: 'power2.out', duration: 1 },
         i * 0.55);
     });
-    tl.to({}, { duration: 1.5 });
+    /* striscia gialla: scende col percorso a serpentina, poi si allarga fino a coprire lo schermo */
+    const linea = $('.manifesto__striscia path', sez);
+    if (linea) {
+      tl.to(linea, { strokeDashoffset: 0, ease: 'none', duration: 4.5 }, '+=0.5')
+        .to(linea, { attr: { 'stroke-width': 2600 }, strokeWidth: 2600, ease: 'power2.in', duration: 2.2 })
+        .to({}, { duration: 0.4 });
+    } else tl.to({}, { duration: 1.5 });
   };
 
   /* ================= pila di carte ================= */

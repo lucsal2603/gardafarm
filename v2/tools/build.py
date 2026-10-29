@@ -13,7 +13,7 @@ from pathlib import Path
 
 QUI = Path(__file__).resolve().parent
 RADICE = QUI.parent
-VERSIONE = '2026102910'
+VERSIONE = '2026102911'
 
 VOCI = [
     ('home', 'index.html', 'Home', 'giardino-verde'),
