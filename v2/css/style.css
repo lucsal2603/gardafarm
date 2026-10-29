@@ -537,7 +537,7 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 .stagioni__palco { height: 100vh; height: 100svh; overflow: hidden; }
 .stagioni__binario { display: flex; height: 100%; width: max-content; }
 .stagione { position: relative; flex: 0 0 100vw; height: 100%; background: var(--bg, var(--crema)); overflow: hidden; }
-.stagione--intro { flex-basis: 75vw; display: flex; flex-direction: column; justify-content: center; padding: 0 var(--gutter) 0 8vw; background: var(--crema); }
+.stagione--intro { flex-basis: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 var(--gutter); background: var(--crema); }
 .stagione--intro .display { margin-top: 18px; }
 .stagioni__vai { display: inline-flex; align-items: center; gap: 12px; margin-top: 32px; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--lago); }
 .stagione__nome {
@@ -563,7 +563,6 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
   .mazzo__punti { margin: 14px 0 0; }
   .mazzo__tavolo { width: min(74vw, 330px); }
   .mazzo__testo { display: none; }
-  .stagione--intro { flex-basis: 100vw; padding-left: var(--gutter); }
   .stagione__nome { font-size: 30vw; bottom: auto; top: 6vh; }
   .stagione__foto--1 { left: 6vw; top: 26vh; width: 46vw; }
   .stagione__foto--2 { left: 48vw; top: 40vh; width: 44vw; }
