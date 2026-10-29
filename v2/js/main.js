@@ -675,6 +675,12 @@
     } else tl.to({}, { duration: 1.5 });
   });
 
+  /* ================= sedi su telefono: senza hover, il motivo esce quando la card entra ================= */
+  const sediTouch = () => {
+    if (!matchMedia('(hover: none)').matches) return;
+    $$('.sede').forEach((c) => ScrollTrigger.create({ trigger: c, start: 'top 72%', end: 'bottom 20%', toggleClass: 'is-attiva' }));
+  };
+
   /* ================= pila di carte ================= */
   const pila = () => {
     if (ridotto || innerWidth < 760) return;
@@ -743,6 +749,7 @@
     stagioni();
     pila();
     contatori();
+    sediTouch();
     scorrevoli();
     piede();
     ScrollTrigger.refresh();

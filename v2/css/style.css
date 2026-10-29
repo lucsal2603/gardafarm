@@ -872,3 +872,16 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 /* prestazioni: le animazioni in loop si fermano fuori vista */
 .fuori-vista, .fuori-vista * { animation-play-state: paused !important; }
 .bustina, .petalo, .foto-sagoma { contain: layout style; }
+
+/* senza mouse: animali e frutti delle sedi escono appena la card entra nello schermo */
+@media (hover: none) {
+  .sede.is-attiva .sede__motivo { opacity: 1; transform: none; }
+  .sede.is-attiva .sede__foto { transform: rotate(0) scale(1.03); }
+  .sede__motivo .forma-frutto { transition: transform .9s var(--rimbalzo); width: 25%; }
+  .sede__foto { width: 62% !important; }
+  .sede.is-attiva .sede__motivo .forma-frutto { animation: motivo-salta .9s var(--rimbalzo) both; }
+  .sede.is-attiva .sede__motivo .forma-frutto:nth-child(2) { animation-delay: .08s; }
+  .sede.is-attiva .sede__motivo .forma-frutto:nth-child(3) { animation-delay: .16s; }
+  .sede.is-attiva .sede__motivo .forma-frutto:nth-child(4) { animation-delay: .24s; }
+}
+@keyframes motivo-salta { from { scale: 0; } to { scale: 1; } }
