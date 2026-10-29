@@ -398,8 +398,28 @@
       attivo = k;
       petali.forEach((p, i) => p.classList.toggle('is-on', i === k));
       infos.forEach((el, i) => el.classList.toggle('is-on', i === k));
-      if (ape && !ridotto) gsap.fromTo(ape, { y: -30, rotate: -18 }, { y: 0, rotate: 0, duration: 0.7, ease: 'back.out(3)' });
     };
+    /* l'ape vola da una punta all'altra: si alza dal petalo che se ne va e si posa su quello che arriva in alto */
+    const fiore = $('.fiore', sez);
+    let ultimoF = 0, verso = 1;
+    const punta = (k, r) => {
+      const F = fiore.offsetWidth, a = (k * passo + r) * Math.PI / 180, R = F * 0.53;
+      return { x: Math.sin(a) * R, y: -Math.cos(a) * R };
+    };
+    const muoviApe = (r) => {
+      if (!ape) return;
+      const f = -r / passo, i = Math.floor(f), t = f - i;
+      const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      const p0 = punta(i, r), p1 = punta(i + 1, r), F = fiore.offsetWidth;
+      const volo = Math.sin(Math.PI * e);
+      const x = p0.x + (p1.x - p0.x) * e, y = p0.y + (p1.y - p0.y) * e - volo * F * 0.16;
+      if (Math.abs(f - ultimoF) > 0.0005) verso = f > ultimoF ? 1 : -1;
+      ultimoF = f;
+      const incl = volo * 16 * verso;
+      ape.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${incl.toFixed(1)}deg) scaleX(${verso})`;
+    };
+    muoviApe(0);
+    addEventListener('resize', () => muoviApe(-ultimoF * passo));
     accendi(0);
     if (ridotto) return;
     const SOSTA = 0.85; /* mezzo schermo fermo appena la sezione appare */
@@ -412,8 +432,9 @@
     });
     tl.to({}, { duration: SOSTA });
     for (let i = 1; i < N; i++) {
-      tl.to(stato, { r: -passo * i, ease: 'power2.inOut', duration: 1, onUpdate: () => {
+      tl.to(stato, { r: -passo * i, ease: 'sine.inOut', duration: 1, onUpdate: () => {
         gsap.set(giro, { rotate: stato.r });
+        muoviApe(stato.r);
         accendi(((Math.round(-stato.r / passo) % N) + N) % N);
       } });
     }
