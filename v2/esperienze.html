@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
-<link rel="stylesheet" href="css/style.css?v=2026102930">
+<link rel="stylesheet" href="css/style.css?v=2026102931">
 </head>
 <body class="pagina-esperienze">
 <a class="skip" href="#contenuto">Vai al contenuto</a>
@@ -74,119 +74,148 @@
 <main id="contenuto">
 <section class="titolo-pagina">
   <h1 class="display t-mega">Esperienze</h1>
-  <div class="titolo-pagina__lati">
-    <span>Green &amp; outdoor<br>experiences</span>
-    <span>Verona<br>&amp; Villafranca</span>
-  </div>
+  <div class="titolo-pagina__lati"><span>Green &amp; outdoor<br>experiences</span><span>Verona<br>&amp; Villafranca</span></div>
 </section>
 
-<section class="espandi" aria-label="Esperienze in natura">
-  <div class="espandi__palco">
-    <div class="espandi__img">
-      <img src="img/erba-mano.webp" alt="Una mano accarezza l'erba alta nella luce del tramonto" width="2000" height="1055">
-      <h2 class="espandi__titolo display">Un'esperienza<br>di luoghi<br>e di sapori</h2>
+<section class="ventaglio ventaglio--pagina" aria-label="Un'esperienza di luoghi e di sapori">
+  <div class="ventaglio__palco">
+    <div class="ventaglio__carte">
+      <div class="ventaglio__carta ventaglio__carta--sx"><img src="img/cucina-insieme.webp" alt="Un laboratorio di team cooking" loading="eager"></div>
+      <div class="ventaglio__carta ventaglio__carta--dx"><img src="img/trekking-bosco.webp" alt="Trekking nel bosco" loading="eager"></div>
+      <div class="ventaglio__carta ventaglio__carta--centro"><img src="img/apicoltore.webp" alt="L'apicoltore tra le arnie" loading="eager"></div>
     </div>
+    <p class="ventaglio__frase serif-up">Un'esperienza di luoghi<br>e di sapori</p>
   </div>
 </section>
 
 <section class="racconto">
   <span class="rombo" aria-hidden="true"></span>
   <div class="lead" data-split>
-    <p>A Gardafarm vivi esperienze autentiche e su misura: laboratori in natura, team cooking, attività di benessere, addii al nubilato e al celibato, compleanni ed eventi aziendali o privati. Immergiti tra campi e animali, con la possibilità di fare trekking, esplorare le piste ciclopedonali vicine o vivere un'esperienza a cavallo nei maneggi della zona.</p>
+    <p>A Gardafarm vivi esperienze autentiche e su misura: laboratori in natura, team cooking, attività di benessere, addii al nubilato e al celibato, compleanni ed eventi aziendali o privati. Immergiti tra campi e animali, fai trekking sulle piste ciclopedonali vicine o vivi un'esperienza a cavallo nei maneggi della zona.</p>
   </div>
   <span class="rombo" aria-hidden="true"></span>
 </section>
 
-<section class="sezione sole-sezione" aria-labelledby="t-scopri">
-  <div class="pila-grid">
-    <div class="pila-intro">
-      <h2 class="display t-l" id="t-scopri" data-split="chars">Scopri<br>le nostre<br>esperienze</h2>
-      <div class="pila-intro__tag"><span>Per gruppi<br>su prenotazione</span><span>Natura<br>&amp; animali</span></div>
-      <span class="forma-frutto" data-forma="ape" data-speed="-.6" style="display:block;width:clamp(90px,10vw,160px);margin-top:6vh"></span>
+<section class="sole-sezione fiore-sez" aria-labelledby="t-esp">
+  <span class="etichetta fiore__etichetta">Laboratori, animali, natura</span>
+  <svg class="fiore__arco" aria-hidden="true">
+    <defs><path id="arco-grande" d=""/><path id="arco-piccolo" d=""/></defs>
+      <g class="arco__voce" data-i="0"><text class="arco__nome"><textPath href="#arco-grande" startOffset="50%">Team building</textPath></text><text class="arco__sotto"><textPath href="#arco-piccolo" startOffset="50%">Cucina, arte e collaborazione</textPath></text></g>
+      <g class="arco__voce" data-i="1"><text class="arco__nome"><textPath href="#arco-grande" startOffset="50%">Giornata del contadino</textPath></text><text class="arco__sotto"><textPath href="#arco-piccolo" startOffset="50%">Un giorno in fattoria</textPath></text></g>
+      <g class="arco__voce" data-i="2"><text class="arco__nome"><textPath href="#arco-grande" startOffset="50%">Il magico mondo delle api</textPath></text><text class="arco__sotto"><textPath href="#arco-piccolo" startOffset="50%">Alveari, fiori e miele</textPath></text></g>
+      <g class="arco__voce" data-i="3"><text class="arco__nome"><textPath href="#arco-grande" startOffset="50%">Trekking con gli asinelli</textPath></text><text class="arco__sotto"><textPath href="#arco-piccolo" startOffset="50%">Passeggiata tra natura e tenerezza</textPath></text></g>
+      <g class="arco__voce" data-i="4"><text class="arco__nome"><textPath href="#arco-grande" startOffset="50%">Saperi e sapori</textPath></text><text class="arco__sotto"><textPath href="#arco-piccolo" startOffset="50%">Erbe aromatiche, profumi e colori</textPath></text></g>
+      <g class="arco__voce" data-i="5"><text class="arco__nome"><textPath href="#arco-grande" startOffset="50%">Sentiero del campione</textPath></text><text class="arco__sotto"><textPath href="#arco-piccolo" startOffset="50%">Libero e gratuito, sempre</textPath></text></g>
+  </svg>
+  <h3 class="sr-only" aria-live="polite" id="fiore-nome-sr">Team building</h3>
+  <div class="fiore__lati">
+    <div class="fiore__lato is-on" data-i="0">
+      <p class="fiore__testo">Esperienze coinvolgenti tra mani in pasta, arte e collaborazione. Dalla cucina condivisa all'arte partecipativa: ogni attività crea connessione autentica. Per gruppi, su prenotazione.</p>
+      <div class="fiore__piede"><span class="fiore__dove"><svg width="12" height="16" viewBox="0 0 12 16" aria-hidden="true"><path d="M6 15.2C3.2 11.6 1 8.9 1 6a5 5 0 0 1 10 0c0 2.9-2.2 5.6-5 9.2Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.8" fill="currentColor"/></svg>Verona e Villafranca</span><a class="fiore__link" href="mailto:info@gardafarmverona.com?subject=Esperienza%20team-building">Prenota <svg width="30" height="12" viewBox="0 0 30 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 6h28M23 1l5 5-5 5"/></svg></a></div>
     </div>
-    <div class="pila">
-      <article class="carta-pila" id="team-building">
-        <div class="carta-pila__foto"><img src="img/cucina-insieme.webp" alt="Un gruppo durante un laboratorio di cucina" width="1125" height="1500" loading="lazy"></div>
-        <div class="carta-pila__corpo">
-          <span class="carta-pila__num">01.</span>
-          <h3 class="carta-pila__titolo serif-up">Team building</h3>
-          <p class="carta-pila__sotto">Mani in pasta, arte e collaborazione</p>
-          <p class="carta-pila__testo">Proposte su misura per gruppi aziendali e privati che vogliono fare squadra divertendosi. Dalla cucina condivisa all'arte partecipativa: ogni attività crea connessione autentica.</p>
-          <div class="carta-pila__meta"><span><b>Per chi</b>Gruppi, su prenotazione</span><span><b>Dove</b>Verona e Villafranca</span></div>
-          <a class="pill" href="mailto:info@gardafarmverona.com?subject=Team%20building">Richiedi informazioni</a>
-        </div>
-      </article>
-      <article class="carta-pila" id="contadino">
-        <div class="carta-pila__foto"><img src="img/asinello.webp" alt="Un asinello mangia il fieno" width="1125" height="1500" loading="lazy"></div>
-        <div class="carta-pila__corpo">
-          <span class="carta-pila__num">02.</span>
-          <h3 class="carta-pila__titolo serif-up">Giornata del contadino</h3>
-          <p class="carta-pila__sotto">Un giorno in fattoria, a contatto con gli animali</p>
-          <p class="carta-pila__testo">Un'esperienza educativa e sensoriale per bambini e adulti, tra stalle, galline, conigli e asinelli. Si impara a conoscere gli animali da vicino, ad accudirli e a vivere il ritmo autentico della campagna.</p>
-          <div class="carta-pila__meta"><span><b>Per chi</b>Gruppi, su prenotazione</span><span><b>Dove</b>Villafranca</span></div>
-          <a class="pill" href="mailto:info@gardafarmverona.com?subject=Giornata%20del%20contadino">Contattaci</a>
-        </div>
-      </article>
-      <article class="carta-pila" id="api">
-        <div class="carta-pila__foto"><img src="img/apicoltore.webp" alt="L'apicoltore accanto alle arnie" width="1125" height="1500" loading="lazy"></div>
-        <div class="carta-pila__corpo">
-          <span class="carta-pila__num">03.</span>
-          <h3 class="carta-pila__titolo serif-up">Il magico mondo delle api</h3>
-          <p class="carta-pila__sotto">Percorso sensoriale tra alveari, fiori e miele</p>
-          <p class="carta-pila__testo">Scopriamo insieme l'importanza delle api per l'ecosistema, esplorando la loro vita straordinaria. Un laboratorio esperienziale con degustazione e attività a tema miele, polline e cera d'api.</p>
-          <div class="carta-pila__meta"><span><b>Per chi</b>Gruppi, su prenotazione</span><span><b>Dove</b>Verona e Villafranca</span></div>
-          <a class="pill" href="mailto:info@gardafarmverona.com?subject=Il%20magico%20mondo%20delle%20api">Contattaci</a>
-        </div>
-      </article>
-      <article class="carta-pila" id="asinelli">
-        <div class="carta-pila__foto"><img src="img/trekking-bosco.webp" alt="Una guida accompagna un gruppo nel bosco" width="1125" height="1500" loading="lazy"></div>
-        <div class="carta-pila__corpo">
-          <span class="carta-pila__num">04.</span>
-          <h3 class="carta-pila__titolo serif-up">Trekking con gli asinelli</h3>
-          <p class="carta-pila__sotto">Passeggiata tra natura e tenerezza</p>
-          <p class="carta-pila__testo">Camminata lenta e consapevole in compagnia degli asinelli, tra vigneti, oliveti e frutteti biologici. Un'occasione per rilassarsi, ascoltare la natura e connettersi con questi animali dolci ed empatici.</p>
-          <div class="carta-pila__meta"><span><b>Per chi</b>Gruppi, su prenotazione</span><span><b>Dove</b>Villafranca</span></div>
-          <a class="pill" href="mailto:info@gardafarmverona.com?subject=Trekking%20con%20gli%20asinelli">Contattaci</a>
-        </div>
-      </article>
-      <article class="carta-pila" id="saperi">
-        <div class="carta-pila__foto"><img src="img/lavanda-mazzo.webp" alt="Mazzo di lavanda essiccata" width="1125" height="1500" loading="lazy"></div>
-        <div class="carta-pila__corpo">
-          <span class="carta-pila__num">05.</span>
-          <h3 class="carta-pila__titolo serif-up">Saperi e sapori</h3>
-          <p class="carta-pila__sotto">Laboratorio con erbe aromatiche, profumi e colori</p>
-          <p class="carta-pila__testo">Un viaggio tra natura e creatività per conoscere le piante aromatiche, le loro proprietà e i possibili usi. Prepariamo insieme un piccolo prodotto da portare a casa, come ricordo profumato.</p>
-          <div class="carta-pila__meta"><span><b>Per chi</b>Gruppi, su prenotazione</span><span><b>Dove</b>Verona e Villafranca</span></div>
-          <a class="pill" href="mailto:info@gardafarmverona.com?subject=Saperi%20e%20sapori">Contattaci</a>
-        </div>
-      </article>
-      <article class="carta-pila" id="sentiero">
-        <div class="carta-pila__foto"><img src="img/viale.webp" alt="Un vialetto tra il verde" width="900" height="1200" loading="lazy"></div>
-        <div class="carta-pila__corpo">
-          <span class="carta-pila__num">06.</span>
-          <h3 class="carta-pila__titolo serif-up">Sentiero del campione</h3>
-          <p class="carta-pila__sotto">Un percorso accessibile a tutti</p>
-          <p class="carta-pila__testo">Parte proprio dalla sede di Gardafarm a Villafranca e unisce l'attenzione alla sostenibilità sociale e il rispetto dell'ambiente al benessere fisico e mentale.</p>
-          <div class="carta-pila__meta"><span><b>Accesso</b>Libero e gratuito, sempre</span><span><b>Dove</b>Villafranca</span></div>
-          <a class="pill" href="mailto:info@gardafarmverona.com?subject=Brochure%20Sentiero%20del%20campione">Chiedi la brochure</a>
-        </div>
-      </article>
+    <div class="fiore__lato" data-i="1">
+      <p class="fiore__testo">Un'esperienza educativa e sensoriale per bambini e adulti, tra stalle, galline, conigli e asinelli: si impara ad accudire gli animali e a vivere il ritmo della campagna. Per gruppi, su prenotazione.</p>
+      <div class="fiore__piede"><span class="fiore__dove"><svg width="12" height="16" viewBox="0 0 12 16" aria-hidden="true"><path d="M6 15.2C3.2 11.6 1 8.9 1 6a5 5 0 0 1 10 0c0 2.9-2.2 5.6-5 9.2Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.8" fill="currentColor"/></svg>Villafranca</span><a class="fiore__link" href="mailto:info@gardafarmverona.com?subject=Esperienza%20contadino">Prenota <svg width="30" height="12" viewBox="0 0 30 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 6h28M23 1l5 5-5 5"/></svg></a></div>
+    </div>
+    <div class="fiore__lato" data-i="2">
+      <p class="fiore__testo">Scopriamo l'importanza delle api per l'ecosistema in un laboratorio con degustazione e attività a tema miele, polline e cera d'api. Per gruppi, su prenotazione.</p>
+      <div class="fiore__piede"><span class="fiore__dove"><svg width="12" height="16" viewBox="0 0 12 16" aria-hidden="true"><path d="M6 15.2C3.2 11.6 1 8.9 1 6a5 5 0 0 1 10 0c0 2.9-2.2 5.6-5 9.2Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.8" fill="currentColor"/></svg>Verona e Villafranca</span><a class="fiore__link" href="mailto:info@gardafarmverona.com?subject=Esperienza%20api">Prenota <svg width="30" height="12" viewBox="0 0 30 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 6h28M23 1l5 5-5 5"/></svg></a></div>
+    </div>
+    <div class="fiore__lato" data-i="3">
+      <p class="fiore__testo">Camminata lenta e consapevole con gli asinelli, tra vigneti, oliveti e frutteti biologici: per rilassarsi e ascoltare la natura. Per gruppi, su prenotazione.</p>
+      <div class="fiore__piede"><span class="fiore__dove"><svg width="12" height="16" viewBox="0 0 12 16" aria-hidden="true"><path d="M6 15.2C3.2 11.6 1 8.9 1 6a5 5 0 0 1 10 0c0 2.9-2.2 5.6-5 9.2Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.8" fill="currentColor"/></svg>Villafranca</span><a class="fiore__link" href="mailto:info@gardafarmverona.com?subject=Esperienza%20asinelli">Prenota <svg width="30" height="12" viewBox="0 0 30 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 6h28M23 1l5 5-5 5"/></svg></a></div>
+    </div>
+    <div class="fiore__lato" data-i="4">
+      <p class="fiore__testo">Un viaggio tra natura e creatività per conoscere le piante aromatiche e preparare insieme un piccolo ricordo profumato da portare a casa. Per gruppi, su prenotazione.</p>
+      <div class="fiore__piede"><span class="fiore__dove"><svg width="12" height="16" viewBox="0 0 12 16" aria-hidden="true"><path d="M6 15.2C3.2 11.6 1 8.9 1 6a5 5 0 0 1 10 0c0 2.9-2.2 5.6-5 9.2Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.8" fill="currentColor"/></svg>Verona e Villafranca</span><a class="fiore__link" href="mailto:info@gardafarmverona.com?subject=Esperienza%20saperi">Prenota <svg width="30" height="12" viewBox="0 0 30 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 6h28M23 1l5 5-5 5"/></svg></a></div>
+    </div>
+    <div class="fiore__lato" data-i="5">
+      <p class="fiore__testo">Un sentiero accessibile a tutti che parte da Gardafarm Villafranca e unisce sostenibilità sociale, rispetto dell'ambiente e benessere. Accesso libero e gratuito.</p>
+      <div class="fiore__piede"><span class="fiore__dove"><svg width="12" height="16" viewBox="0 0 12 16" aria-hidden="true"><path d="M6 15.2C3.2 11.6 1 8.9 1 6a5 5 0 0 1 10 0c0 2.9-2.2 5.6-5 9.2Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.8" fill="currentColor"/></svg>Villafranca</span><a class="fiore__link" href="mailto:info@gardafarmverona.com?subject=Esperienza%20sentiero">Prenota <svg width="30" height="12" viewBox="0 0 30 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 6h28M23 1l5 5-5 5"/></svg></a></div>
+    </div>
+  </div>
+  <a class="pill fiore__tutte" href="mailto:info@gardafarmverona.com?subject=Richiesta%20esperienze" style="color:var(--lago)">Scrivici</a>
+  <div class="fiore">
+    <div class="fiore__giro">
+        <a class="petalo" href="#team-building" style="--i:0" data-cursor="Team building" aria-label="Team building">
+          <svg viewBox="-14 -14 228 348" aria-hidden="true">
+            <defs><clipPath id="petalo-0"><path d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/></clipPath></defs>
+            <path class="petalo__bordo" d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/>
+            <g clip-path="url(#petalo-0)"><image href="img/cucina-insieme.webp" x="-20" y="0" width="240" height="330" preserveAspectRatio="xMidYMid slice"/></g>
+          </svg>
+        </a>
+        <a class="petalo" href="#contadino" style="--i:1" data-cursor="Giornata del contadino" aria-label="Giornata del contadino">
+          <svg viewBox="-14 -14 228 348" aria-hidden="true">
+            <defs><clipPath id="petalo-1"><path d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/></clipPath></defs>
+            <path class="petalo__bordo" d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/>
+            <g clip-path="url(#petalo-1)"><image href="img/asinello.webp" x="-20" y="0" width="240" height="330" preserveAspectRatio="xMidYMid slice"/></g>
+          </svg>
+        </a>
+        <a class="petalo" href="#api" style="--i:2" data-cursor="Il magico mondo delle api" aria-label="Il magico mondo delle api">
+          <svg viewBox="-14 -14 228 348" aria-hidden="true">
+            <defs><clipPath id="petalo-2"><path d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/></clipPath></defs>
+            <path class="petalo__bordo" d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/>
+            <g clip-path="url(#petalo-2)"><image href="img/apicoltore.webp" x="-20" y="0" width="240" height="330" preserveAspectRatio="xMidYMid slice"/></g>
+          </svg>
+        </a>
+        <a class="petalo" href="#asinelli" style="--i:3" data-cursor="Trekking con gli asinelli" aria-label="Trekking con gli asinelli">
+          <svg viewBox="-14 -14 228 348" aria-hidden="true">
+            <defs><clipPath id="petalo-3"><path d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/></clipPath></defs>
+            <path class="petalo__bordo" d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/>
+            <g clip-path="url(#petalo-3)"><image href="img/trekking-bosco.webp" x="-20" y="0" width="240" height="330" preserveAspectRatio="xMidYMid slice"/></g>
+          </svg>
+        </a>
+        <a class="petalo" href="#saperi" style="--i:4" data-cursor="Saperi e sapori" aria-label="Saperi e sapori">
+          <svg viewBox="-14 -14 228 348" aria-hidden="true">
+            <defs><clipPath id="petalo-4"><path d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/></clipPath></defs>
+            <path class="petalo__bordo" d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/>
+            <g clip-path="url(#petalo-4)"><image href="img/lavanda-mazzo.webp" x="-20" y="0" width="240" height="330" preserveAspectRatio="xMidYMid slice"/></g>
+          </svg>
+        </a>
+        <a class="petalo" href="#sentiero" style="--i:5" data-cursor="Sentiero del campione" aria-label="Sentiero del campione">
+          <svg viewBox="-14 -14 228 348" aria-hidden="true">
+            <defs><clipPath id="petalo-5"><path d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/></clipPath></defs>
+            <path class="petalo__bordo" d="M100 320 C 28 250, -2 150, 28 70 C 48 18, 152 18, 172 70 C 202 150, 172 250, 100 320 Z"/>
+            <g clip-path="url(#petalo-5)"><image href="img/viale.webp" x="-20" y="0" width="240" height="330" preserveAspectRatio="xMidYMid slice"/></g>
+          </svg>
+        </a>
+    </div>
+    <div class="fiore__cuore"><h2 id="t-esp">Esperienze<br><em>in natura</em></h2></div>
+    <div class="fiore__ape" aria-hidden="true">
+      <svg viewBox="0 0 120 90">
+        <g class="ape__ala ape__ala--dietro"><ellipse cx="50" cy="26" rx="19" ry="12" transform="rotate(-24 50 26)"/></g>
+        <path d="M23 54 L9 57 L23 61 Z" fill="#083650"/>
+        <ellipse cx="56" cy="54" rx="34" ry="22" fill="#F2C230" stroke="#083650" stroke-width="3"/>
+        <g fill="#083650"><path d="M44 33 h9 v43 h-9 Z M62 33 h9 v43 h-9 Z"/></g>
+        <circle cx="94" cy="51" r="15" fill="#083650"/><circle cx="99" cy="46" r="3.6" fill="#FFFDF8"/>
+        <path d="M96 38 Q 103 22 112 20 M89 37 Q 91 21 98 14" fill="none" stroke="#083650" stroke-width="2.6" stroke-linecap="round"/>
+        <g class="ape__ala ape__ala--davanti"><ellipse cx="64" cy="24" rx="22" ry="13" transform="rotate(14 64 24)"/></g>
+      </svg>
     </div>
   </div>
 </section>
 
-<section class="frutti" aria-labelledby="t-inoltre" style="min-height:auto;padding-block:clamp(90px,12vw,200px)">
-  <span class="forma-frutto" data-forma="ciliegia" data-speed="1.2" style="left:5%;top:6%"></span>
-  <span class="forma-frutto" data-forma="gallina" data-speed="-.8" style="right:6%;top:14%"></span>
-  <span class="forma-frutto" data-forma="uovo" data-speed="1.4" style="left:12%;bottom:4%;width:clamp(70px,8vw,130px)"></span>
-  <span class="forma-frutto" data-forma="foglia" data-speed="-1.2" style="right:16%;bottom:2%;width:clamp(80px,10vw,160px)"></span>
-  <div style="position:relative;z-index:2;max-width:900px;text-align:center">
-    <span class="etichetta" data-reveal>E inoltre</span>
-    <h2 class="display t-m" id="t-inoltre" data-split="chars" style="margin-top:18px">Su misura<br>per te</h2>
-    <p class="lead" data-reveal style="margin-top:24px">Team art, benessere, attività creative, addii al nubilato e al celibato, compleanni, eventi privati e aziendali, trekking e bicicletta sulle piste ciclabili vicine, passeggiate a cavallo nei maneggi della zona.</p>
-    <div class="cta" data-reveal style="margin-top:30px">
-      <a class="pill pill--pieno" href="mailto:info@gardafarmverona.com?subject=Esperienza%20su%20misura">Raccontaci la tua idea</a>
-    </div>
+<section class="manifesto" aria-label="Su misura per te">
+  <div class="manifesto__palco">
+    <p class="manifesto__testo">
+      <span class="manifesto__parte">Team art,</span>
+      <span class="manifesto__icona forma-frutto" data-forma="fiore" aria-hidden="true"></span>
+      <span class="manifesto__parte">benessere,</span>
+      <span class="manifesto__icona forma-frutto" data-forma="foglia" aria-hidden="true"></span>
+      <span class="manifesto__parte">feste e compleanni,</span>
+      <span class="manifesto__icona forma-frutto" data-forma="mela" aria-hidden="true"></span>
+      <span class="manifesto__parte">trekking e bicicletta:</span>
+      <span class="manifesto__icona forma-frutto" data-forma="sole" aria-hidden="true"></span>
+      <span class="manifesto__parte">tutto su misura per te.</span>
+    </p>
+  </div>
+</section>
+
+<section class="sezione sole-sezione centro" aria-labelledby="t-cta">
+  <h2 class="display t-l" id="t-cta" data-split="chars">Raccontaci<br><em>la tua idea</em></h2>
+  <div class="cta" data-reveal style="margin-top:32px">
+    <a class="pill" href="mailto:info@gardafarmverona.com?subject=Esperienza%20su%20misura" style="background:var(--lago);color:var(--sole);border-color:var(--lago)">Scrivici</a>
+    <a class="pill" href="tel:+393402212375">+39 340 221 2375</a>
   </div>
 </section>
 </main>
@@ -248,6 +277,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
-<script src="js/main.js?v=2026102930" defer></script>
+<script src="js/main.js?v=2026102931" defer></script>
 </body>
 </html>

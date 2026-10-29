@@ -368,6 +368,9 @@
     $$('[data-sale] img').forEach((im) => gsap.fromTo(im, { scale: 1.15 }, {
       scale: 1, ease: 'none', scrollTrigger: { trigger: im.parentNode, start: 'top bottom', end: 'bottom top', scrub: true }
     }));
+    $$('[data-parallasse-sagome] .foto-sagoma').forEach((f, i) => gsap.fromTo(f, { y: (i % 2 ? 1 : -1) * 60 - 30 * i }, {
+      y: (i % 2 ? -1 : 1) * 40 + 20 * i, ease: 'none', scrollTrigger: { trigger: f.parentNode, start: 'top bottom', end: 'bottom top', scrub: true }
+    }));
     $$('.parola-cielo img, [data-parallasse] img').forEach((im) => gsap.fromTo(im, { yPercent: -8 }, {
       yPercent: 8, ease: 'none', scrollTrigger: { trigger: im.parentNode, start: 'top bottom', end: 'bottom top', scrub: true }
     }));
@@ -462,10 +465,10 @@
     const stato = { r: 0 };
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: sez, start: 'top top', end: () => '+=' + innerHeight * (0.6 * (N - 1 + SOSTA) + 1.35), pin: true, scrub: 0.6,
+        trigger: sez, start: 'top top', end: () => '+=' + innerHeight * (0.6 * (N - 1 + SOSTA) + ($('.fiore__arrivo', sez) ? 1.35 : 0.2)), pin: true, scrub: 0.6,
         refreshPriority: 1, invalidateOnRefresh: true,
         /* scambio secco e invisibile: nello stesso istante la sezione vera è ferma esattamente al suo posto */
-        onLeave: () => gsap.set(sez, { visibility: 'hidden' }),
+        onLeave: () => { if ($('.fiore__arrivo', sez)) gsap.set(sez, { visibility: 'hidden' }); },
         onEnterBack: () => gsap.set(sez, { visibility: 'visible' })
       }
     });
@@ -493,9 +496,8 @@
   };
 
   /* ================= la vita a Gardafarm: viaggio orizzontale tra le stagioni ================= */
-  const stagioni = () => {
-    const sez = $('.stagioni');
-    if (!sez || ridotto) return;
+  const stagioni = () => $$('.stagioni').forEach((sez) => {
+    if (ridotto) return;
     const binario = $('.stagioni__binario', sez);
     const dist = () => binario.scrollWidth - innerWidth;
     const corsa = gsap.to(binario, {
@@ -513,12 +515,11 @@
       const testo = $('.stagione__testo', pan);
       if (testo) gsap.from(testo, { autoAlpha: 0, y: 40, ease: 'power2.out', scrollTrigger: { trigger: pan, containerAnimation: corsa, start: 'left 55%', end: 'left 20%', scrub: true } });
     });
-  };
+  });
 
   /* ================= ventaglio: le foto laterali escono da dietro quella centrale ================= */
-  const ventaglio = () => {
-    const sez = $('.ventaglio');
-    if (!sez || ridotto) return;
+  const ventaglio = () => $$('.ventaglio').forEach((sez) => {
+    if (ridotto) return;
     const sx = $('.ventaglio__carta--sx', sez), dx = $('.ventaglio__carta--dx', sez), centro = $('.ventaglio__carta--centro', sez);
     const frase = $('.ventaglio__frase', sez);
     const apri = innerWidth < 760 ? 44 : 68;
@@ -529,12 +530,11 @@
       .fromTo(dx, { xPercent: 0, rotate: 0, rotationY: 0 },
         { xPercent: apri, rotate: 16, rotationY: -32, ease: 'power3.out', duration: 1 }, 0)
       .fromTo(frase, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, ease: 'power2.out', duration: 0.5 }, 0.5);
-  };
+  });
 
   /* ================= manifesto: parole e simboli compaiono con lo scroll ================= */
-  const manifesto = () => {
-    const sez = $('.manifesto');
-    if (!sez || ridotto) return;
+  const manifesto = () => $$('.manifesto').forEach((sez) => {
+    if (ridotto) return;
     const pezzi = [];
     [...$('.manifesto__testo', sez).children].forEach((el) => {
       if (el.classList.contains('manifesto__parte')) {
@@ -594,7 +594,7 @@
         /* lo schermo è giallo: il palco sparisce e sotto c'è già la sezione delle esperienze, ferma */
         .to(palco, { autoAlpha: 0, ease: 'none', duration: 0.15 });
     } else tl.to({}, { duration: 1.5 });
-  };
+  });
 
   /* ================= pila di carte ================= */
   const pila = () => {

@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
-<link rel="stylesheet" href="css/style.css?v=2026102930">
+<link rel="stylesheet" href="css/style.css?v=2026102931">
 </head>
 <body class="pagina-villafranca">
 <a class="skip" href="#contenuto">Vai al contenuto</a>
@@ -74,18 +74,17 @@
 <main id="contenuto">
 <section class="titolo-pagina">
   <h1 class="display t-mega">Villafranca</h1>
-  <div class="titolo-pagina__lati">
-    <span>Fattoria didattica<br>e sociale</span>
-    <span>Via Paroline 7<br>Villafranca di Verona</span>
-  </div>
+  <div class="titolo-pagina__lati"><span>Fattoria didattica<br>e sociale</span><span>Via Paroline 7<br>Villafranca di Verona</span></div>
 </section>
 
-<section class="espandi" aria-label="La fattoria di Villafranca">
-  <div class="espandi__palco">
-    <div class="espandi__img">
-      <img src="img/fattoria-arancio.webp" alt="La fattoria di Villafranca tra gli alberi giovani" width="1368" height="820">
-      <h2 class="espandi__titolo display">Imparare<br>facendo,<br>nel verde</h2>
+<section class="ventaglio ventaglio--pagina" aria-label="Imparare facendo, nel verde">
+  <div class="ventaglio__palco">
+    <div class="ventaglio__carte">
+      <div class="ventaglio__carta ventaglio__carta--sx"><img src="img/insegna.webp" alt="L'insegna dipinta della fattoria sociale" loading="eager"></div>
+      <div class="ventaglio__carta ventaglio__carta--dx"><img src="img/asinello.webp" alt="Un asinello mangia il fieno" loading="eager"></div>
+      <div class="ventaglio__carta ventaglio__carta--centro"><img src="img/fattoria-arancio.webp" alt="La fattoria tra gli alberi" loading="eager"></div>
     </div>
+    <p class="ventaglio__frase serif-up">Imparare facendo,<br>nel verde</p>
   </div>
 </section>
 
@@ -127,61 +126,73 @@
   </div>
 </section>
 
-<section class="lago-sezione" aria-labelledby="t-iaa">
-  <div class="scorrevole" aria-hidden="true">
-    <div class="scorrevole__binario">
-      <span>Asinelli</span><i>◆</i><span>Caprette</span><i>◆</i><span>Galline</span><i>◆</i><span>Conigli</span><i>◆</i><span>Api</span><i>◆</i>
-      <span>Asinelli</span><i>◆</i><span>Caprette</span><i>◆</i><span>Galline</span><i>◆</i><span>Conigli</span><i>◆</i><span>Api</span><i>◆</i>
-    </div>
-  </div>
-  <div class="sezione">
-    <div class="due-col">
-      <div class="stack">
-        <span class="etichetta" data-reveal>Relazione, ascolto, contatto</span>
-        <h2 class="display t-l" id="t-iaa" data-split="chars">Interventi<br>assistiti<br>con gli animali</h2>
-        <p data-reveal>La sede di Villafranca è centro specializzato per gli Interventi Assistiti con gli Animali, riconosciuto dal Ministero della Salute e iscritto al Registro delle Fattorie Sociali del Veneto.</p>
-        <p data-reveal>Gli animali diventano compagni di scoperta e relazione, stimolando fiducia, comunicazione ed empatia. Qui la natura è maestra di benessere.</p>
-      </div>
-      <div>
-        <div class="foto-arrotondata" data-parallasse style="aspect-ratio:4/5"><img src="img/asinello.webp" alt="Un asinello nel recinto della fattoria" width="1125" height="1500" loading="lazy"></div>
-        <ul class="elenco" style="margin-top:32px">
-          <li data-reveal><span class="elenco__n">◆</span><span class="elenco__t" style="font-size:clamp(20px,1.8vw,28px)">Bambini e ragazzi</span><span class="elenco__d">Scuole, centri educativi, famiglie</span></li>
-          <li data-reveal><span class="elenco__n">◆</span><span class="elenco__t" style="font-size:clamp(20px,1.8vw,28px)">Adulti e gruppi</span><span class="elenco__d">Anche con fragilità</span></li>
-          <li data-reveal><span class="elenco__n">◆</span><span class="elenco__t" style="font-size:clamp(20px,1.8vw,28px)">Realtà inclusive</span><span class="elenco__d">Educative e terapeutiche</span></li>
-        </ul>
-      </div>
-    </div>
+<section class="manifesto" aria-label="Gli animali della fattoria">
+  <div class="manifesto__palco">
+    <p class="manifesto__testo">
+      <span class="manifesto__parte">Asinelli,</span>
+      <span class="manifesto__icona forma-frutto" data-forma="asinello" aria-hidden="true"></span>
+      <span class="manifesto__parte">galline,</span>
+      <span class="manifesto__icona forma-frutto" data-forma="gallina" aria-hidden="true"></span>
+      <span class="manifesto__parte">conigli e api</span>
+      <span class="manifesto__icona forma-frutto" data-forma="ape" aria-hidden="true"></span>
+      <span class="manifesto__parte">diventano compagni</span>
+      <span class="manifesto__icona forma-frutto" data-forma="uovo" aria-hidden="true"></span>
+      <span class="manifesto__parte">di scoperta e di cura.</span>
+    </p>
   </div>
 </section>
 
-<section class="sezione" aria-labelledby="t-fattoria">
-  <div class="due-col">
+<section class="sezione lago-sezione" aria-labelledby="t-iaa">
+  <div class="due-col due-col--sagome">
     <div class="stack">
-      <span class="etichetta" data-reveal>Esperienze in fattoria</span>
-      <h2 class="display t-l" id="t-fattoria" data-split="chars">Mani<br>nella terra</h2>
-      <p data-reveal>Ogni proposta è progettata con cura, su misura per il gruppo o la scuola, con uno stile coinvolgente, esperienziale e profondamente umano.</p>
-      <a class="pill" href="esperienze.html" data-reveal>Scopri le esperienze</a>
+      <span class="etichetta" data-reveal>Relazione, ascolto, contatto</span>
+      <h2 class="display t-l" id="t-iaa" data-split="chars">Interventi<br>assistiti<br><em>con gli animali</em></h2>
+      <p data-reveal>La sede di Villafranca è centro specializzato per gli Interventi Assistiti con gli Animali, riconosciuto dal Ministero della Salute e iscritto al Registro delle Fattorie Sociali del Veneto.</p>
+      <ul class="elenco">
+        <li data-reveal><span class="elenco__n">◆</span><span class="elenco__t" style="font-size:clamp(20px,1.8vw,28px)">Bambini e ragazzi</span><span class="elenco__d">Scuole, centri educativi, famiglie</span></li>
+        <li data-reveal><span class="elenco__n">◆</span><span class="elenco__t" style="font-size:clamp(20px,1.8vw,28px)">Adulti e gruppi</span><span class="elenco__d">Anche con fragilità</span></li>
+        <li data-reveal><span class="elenco__n">◆</span><span class="elenco__t" style="font-size:clamp(20px,1.8vw,28px)">Realtà inclusive</span><span class="elenco__d">Educative e terapeutiche</span></li>
+      </ul>
     </div>
-    <ul class="elenco">
-      <li data-reveal><span class="elenco__n">01</span><span class="elenco__t">Giornata del contadino</span><span class="elenco__d">Stalle, galline, conigli e asinelli</span></li>
-      <li data-reveal><span class="elenco__n">02</span><span class="elenco__t">Raccolta della lavanda</span><span class="elenco__d">Dal campo al mazzetto profumato</span></li>
-      <li data-reveal><span class="elenco__n">03</span><span class="elenco__t">Bouquet garni</span><span class="elenco__d">Erbe aromatiche legate a mano</span></li>
-      <li data-reveal><span class="elenco__n">04</span><span class="elenco__t">Miele e sale aromatico</span><span class="elenco__d">Laboratori con degustazione</span></li>
-      <li data-reveal><span class="elenco__n">05</span><span class="elenco__t">Attività di stagione</span><span class="elenco__d">Vino, frutta e orto</span></li>
-    </ul>
+  <div class="sagome sagome--trio" data-parallasse-sagome>
+    <div class="foto-sagoma foto-sagoma--1" data-sagoma="cerchio" style="--c:#F2C230"><img src="img/asinello.webp" alt="Un asinello nel recinto" loading="lazy"></div>
+    <div class="foto-sagoma foto-sagoma--2" data-sagoma="ciottolo" style="--c:#8DBE5A"><img src="img/squadra-asinello.webp" alt="Lo staff con un asinello" loading="lazy"></div>
+    <div class="foto-sagoma foto-sagoma--3" data-sagoma="fiore" style="--c:#F3A06B"><img src="img/apicoltore.webp" alt="Laboratorio con le api" loading="lazy"></div>
+  </div>
   </div>
 </section>
 
-<section aria-label="Foto della fattoria" style="padding-bottom:clamp(60px,8vw,140px)">
-  <div class="nastro"><div class="nastro__binario" data-orizzontale>
-    <div class="nastro__foto"><img src="img/apicoltore.webp" alt="Laboratorio con le api: l'apicoltore accanto alle arnie" width="1125" height="1500" loading="lazy"></div>
-    <div class="nastro__foto"><img src="img/trekking-bosco.webp" alt="Trekking nel bosco lungo il fiume" width="1125" height="1500" loading="lazy"></div>
-    <div class="nastro__foto"><img src="img/insegna.webp" alt="L'insegna dipinta della fattoria sociale e del giardino didattico" width="1600" height="1008" loading="lazy"></div>
-    <div class="nastro__foto"><img src="img/fiore-zucca.webp" alt="Fiore di zucca nell'orto" width="1125" height="1500" loading="lazy"></div>
-    <div class="nastro__foto"><img src="img/panchine.webp" alt="Panchine tra gli alberi del giardino" width="1600" height="1008" loading="lazy"></div>
-    <div class="nastro__foto"><img src="img/ibisco-bianco.webp" alt="Ibisco bianco in fiore" width="1275" height="1700" loading="lazy"></div>
-    <div class="nastro__foto"><img src="img/ingresso.webp" alt="L'ingresso tra magnolie e aiuole" width="1200" height="1376" loading="lazy"></div>
-  </div></div>
+<section class="stagioni" aria-labelledby="t-fattoria">
+  <div class="stagioni__palco">
+    <div class="stagioni__binario">
+      <div class="stagione stagione--intro">
+        <span class="etichetta">Esperienze in fattoria</span>
+        <h2 class="display t-xl" id="t-fattoria">Mani<br><em>nella terra</em></h2>
+        <span class="stagioni__vai" aria-hidden="true">Scorri <svg width="38" height="14" viewBox="0 0 38 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 7h36M30 1l6 6-6 6"/></svg></span>
+      </div>
+      <div class="stagione" style="--bg:#F8E7A6;--nome:#E8C547">
+        <span class="stagione__nome" aria-hidden="true">Animali</span>
+        <figure class="stagione__foto stagione__foto--1" data-v="1.2"><img src="img/asinello.webp" alt="La giornata del contadino" loading="lazy"><figcaption>La giornata del contadino</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--2" data-v="-0.8"><img src="img/trekking-bosco.webp" alt="Trekking con gli asinelli" loading="lazy"><figcaption>Trekking con gli asinelli</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--3" data-v="1.6"><img src="img/squadra-asinello.webp" alt="In compagnia" loading="lazy"><figcaption>In compagnia</figcaption></figure>
+        <div class="stagione__testo"><h3 class="serif-up">Animali</h3><p>Stalle, galline, conigli e asinelli: si impara ad accudirli e a vivere il ritmo autentico della campagna.</p></div>
+      </div>
+      <div class="stagione" style="--bg:#E7DFF3;--nome:#B4A3DA">
+        <span class="stagione__nome" aria-hidden="true">Lavanda</span>
+        <figure class="stagione__foto stagione__foto--1" data-v="1.2"><img src="img/lavanda.webp" alt="La lavanda in campo" loading="lazy"><figcaption>La lavanda in campo</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--2" data-v="-0.8"><img src="img/lavanda-mazzo.webp" alt="Il mazzetto profumato" loading="lazy"><figcaption>Il mazzetto profumato</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--3" data-v="1.6"><img src="img/giardino-sensoriale.webp" alt="Le erbe aromatiche" loading="lazy"><figcaption>Le erbe aromatiche</figcaption></figure>
+        <div class="stagione__testo"><h3 class="serif-up">Lavanda</h3><p>Raccolta e lavorazione della lavanda, creazione di bouquet garni e laboratori con il sale aromatico.</p></div>
+      </div>
+      <div class="stagione" style="--bg:#F5D0B5;--nome:#E39A68">
+        <span class="stagione__nome" aria-hidden="true">Miele</span>
+        <figure class="stagione__foto stagione__foto--1" data-v="1.2"><img src="img/apicoltore.webp" alt="Tra le arnie" loading="lazy"><figcaption>Tra le arnie</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--2" data-v="-0.8"><img src="img/aiuola-rose.webp" alt="I fiori" loading="lazy"><figcaption>I fiori</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--3" data-v="1.6"><img src="img/fiore-zucca.webp" alt="L'orto" loading="lazy"><figcaption>L'orto</figcaption></figure>
+        <div class="stagione__testo"><h3 class="serif-up">Miele</h3><p>Laboratori con il miele e attività sensoriali e stagionali tra vino, frutta e orto.</p></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="sezione sole-sezione" aria-labelledby="t-sale">
@@ -275,6 +286,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
-<script src="js/main.js?v=2026102930" defer></script>
+<script src="js/main.js?v=2026102931" defer></script>
 </body>
 </html>

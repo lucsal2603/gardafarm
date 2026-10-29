@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
-<link rel="stylesheet" href="css/style.css?v=2026102930">
+<link rel="stylesheet" href="css/style.css?v=2026102931">
 </head>
 <body class="pagina-verona">
 <a class="skip" href="#contenuto">Vai al contenuto</a>
@@ -74,25 +74,24 @@
 <main id="contenuto">
 <section class="titolo-pagina">
   <h1 class="display t-mega">Verona</h1>
-  <div class="titolo-pagina__lati">
-    <span>Agriturismo<br>e sale eventi</span>
-    <span>Via Gardesane 91/B<br>Verona</span>
-  </div>
+  <div class="titolo-pagina__lati"><span>Agriturismo<br>e sale eventi</span><span>Via Gardesane 91/B<br>Verona</span></div>
 </section>
 
-<section class="espandi" aria-label="L'agriturismo di Verona">
-  <div class="espandi__palco">
-    <div class="espandi__img">
-      <img src="img/giardino-sensoriale.webp" alt="Il giardino sensoriale con lavanda e ginestre" width="1080" height="1080">
-      <h2 class="espandi__titolo display">A 10 minuti<br>dal cuore<br>di Verona</h2>
+<section class="ventaglio ventaglio--pagina" aria-label="A 10 minuti dal cuore di Verona, 20 dal Lago di Garda">
+  <div class="ventaglio__palco">
+    <div class="ventaglio__carte">
+      <div class="ventaglio__carta ventaglio__carta--sx"><img src="img/terrazza.webp" alt="La terrazza panoramica" loading="eager"></div>
+      <div class="ventaglio__carta ventaglio__carta--dx"><img src="img/camera-verde.webp" alt="Una camera con testiera verde" loading="eager"></div>
+      <div class="ventaglio__carta ventaglio__carta--centro"><img src="img/giardino-sensoriale.webp" alt="Il giardino sensoriale" loading="eager"></div>
     </div>
+    <p class="ventaglio__frase serif-up">A 10 minuti dal cuore di Verona,<br>20 dal Lago di Garda</p>
   </div>
 </section>
 
 <section class="racconto">
   <span class="rombo" aria-hidden="true"></span>
   <div class="lead" data-split>
-    <p>A soli 10 minuti dal centro storico di Verona e 20 dal Lago di Garda, Gardafarm è il luogo ideale per chi desidera un soggiorno immerso nella natura senza rinunciare alla comodità della città. Un punto di partenza perfetto per esplorare Verona, il Garda e la Lessinia.</p>
+    <p>Gardafarm è il luogo ideale per chi desidera un soggiorno immerso nella natura senza rinunciare alla comodità della città. Un punto di partenza perfetto per esplorare Verona, il Lago di Garda e la Lessinia.</p>
   </div>
   <span class="rombo" aria-hidden="true"></span>
 </section>
@@ -106,48 +105,65 @@
   </div>
 </section>
 
-<section class="sezione" aria-labelledby="t-trovi">
-  <div class="due-col">
-    <div class="pila-intro" style="top:calc(var(--header-h) + 4vh)">
-      <span class="etichetta" data-reveal>Qui trovi</span>
-      <h2 class="display t-l" id="t-trovi" data-split="chars" style="margin-top:18px">Natura<br>e comfort</h2>
-      <div class="foto-arrotondata" data-reveal style="aspect-ratio:4/3;margin-top:32px;max-width:520px"><img src="img/aiuole.webp" alt="Aiuole fiorite e prato curato" width="1600" height="900" loading="lazy"></div>
-    </div>
-    <ul class="elenco">
-      <li data-reveal><span class="elenco__n">01</span><span class="elenco__t">Camere accoglienti</span><span class="elenco__d">Singole, doppie e familiari, per vacanze, weekend o lavoro.</span></li>
-      <li data-reveal><span class="elenco__n">02</span><span class="elenco__t">Terrazza panoramica</span><span class="elenco__d">Ampia, per rilassarsi al sole o al tramonto.</span></li>
-      <li data-reveal><span class="elenco__n">03</span><span class="elenco__t">Giardino sensoriale</span><span class="elenco__d">Piante aromatiche e angoli di quiete dedicati al relax.</span></li>
-      <li data-reveal><span class="elenco__n">04</span><span class="elenco__t">Area barbecue</span><span class="elenco__d">Attrezzata, per momenti conviviali all'aperto.</span></li>
-      <li data-reveal><span class="elenco__n">05</span><span class="elenco__t">Laboratori in natura</span><span class="elenco__d">Attività esperienziali per adulti, famiglie e gruppi.</span></li>
-      <li data-reveal><span class="elenco__n">06</span><span class="elenco__t">Spazi per eventi</span><span class="elenco__d">Interni ed esterni per feste, cerimonie, team building, corsi e incontri aziendali.</span></li>
-    </ul>
+<section class="manifesto" aria-label="Cosa trovi a Verona">
+  <div class="manifesto__palco">
+    <p class="manifesto__testo">
+      <span class="manifesto__parte">Camere accoglienti,</span>
+      <span class="manifesto__icona forma-frutto" data-forma="fiore" aria-hidden="true"></span>
+      <span class="manifesto__parte">una terrazza panoramica,</span>
+      <span class="manifesto__icona forma-frutto" data-forma="sole" aria-hidden="true"></span>
+      <span class="manifesto__parte">il giardino sensoriale</span>
+      <span class="manifesto__icona forma-frutto" data-forma="lavanda" aria-hidden="true"></span>
+      <span class="manifesto__parte">e spazi per stare insieme.</span>
+    </p>
   </div>
 </section>
 
-<section class="sezione" aria-labelledby="t-camere" style="padding-inline:0">
-  <div class="centro" style="padding-inline:var(--gutter)">
-    <h2 class="display t-xl" id="t-camere" data-split="chars">Le camere</h2>
-    <div class="titolo-pagina__lati" style="max-width:1100px;margin-inline:auto">
-      <span data-reveal>Arredi essenziali,<br>dettagli rustici</span>
-      <span data-reveal=".1">Colazione<br>inclusa</span>
+<section class="stagioni" aria-labelledby="t-camere">
+  <div class="stagioni__palco">
+    <div class="stagioni__binario">
+      <div class="stagione stagione--intro">
+        <span class="etichetta">Il soggiorno</span>
+        <h2 class="display t-xl" id="t-camere">Le camere<br><em>e il verde</em></h2>
+        <span class="stagioni__vai" aria-hidden="true">Scorri <svg width="38" height="14" viewBox="0 0 38 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 7h36M30 1l6 6-6 6"/></svg></span>
+      </div>
+      <div class="stagione" style="--bg:#DCEBC6;--nome:#9FC77A">
+        <span class="stagione__nome" aria-hidden="true">Camere</span>
+        <figure class="stagione__foto stagione__foto--1" data-v="1.2"><img src="img/camera-verde.webp" alt="Camera matrimoniale" loading="lazy"><figcaption>Camera matrimoniale</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--2" data-v="-0.8"><img src="img/camera-grigia.webp" alt="Dettagli rustici" loading="lazy"><figcaption>Dettagli rustici</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--3" data-v="1.6"><img src="img/vetrata.webp" alt="Vista sul giardino" loading="lazy"><figcaption>Vista sul giardino</figcaption></figure>
+        <div class="stagione__testo"><h3 class="serif-up">Camere</h3><p>Singole, doppie e familiari, con bagno privato, aria condizionata, Wi-Fi, materassi in memory foam e lenzuola in cotone satin.</p></div>
+      </div>
+      <div class="stagione" style="--bg:#F8E7A6;--nome:#E8C547">
+        <span class="stagione__nome" aria-hidden="true">Colazione</span>
+        <figure class="stagione__foto stagione__foto--1" data-v="1.2"><img src="img/colazione.webp" alt="La colazione in sala" loading="lazy"><figcaption>La colazione in sala</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--2" data-v="-0.8"><img src="img/finestra.webp" alt="Luce dalla vetrata" loading="lazy"><figcaption>Luce dalla vetrata</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--3" data-v="1.6"><img src="img/sala-sedie-verdi.webp" alt="La sala" loading="lazy"><figcaption>La sala</figcaption></figure>
+        <div class="stagione__testo"><h3 class="serif-up">Colazione</h3><p>La colazione è inclusa: un buon inizio prima di partire alla scoperta di Verona e del Garda.</p></div>
+      </div>
+      <div class="stagione" style="--bg:#D6E6EE;--nome:#9FC0D2">
+        <span class="stagione__nome" aria-hidden="true">Terrazza</span>
+        <figure class="stagione__foto stagione__foto--1" data-v="1.2"><img src="img/terrazza.webp" alt="La terrazza panoramica" loading="lazy"><figcaption>La terrazza panoramica</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--2" data-v="-0.8"><img src="img/panchine.webp" alt="Angoli di quiete" loading="lazy"><figcaption>Angoli di quiete</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--3" data-v="1.6"><img src="img/serra-sole.webp" alt="La serra al sole" loading="lazy"><figcaption>La serra al sole</figcaption></figure>
+        <div class="stagione__testo"><h3 class="serif-up">Terrazza</h3><p>Un'ampia terrazza panoramica per rilassarsi al sole o al tramonto, e un'area barbecue per le serate all'aperto.</p></div>
+      </div>
+      <div class="stagione" style="--bg:#E7DFF3;--nome:#B4A3DA">
+        <span class="stagione__nome" aria-hidden="true">Giardino</span>
+        <figure class="stagione__foto stagione__foto--1" data-v="1.2"><img src="img/giardino-sensoriale.webp" alt="Il giardino sensoriale" loading="lazy"><figcaption>Il giardino sensoriale</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--2" data-v="-0.8"><img src="img/lavanda.webp" alt="La lavanda" loading="lazy"><figcaption>La lavanda</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--3" data-v="1.6"><img src="img/aiuole.webp" alt="Le aiuole" loading="lazy"><figcaption>Le aiuole</figcaption></figure>
+        <div class="stagione__testo"><h3 class="serif-up">Giardino</h3><p>1500 m² di giardino sensoriale con piante aromatiche e angoli dedicati al relax.</p></div>
+      </div>
     </div>
   </div>
-  <div class="nastro" style="margin-top:clamp(40px,5vw,72px)"><div class="nastro__binario" data-orizzontale>
-    <div class="nastro__foto"><img src="img/camera-verde.webp" alt="Camera con testiera e tende verdi" width="1080" height="1080" loading="lazy"></div>
-    <div class="nastro__foto"><img src="img/colazione.webp" alt="Tavolo della colazione con dolci e caffè" width="1080" height="1080" loading="lazy"></div>
-    <div class="nastro__foto"><img src="img/camera-grigia.webp" alt="Camera matrimoniale con cuscini e plaid" width="1080" height="1080" loading="lazy"></div>
-    <div class="nastro__foto"><img src="img/terrazza.webp" alt="La terrazza panoramica con sdraio" width="1080" height="1080" loading="lazy"></div>
-    <div class="nastro__foto"><img src="img/vetrata.webp" alt="Vista sul giardino dalla porta finestra della camera" width="1275" height="1700" loading="lazy"></div>
-    <div class="nastro__foto"><img src="img/finestra.webp" alt="Pianta davanti alla grande vetrata" width="1199" height="827" loading="lazy"></div>
-  </div></div>
-  <div class="racconto" style="padding-bottom:clamp(30px,4vw,60px)">
-    <span class="rombo" aria-hidden="true"></span>
-    <p class="lead" data-split>Ogni stanza è pensata per offrire comfort e semplicità, con tonalità rilassanti per un soggiorno rigenerante e la possibilità di godersi l'ampia terrazza panoramica.</p>
-  </div>
-  <div class="scheda" style="margin-inline:var(--gutter)" data-reveal>
+</section>
+
+<section class="sezione" aria-label="Prezzi delle camere">
+  <div class="scheda" data-reveal>
     <div>
       <h3>Cosa offriamo</h3>
-      <p>Camera doppia ad uso singolo, matrimoniale o con due letti singoli, con possibilità di letto aggiuntivo. Bagno privato, aria condizionata, TV a schermo piatto, Wi-Fi gratuito, pavimento in legno, materassi e guanciali in memory foam, lenzuola in cotone satin, biancheria da bagno, asciugacapelli e set di cortesia.</p>
+      <p>Camera doppia ad uso singolo, matrimoniale o con due letti singoli, con possibilità di letto aggiuntivo. Bagno privato, aria condizionata, TV a schermo piatto, Wi-Fi gratuito, pavimento in legno, biancheria da bagno, asciugacapelli e set di cortesia.</p>
     </div>
     <div>
       <h3>Prezzi a partire da</h3>
@@ -205,18 +221,19 @@
 </section>
 
 <section class="sezione" aria-labelledby="t-sost">
-  <div class="due-col">
-    <div class="stack">
+  <div class="due-col due-col--sagome">
+    <div class="stack" style="align-self:center">
       <span class="etichetta" data-reveal>Comfort e sostenibilità</span>
-      <h2 class="display t-m" id="t-sost" data-split="chars">Basso<br>impatto</h2>
-      <p data-reveal>Tutte le stanze sono state adeguate secondo la normativa antisismica e dotate di doppio cappotto termico, serramenti e porte ad alto isolamento acustico e termico, e di un impianto fotovoltaico da 28 kW per un soggiorno a basso impatto ambientale.</p>
-    </div>
-    <div class="stack">
-      <span class="etichetta" data-reveal>Accessibilità e accoglienza</span>
-      <h2 class="display t-m" data-split="chars">Per tutti</h2>
-      <p data-reveal>Ambienti accessibili, un ampio parcheggio interno recintato e una calda ospitalità pensata per famiglie, gruppi e viaggiatori in cerca di autenticità, natura e comfort.</p>
+      <h2 class="display t-l" id="t-sost" data-split="chars">Basso<br><em>impatto</em></h2>
+      <p data-reveal>Tutte le stanze sono state adeguate secondo la normativa antisismica e dotate di doppio cappotto termico, serramenti ad alto isolamento acustico e termico e di un impianto fotovoltaico da 28 kW.</p>
+      <p data-reveal>Ambienti accessibili, un ampio parcheggio interno recintato e una calda ospitalità per famiglie, gruppi e viaggiatori.</p>
       <p data-reveal style="font-size:13px">CIN IT023091B5T99FYF8F · CIR 0239091-AGR-00024</p>
     </div>
+  <div class="sagome sagome--trio" data-parallasse-sagome>
+    <div class="foto-sagoma foto-sagoma--1" data-sagoma="arco" style="--c:#0B4A6E"><img src="img/serra-sole.webp" alt="La serra e la casa coi pannelli solari" loading="lazy"></div>
+    <div class="foto-sagoma foto-sagoma--2" data-sagoma="goccia" style="--c:#F3C9CF"><img src="img/ibisco-bianco.webp" alt="Ibisco bianco in fiore" loading="lazy"></div>
+    <div class="foto-sagoma foto-sagoma--3" data-sagoma="uovo" style="--c:#8E7CC3"><img src="img/iris.webp" alt="Iris vicino allo stagno" loading="lazy"></div>
+  </div>
   </div>
 </section>
 
@@ -317,6 +334,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
-<script src="js/main.js?v=2026102930" defer></script>
+<script src="js/main.js?v=2026102931" defer></script>
 </body>
 </html>

@@ -397,7 +397,8 @@ html:not(.js) .ventaglio__palco, .ridotto .ventaglio__palco { position: relative
 .forma-frutto svg { width: 100%; height: auto; display: block; overflow: visible; }
 
 /* ---------- manifesto: frase grande che si accende parola per parola ---------- */
-.manifesto { position: relative; height: 560vh; }
+.manifesto { position: relative; height: 260vh; }
+.manifesto--striscia { height: 560vh; }
 .manifesto__palco { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-items: center; padding: 0 var(--gutter); }
 .manifesto__testo {
   max-width: 1280px; margin: 0; text-align: center;
@@ -410,7 +411,7 @@ html:not(.js) .ventaglio__palco, .ridotto .ventaglio__palco { position: relative
 .manifesto .parola { display: inline-block; }
 .manifesto__palco { overflow: hidden; background: var(--crema); }
 /* la sezione dopo sta già sotto il palco: quando il giallo copre tutto, il palco sparisce e lei è lì, ferma */
-.js:not(.ridotto) .manifesto { z-index: 2; margin-bottom: -100vh; margin-bottom: -100svh; }
+.js:not(.ridotto) .manifesto--striscia { z-index: 2; margin-bottom: -100vh; margin-bottom: -100svh; }
 .js:not(.ridotto) .dopo-manifesto { z-index: 1; }
 .manifesto__striscia { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; overflow: visible; }
 .manifesto__striscia path { fill: none; stroke: var(--sole); stroke-linecap: round; stroke-linejoin: round; }
@@ -435,7 +436,8 @@ html:not(.js) .ventaglio__palco, .ridotto .ventaglio__palco { position: relative
 html:not(.js) .manifesto, .ridotto .manifesto { height: auto; }
 html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative; height: auto; padding-block: 20vh; }
 @media (max-width: 760px) {
-  .manifesto { height: 460vh; }
+  .manifesto { height: 220vh; }
+  .manifesto--striscia { height: 460vh; }
   .manifesto__testo { font-size: clamp(28px, 8.4vw, 40px); }
 }
 
@@ -836,4 +838,28 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
   .espandi__palco { position: relative; height: 80vh; }
   .espandi__img { clip-path: inset(0 var(--gutter) round var(--raggio)) !important; }
   .espandi__img { --velo: 1; }
+}
+
+/* ---------- pagine interne con i componenti della home ---------- */
+.ventaglio--pagina { height: 92vh; height: 92svh; }
+.ventaglio--pagina .ventaglio__palco { justify-content: flex-start; padding-top: 6vh; }
+.foto-arrotondata, .nastro__foto { border: clamp(7px, .9vw, 13px) solid #E3D2AE; background: #E3D2AE; box-shadow: 0 24px 46px -24px rgba(8, 54, 80, .4); }
+.foto-arrotondata img, .nastro__foto img { border-radius: calc(var(--raggio) * .55); }
+.stagione__foto img { border: clamp(7px, .9vw, 12px) solid #E3D2AE; background: #E3D2AE; }
+.sala { border: clamp(7px, .9vw, 12px) solid #E3D2AE; }
+.quattro__voce { border: clamp(7px, .9vw, 12px) solid #E3D2AE; }
+.sagome { position: relative; min-height: clamp(420px, 44vw, 640px); }
+.foto-sagoma { position: absolute; aspect-ratio: 224 / 264; will-change: transform; }
+.foto-sagoma svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 22px 26px rgba(8, 54, 80, .28)); }
+.foto-sagoma > img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.sagome--trio .foto-sagoma--1 { left: 0; top: 4%; width: 46%; rotate: -5deg; }
+.sagome--trio .foto-sagoma--2 { left: 40%; top: 26%; width: 52%; rotate: 4deg; z-index: 2; }
+.sagome--trio .foto-sagoma--3 { left: 8%; top: 56%; width: 36%; rotate: -3deg; z-index: 3; }
+@media (max-width: 760px) {
+  .ventaglio--pagina { height: 70svh; }
+  .sagome { min-height: 110vw; }
+}
+@media (max-width: 900px) {
+  .pagina-esperienze .fiore__testo { display: block; font-size: 14px; margin-bottom: 10px; text-align: center; }
+  .pagina-esperienze .fiore { --cy: 84%; --F: min(96vw, 54svh); }
 }

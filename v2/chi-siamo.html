@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
-<link rel="stylesheet" href="css/style.css?v=2026102930">
+<link rel="stylesheet" href="css/style.css?v=2026102931">
 </head>
 <body class="pagina-chi-siamo">
 <a class="skip" href="#contenuto">Vai al contenuto</a>
@@ -74,18 +74,17 @@
 <main id="contenuto">
 <section class="titolo-pagina">
   <h1 class="display t-mega">Chi siamo</h1>
-  <div class="titolo-pagina__lati">
-    <span>La nostra<br>storia</span>
-    <span>Enjoy nature,<br>dal 1988</span>
-  </div>
+  <div class="titolo-pagina__lati"><span>La nostra<br>storia</span><span>Enjoy nature,<br>dal 1988</span></div>
 </section>
 
-<section class="espandi" aria-label="Le nostre radici">
-  <div class="espandi__palco">
-    <div class="espandi__img">
-      <img src="img/giardino-verde.webp" alt="Aiuole verdi e cespugli rigogliosi nel giardino" width="1500" height="2000">
-      <h2 class="espandi__titolo display">La natura è parte<br>della nostra storia<br>e della nostra anima</h2>
+<section class="ventaglio ventaglio--pagina" aria-label="La natura è parte della nostra storia e della nostra anima">
+  <div class="ventaglio__palco">
+    <div class="ventaglio__carte">
+      <div class="ventaglio__carta ventaglio__carta--sx"><img src="img/pesco.webp" alt="Rami di pesco in fiore" loading="eager"></div>
+      <div class="ventaglio__carta ventaglio__carta--dx"><img src="img/lavanda.webp" alt="Lavanda in fiore davanti alla casa verde" loading="eager"></div>
+      <div class="ventaglio__carta ventaglio__carta--centro"><img src="img/giardino-verde.webp" alt="Aiuole verdi e cespugli rigogliosi" loading="eager"></div>
     </div>
+    <p class="ventaglio__frase serif-up">La natura è parte della nostra storia<br>e della nostra anima</p>
   </div>
 </section>
 
@@ -107,45 +106,68 @@
   </div>
 </section>
 
-<section class="frutti" aria-labelledby="t-filosofia">
-  <span class="forma-frutto" data-forma="foglia" data-speed="1.1" style="left:8%;top:6%"></span>
-  <span class="forma-frutto" data-forma="mela" data-speed="-.9" style="right:10%;top:10%"></span>
-  <span class="forma-frutto" data-forma="fiore" data-speed=".7" style="left:22%;bottom:6%;width:clamp(90px,12vw,200px)"></span>
-  <span class="forma-frutto" data-forma="lavanda" data-speed="-1.3" style="right:6%;bottom:12%"></span>
-  <span class="forma-frutto" data-forma="sole" data-speed="1.5" style="left:2%;top:44%;width:clamp(80px,10vw,170px)"></span>
-  <div class="frutti__frase">
-    <span class="etichetta" data-reveal>La nostra filosofia</span>
-    <h2 class="serif-up" id="t-filosofia" data-split style="margin-top:18px;font-size:clamp(26px,2.8vw,44px)">Enjoy nature,<br>stare bene<br>nella natura</h2>
+<section class="manifesto" aria-label="La nostra filosofia">
+  <div class="manifesto__palco">
+    <p class="manifesto__testo">
+      <span class="manifesto__parte">Enjoy nature:</span>
+      <span class="manifesto__icona forma-frutto" data-forma="foglia" aria-hidden="true"></span>
+      <span class="manifesto__parte">il benessere nasce</span>
+      <span class="manifesto__icona forma-frutto" data-forma="sole" aria-hidden="true"></span>
+      <span class="manifesto__parte">dal contatto con la terra,</span>
+      <span class="manifesto__icona forma-frutto" data-forma="mela" aria-hidden="true"></span>
+      <span class="manifesto__parte">gli alberi</span>
+      <span class="manifesto__icona forma-frutto" data-forma="ape" aria-hidden="true"></span>
+      <span class="manifesto__parte">e gli animali.</span>
+    </p>
   </div>
 </section>
 
-<section class="sezione" style="padding-top:0">
-  <div class="due-col">
-    <div class="foto-arrotondata" data-parallasse style="aspect-ratio:4/5"><img src="img/lavanda.webp" alt="Lavanda in fiore davanti alla casa verde" width="1275" height="1700" loading="lazy"></div>
-    <div style="align-self:center" class="stack">
-      <h2 class="display t-m" data-split="chars">Radici<br>contadine</h2>
-      <p data-reveal>Con radici profonde nella tradizione contadina, fin da piccoli abbiamo vissuto immersi nel verde, assaporandone la genuinità e i benefici. È proprio questo legame con la natura, con i suoi effetti positivi sul corpo e sulla mente, a ispirare la filosofia di Gardafarm.</p>
-      <p data-reveal>Crediamo che il benessere fisico e mentale nasca anche da momenti autentici a contatto con la terra, gli alberi e gli animali. Per questo vogliamo condividere con chi ci visita la nostra visione: offrire relax, armonia e rigenerazione immersi nel verde, così come noi stessi li viviamo ogni giorno.</p>
-    </div>
+<section class="sezione" aria-labelledby="t-radici">
+  <div class="due-col due-col--sagome">
+  <div class="sagome sagome--trio" data-parallasse-sagome>
+    <div class="foto-sagoma foto-sagoma--1" data-sagoma="foglia" style="--c:#8E7CC3"><img src="img/lavanda.webp" alt="Lavanda in fiore" loading="lazy"></div>
+    <div class="foto-sagoma foto-sagoma--2" data-sagoma="cerchio" style="--c:#F2C230"><img src="img/squadra-asinello.webp" alt="Lo staff di Gardafarm con un asinello" loading="lazy"></div>
+    <div class="foto-sagoma foto-sagoma--3" data-sagoma="goccia" style="--c:#F3C9CF"><img src="img/pesco.webp" alt="Rami di pesco in fiore" loading="lazy"></div>
   </div>
-</section>
-
-<section aria-label="La nostra visione">
-  <div class="parola-cielo">
-    <img src="img/serra-sole.webp" alt="" width="2048" height="1334" loading="lazy">
-    <h2 class="display" data-split="chars">Visione</h2>
-  </div>
-</section>
-
-<section class="sezione">
-  <div class="due-col">
     <div class="stack" style="align-self:center">
-      <p class="serif-up" data-split style="font-size:clamp(24px,2.4vw,38px);color:var(--prato)">Imparare dalla natura,<br>crescere insieme.</p>
-      <p data-reveal>A Gardafarm crediamo che il contatto con la natura sia una fonte inesauribile di benessere e ispirazione. Nel nostro agriturismo offriamo soggiorni rilassanti e rigeneranti, con spazi per vivere in modo autentico.</p>
-      <p data-reveal>Nella nostra fattoria didattica e sociale proponiamo attività e spazi per eventi, momenti di festa, percorsi didattici, attività per scuole, famiglie, gruppi e aziende.</p>
-      <p data-reveal class="serif-up" style="font-size:18px;color:var(--lago)">A Gardafarm la natura non è solo un luogo: è maestra, casa e occasione di incontro.</p>
+      <span class="etichetta" data-reveal>La nostra filosofia</span>
+      <h2 class="display t-l" id="t-radici" data-split="chars">Radici<br><em>contadine</em></h2>
+      <p data-reveal>Con radici profonde nella tradizione contadina, fin da piccoli abbiamo vissuto immersi nel verde, assaporandone la genuinità e i benefici. È proprio questo legame con la natura, con i suoi effetti positivi sul corpo e sulla mente, a ispirare la filosofia di Gardafarm.</p>
+      <p data-reveal>Vogliamo condividere con chi ci visita la nostra visione: offrire relax, armonia e rigenerazione immersi nel verde, così come noi stessi li viviamo ogni giorno.</p>
     </div>
-    <div class="foto-arrotondata" data-parallasse style="aspect-ratio:1"><img src="img/squadra-asinello.webp" alt="Lo staff di Gardafarm in campagna con un asinello" width="1500" height="1500" loading="lazy"></div>
+  </div>
+</section>
+
+<section class="stagioni" aria-labelledby="t-visione">
+  <div class="stagioni__palco">
+    <div class="stagioni__binario">
+      <div class="stagione stagione--intro">
+        <span class="etichetta">La nostra visione</span>
+        <h2 class="display t-xl" id="t-visione">Imparare<br><em>dalla natura</em></h2>
+        <span class="stagioni__vai" aria-hidden="true">Scorri <svg width="38" height="14" viewBox="0 0 38 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 7h36M30 1l6 6-6 6"/></svg></span>
+      </div>
+      <div class="stagione" style="--bg:#DCEBC6;--nome:#9FC77A">
+        <span class="stagione__nome" aria-hidden="true">Ospitare</span>
+        <figure class="stagione__foto stagione__foto--1" data-v="1.2"><img src="img/camera-verde.webp" alt="Camere nel verde" loading="lazy"><figcaption>Camere nel verde</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--2" data-v="-0.8"><img src="img/colazione.webp" alt="La colazione" loading="lazy"><figcaption>La colazione</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--3" data-v="1.6"><img src="img/terrazza.webp" alt="La terrazza" loading="lazy"><figcaption>La terrazza</figcaption></figure>
+        <div class="stagione__testo"><h3 class="serif-up">Ospitare</h3><p>Nel nostro agriturismo offriamo soggiorni rilassanti e rigeneranti, con spazi per vivere in modo autentico.</p></div>
+      </div>
+      <div class="stagione" style="--bg:#F8E7A6;--nome:#E8C547">
+        <span class="stagione__nome" aria-hidden="true">Educare</span>
+        <figure class="stagione__foto stagione__foto--1" data-v="1.2"><img src="img/asinello.webp" alt="Gli animali" loading="lazy"><figcaption>Gli animali</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--2" data-v="-0.8"><img src="img/apicoltore.webp" alt="Le api" loading="lazy"><figcaption>Le api</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--3" data-v="1.6"><img src="img/insegna.webp" alt="La fattoria didattica" loading="lazy"><figcaption>La fattoria didattica</figcaption></figure>
+        <div class="stagione__testo"><h3 class="serif-up">Educare</h3><p>Nella fattoria didattica e sociale proponiamo percorsi per scuole, famiglie, gruppi e aziende.</p></div>
+      </div>
+      <div class="stagione" style="--bg:#F5D0B5;--nome:#E39A68">
+        <span class="stagione__nome" aria-hidden="true">Incontrarsi</span>
+        <figure class="stagione__foto stagione__foto--1" data-v="1.2"><img src="img/veranda-festa.webp" alt="Le feste" loading="lazy"><figcaption>Le feste</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--2" data-v="-0.8"><img src="img/cucina-insieme.webp" alt="Il team building" loading="lazy"><figcaption>Il team building</figcaption></figure>
+        <figure class="stagione__foto stagione__foto--3" data-v="1.6"><img src="img/sala-allestita.webp" alt="Gli eventi" loading="lazy"><figcaption>Gli eventi</figcaption></figure>
+        <div class="stagione__testo"><h3 class="serif-up">Incontrarsi</h3><p>Spazi per eventi e momenti di festa: a Gardafarm la natura è maestra, casa e occasione di incontro.</p></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -157,10 +179,10 @@
   </div>
 </section>
 
-<section class="sezione centro" aria-labelledby="t-cta" style="padding-top:clamp(40px,5vw,80px)">
+<section class="sezione sole-sezione centro" aria-labelledby="t-cta">
   <h2 class="display t-l" id="t-cta" data-split="chars">Vieni<br><em>a trovarci</em></h2>
   <div class="cta" data-reveal style="margin-top:32px">
-    <a class="pill pill--pieno" href="verona.html">Sede di Verona</a>
+    <a class="pill" href="verona.html" style="background:var(--lago);color:var(--sole);border-color:var(--lago)">Sede di Verona</a>
     <a class="pill" href="villafranca.html">Sede di Villafranca</a>
   </div>
 </section>
@@ -223,6 +245,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
-<script src="js/main.js?v=2026102930" defer></script>
+<script src="js/main.js?v=2026102931" defer></script>
 </body>
 </html>
