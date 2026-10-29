@@ -319,19 +319,33 @@ html:not(.js) .espandi { height: auto; }
 html:not(.js) .espandi__palco { position: relative; height: 80vh; }
 html:not(.js) .espandi__img { clip-path: none; }
 
-/* trittico di foto in parallasse (home) */
-.trittico {
-  display: grid; grid-template-columns: 1fr 1.35fr 1fr; gap: clamp(14px, 2vw, 32px);
-  align-items: start; padding: clamp(20px, 3vw, 50px) var(--gutter) 0;
+/* ventaglio di tre foto (home): le laterali escono da dietro e ruotano */
+.ventaglio { position: relative; height: 230vh; }
+.ventaglio__palco {
+  position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(28px, 5vh, 56px);
 }
-.trittico__foto { border-radius: var(--raggio); overflow: hidden; aspect-ratio: 3 / 4; }
-.trittico__foto img { width: 100%; height: 100%; object-fit: cover; }
-.trittico__foto--sx { margin-top: 18vh; transform: rotate(-2deg); }
-.trittico__foto--centro { aspect-ratio: 4 / 5; }
-.trittico__foto--dx { margin-top: 30vh; transform: rotate(2deg); }
-.trittico__frase {
-  grid-column: 1 / -1; text-align: center; color: var(--prato);
-  font-size: clamp(24px, 2.6vw, 42px); margin-top: clamp(40px, 6vw, 90px);
+.ventaglio__carte {
+  --w: clamp(190px, 25vw, 380px);
+  position: relative; width: var(--w); aspect-ratio: 4 / 5;
+  perspective: 1400px;
+}
+.ventaglio__carta {
+  position: absolute; inset: 0; border-radius: var(--raggio); overflow: hidden;
+  box-shadow: 0 30px 60px -24px rgba(8, 54, 80, .45), 0 8px 18px rgba(8, 54, 80, .12);
+  transform-origin: 50% 85%; will-change: transform; backface-visibility: hidden;
+}
+.ventaglio__carta img { width: 100%; height: 100%; object-fit: cover; }
+.ventaglio__carta--centro { z-index: 3; }
+.ventaglio__carta--sx, .ventaglio__carta--dx { z-index: 1; }
+.ventaglio__frase { text-align: center; color: var(--prato); font-size: clamp(22px, 2.6vw, 42px); padding: 0 var(--gutter); }
+html:not(.js) .ventaglio, .ridotto .ventaglio { height: auto; }
+html:not(.js) .ventaglio__palco, .ridotto .ventaglio__palco { position: relative; padding-block: 12vh; height: auto; }
+.ridotto .ventaglio__carta--sx { transform: translateX(-62%) rotate(-12deg); }
+.ridotto .ventaglio__carta--dx { transform: translateX(62%) rotate(12deg); }
+@media (max-width: 760px) {
+  .ventaglio { height: 200vh; }
+  .ventaglio__carte { --w: 40vw; }
 }
 
 /* testo centrato tra rombi */
@@ -608,10 +622,6 @@ html:not(.js) .espandi__img { clip-path: none; }
   .sede { min-height: 0; }
   .sede__foto { width: 78%; }
   .sede__testa { flex-direction: column; gap: 6px; }
-  .trittico { grid-template-columns: 1fr 1fr; }
-  .trittico__foto--centro { grid-column: 1 / -1; grid-row: 1; }
-  .trittico__foto--sx, .trittico__foto--dx { margin-top: 0; }
-  .trittico__foto--dx { margin-top: 10vh; }
   .sede__tipo { text-align: left; }
   .pila-intro .forma-frutto { display: none !important; }
   .carta-pila { grid-template-columns: 1fr; position: relative; top: 0; }

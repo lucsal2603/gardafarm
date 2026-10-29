@@ -435,6 +435,24 @@
     gsap.from(split.lines, { yPercent: 115, stagger: 0.1, duration: 1.3, scrollTrigger: { trigger: sez, start: 'top 70%', once: true } });
   };
 
+  /* ================= ventaglio: le foto laterali escono da dietro quella centrale ================= */
+  const ventaglio = () => {
+    const sez = $('.ventaglio');
+    if (!sez || ridotto) return;
+    const sx = $('.ventaglio__carta--sx', sez), dx = $('.ventaglio__carta--dx', sez), centro = $('.ventaglio__carta--centro', sez);
+    const frase = $('.ventaglio__frase', sez);
+    const apri = innerWidth < 760 ? 44 : 68;
+    const tl = gsap.timeline({ scrollTrigger: { trigger: sez, start: 'top top', end: 'bottom bottom', scrub: 1 } });
+    tl.fromTo(centro, { scale: 0.86, rotate: -2 }, { scale: 1, rotate: 0, ease: 'power2.out', duration: 1 }, 0)
+      .fromTo(sx, { xPercent: 0, rotate: 0, rotationY: 0, scale: 0.9 },
+        { xPercent: -apri, rotate: -14, rotationY: 32, scale: 0.94, ease: 'power3.inOut', duration: 1.2 }, 0.15)
+      .fromTo(dx, { xPercent: 0, rotate: 0, rotationY: 0, scale: 0.9 },
+        { xPercent: apri, rotate: 16, rotationY: -32, scale: 0.94, ease: 'power3.inOut', duration: 1.2 }, 0.15)
+      .fromTo(frase, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, ease: 'power2.out', duration: 0.6 }, 0.9)
+      .to([sx, dx], { yPercent: -4, ease: 'none', duration: 0.6 }, 1.4)
+      .to(centro, { yPercent: -2, ease: 'none', duration: 0.6 }, 1.4);
+  };
+
   /* ================= pila di carte ================= */
   const pila = () => {
     if (ridotto || innerWidth < 760) return;
@@ -499,6 +517,7 @@
     righe();
     indice();
     vita();
+    ventaglio();
     pila();
     contatori();
     scorrevoli();
