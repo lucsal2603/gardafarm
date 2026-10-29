@@ -867,8 +867,6 @@ html:not(.js) .manifesto__palco, .ridotto .manifesto__palco { position: relative
 .firma:hover { color: var(--crema); }
 @media (max-width: 760px) { .firma { margin-left: 0; } }
 
-/* link spenti nella demo */
-a.spento { pointer-events: none; cursor: default; }
 
 /* prestazioni: le animazioni in loop si fermano fuori vista */
 .fuori-vista, .fuori-vista * { animation-play-state: paused !important; }

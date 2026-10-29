@@ -9,14 +9,12 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
-  /* demo: attivi solo menu, chiamate, email e contatti; tutti gli altri link sono spenti */
+  /* demo: i link verso altre pagine non portano da nessuna parte, ma hover e animazioni restano attivi */
   const acceso = (h) => /^(tel:|mailto:|#contatti$)/.test(h || '');
   $$('a[href]').forEach((a) => {
     if (acceso(a.getAttribute('href'))) return;
     a.classList.add('spento');
     a.setAttribute('aria-disabled', 'true');
-    a.setAttribute('tabindex', '-1');
-    a.removeAttribute('data-cursor');
   });
   document.addEventListener('click', (e) => { const a = e.target.closest('a.spento'); if (a) { e.preventDefault(); e.stopImmediatePropagation(); } }, true);
 
